@@ -1,0 +1,6 @@
+<%= dm_form_for [@cathegory, @good], title: "Nuova richiesta di #{@cathegory}" do |good| %>  
+  <%= good.input :name %>  
+  <%= good.input :description %>  
+  <%= good.submit %>  
+<% end %>
+

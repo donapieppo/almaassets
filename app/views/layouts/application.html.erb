@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Almaassets</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render partial: 'layouts/menu' %>
+
+    <main role="main" class="container">
+      <%= privacy_alert %>  
+      <%= bootstrap_modal_div %>
+      <%= bootstrap_flash %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

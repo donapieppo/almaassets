@@ -1,0 +1,11 @@
+it:
+  cathegory: Categoria
+  good: Oggetto
+
+  activerecord:
+    models:
+      good: Oggetto
+    attributes:
+      good:
+        name: Nome
+        description: Descrizione

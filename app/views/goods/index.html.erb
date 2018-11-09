@@ -1,0 +1,23 @@
+<h1>Oggetti</h1>
+
+<h2>Nuova richiesta di acquisto</h2>
+<div class="card-group">
+  <% Cathegory.find_each do |c| %>  
+    <div class="card">
+      <%= link_to new_cathegory_good_path(c) do %>
+        <div class="card-header">
+          <h4 class="text-center"><%= c %></h4>
+        </div>
+        <div class="card-body">
+          <%= c.description %>  
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h2>Posseduto</h2>
+<% @goods.each do |good| %>  
+  <%= good %>  
+<% end %>
+

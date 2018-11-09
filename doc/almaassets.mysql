@@ -1,0 +1,53 @@
+drop database almaassets;
+create database almaassets;
+
+use 'almaassets';
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `upn` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `surname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_upn_on_users` (`upn`)
+) ENGINE=InnoDB; 
+
+INSERT INTO users VALUES (436108, "pietro.donatini@unibo.it", "Pietro", "Donatini", NULL, NULL);
+
+DROP TABLE IF EXISTS `cathegories`;
+CREATE TABLE `cathegories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+INSERT INTO `cathegories` VALUES (1, 'Pc portatile', ''), 
+                                 (2, 'Pc fisso', ''),
+                                 (3, 'Hard disk esterno', ''),
+                                 (4, 'Stampante', ''), 
+                                 (5, 'Tablet', ''); 
+
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `actual_status` ENUM('wished', 'asked', 'accepted', 'present', 'dismissed'),
+  `cathegory_id` int(11) unsigned,
+  `user_id` int(11) unsigned,
+  `name` varchar(255),
+  `description` text,
+  PRIMARY KEY (`id`),
+	CONSTRAINT `fk_goods_cathegories` FOREIGN KEY (cathegory_id) REFERENCES cathegories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)     REFERENCES users(id) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
