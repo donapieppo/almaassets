@@ -1,0 +1,2 @@
+# almaassets
+Gestione acquisti Dipartimento
