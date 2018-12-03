@@ -15,33 +15,42 @@ CREATE TABLE `users` (
   KEY `index_upn_on_users` (`upn`)
 ) ENGINE=InnoDB; 
 
-INSERT INTO users VALUES (436108, "pietro.donatini@unibo.it", "Pietro", "Donatini", NULL, NULL);
-
 DROP TABLE IF EXISTS `cathegories`;
 CREATE TABLE `cathegories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `unibo_code` varchar(30), 
+  `unibo_description` text,
   `name` varchar(255) NOT NULL,
   `description` text,
+  `number` smallint,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-INSERT INTO `cathegories` VALUES (1, 'Pc portatile', ''), 
-                                 (2, 'Pc fisso', ''),
-                                 (3, 'Hard disk esterno', ''),
-                                 (4, 'Stampante', ''), 
-                                 (5, 'Tablet', ''); 
+/* INSERT INTO `cathegories` VALUES (1, 'Pc portatile', '', 1), */ 
+/*                                  (2, 'Pc fisso', '', 2), */
+/*                                  (3, 'Hard disk esterno', '', 3), */
+/*                                  (4, 'Stampante', '', 4), */ 
+/*                                  (5, 'Tablet', '', 5); */ 
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `actual_status` ENUM('wished', 'asked', 'accepted', 'present', 'dismissed'),
   `cathegory_id` int(11) unsigned,
+  `inv_number` int(11) unsigned, 
   `user_id` int(11) unsigned,
   `name` varchar(255),
   `description` text,
+  `user_request` varchar(255),
+
+  `price` float,
+  `load_number` int(11),
+  `load_date` date, 
+  `user_justification` text,
+  `unibo_number` int(11) unsigned, 
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_goods_cathegories` FOREIGN KEY (cathegory_id) REFERENCES cathegories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)     REFERENCES users(id) ON DELETE CASCADE ON UPDATE RESTRICT
+	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)      REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
 
@@ -50,4 +59,5 @@ CREATE TABLE `goods` (
 
 
 
+INSERT INTO `users` VALUES (364089,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31'),(436108,'pietro.donatini@unibo.it','Pietro','Donatini',NULL,NULL);
 
