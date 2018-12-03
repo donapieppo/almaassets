@@ -13,16 +13,26 @@
 ActiveRecord::Schema.define(version: 0) do
 
   create_table "cathegories", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "unibo_code", limit: 30
+    t.text "unibo_description"
     t.string "name", null: false
     t.text "description"
+    t.integer "number", limit: 2
   end
 
   create_table "goods", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "actual_status", limit: 9
     t.integer "cathegory_id", unsigned: true
+    t.integer "inv_number", unsigned: true
     t.integer "user_id", unsigned: true
     t.string "name"
-    t.string "description"
+    t.text "description"
+    t.string "user_request"
+    t.float "price"
+    t.integer "load_number"
+    t.date "load_date"
+    t.text "user_justification"
+    t.integer "unibo_number", unsigned: true
     t.index ["cathegory_id"], name: "fk_goods_cathegories"
     t.index ["user_id"], name: "fk_goods_users"
   end
