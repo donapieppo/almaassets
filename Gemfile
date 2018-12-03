@@ -13,6 +13,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'pundit'
 
+gem 'roo'
+gem 'roo-xls'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'bootsnap', '>= 1.1.0', require: false
