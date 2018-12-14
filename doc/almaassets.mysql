@@ -15,6 +15,19 @@ CREATE TABLE `users` (
   KEY `index_upn_on_users` (`upn`)
 ) ENGINE=InnoDB; 
 
+DROP TABLE IF EXISTS `buildings`;
+CREATE TABLE `buildings` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+);
+
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE `cathegories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `building_id`, int(11) unsigned,
+  `name` varchar(255)
+);
+
 DROP TABLE IF EXISTS `cathegories`;
 CREATE TABLE `cathegories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -48,6 +61,10 @@ CREATE TABLE `goods` (
   `load_date` date, 
   `user_justification` text,
   `unibo_number` int(11) unsigned, 
+
+  `old_org` varchar(255),
+  `old_inv_number` int(11) unsigned,
+
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_goods_cathegories` FOREIGN KEY (cathegory_id) REFERENCES cathegories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
 	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)      REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
