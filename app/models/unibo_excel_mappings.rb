@@ -50,6 +50,18 @@ class UniboExcelMappings
   def self.sym_to_unibo_attr(s)
     @@sym_to_unibo_mappings[s]
   end
+
+  @@old_organizations = {
+    "EX85"     => 'matpre2013',
+    "EXE3_DIP" => 'matemates', 
+    "EXE3_MAN" => nil, 
+    "EX_I055"  => 'ciram', 
+    "I040"     => nil # 4 cose
+  }
+
+  def self.old_organization(s)
+    @@old_organizations[s]
+  end
 end
 
 #  "Inventario"=>"I0P4"
