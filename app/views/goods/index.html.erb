@@ -2,7 +2,7 @@
 
 <h2>Nuova richiesta di acquisto</h2>
 <div class="card-group">
-  <% Cathegory.find_each do |c| %>  
+  <% Cathegory.order(:number).find_each do |c| %>  
     <div class="card">
       <%= link_to new_cathegory_good_path(c) do %>
         <div class="card-header">
@@ -17,7 +17,17 @@
 </div>
 
 <h2>Posseduto</h2>
+<div class="list-group">
 <% @goods.each do |good| %>  
-  <%= good %>  
+  <%= link_to edit_good_path(good), class: "list-group-item list-group-item-action" do %>
+    <span class="badge <%= good.user_id ? "badge-info" : "badge-danger" %>"><%= good.inv_number %></span>
+    <%= good.user if good.user_id %>  
+    <% if good.old_inv_number %>
+      <span class="badge badge-warning float-right"><%= good.old_inv_number %> - <%= good.old_org %> </span>
+    <% end %>
+    <br/>
+    <span class="ml-5"><%= good.description %></span>
+  <% end %>
 <% end %>
+</div>
 
