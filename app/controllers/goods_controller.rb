@@ -2,7 +2,8 @@ class GoodsController < ApplicationController
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
   def index
-    @goods = Good.includes(:cathegory).all
+    @goods = Good.includes(:cathegory, :user)
+    @goods = @goods.where(user_id: nil) if params[:unassigned]
   end
 
   def new 
@@ -21,6 +22,9 @@ class GoodsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   private
 
   def set_good
@@ -28,6 +32,6 @@ class GoodsController < ApplicationController
   end
 
   def good_params
-    params[:good].permit(:name, :description, :cathegory_id)
+    params[:good].permit(:user_request, :user_justification, :cathegory_id)
   end
 end
