@@ -2,11 +2,11 @@
 
 <h2>Nuova richiesta di acquisto</h2>
 <div class="card-columns">
-  <% Cathegory.order(:number).find_each do |c| %>  
+  <% Category.order(:number).find_each do |c| %>  
     <div class="card">
-      <%= link_to new_cathegory_good_path(c) do %>
+      <%= link_to new_category_good_path(c) do %>
         <div class="card-header text-center">
-          <%= cathegory_icon(c, size: 40)  %>  
+          <%= category_icon(c, size: 40)  %>  
         </div>
         <div class="card-body">
           <p class="text-center font-weight-bold"><%= c %></p>

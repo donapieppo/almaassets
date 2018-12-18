@@ -1,4 +1,4 @@
-class Cathegory < ApplicationRecord
+class Category < ApplicationRecord
   has_many :goods
 
   def to_s

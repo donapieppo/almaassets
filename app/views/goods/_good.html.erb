@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-2">
-    <%= cathegory_icon(good.cathegory) if good.cathegory_id %>  
     <span class="badge <%= good.user_id ? "badge-info" : "badge-danger" %>">inv. <%= good.inv_number %></span>
+    <span class="float-right"><%= category_icon(good.category, size: 30) if good.category_id %></span>
     <% if good.old_inv_number %>
+      <br/>
       <span class="badge badge-warning"><%= good.old_inv_number %> - <%= good.old_org %></span>
     <% end %>
     <% if good.user_id %>  
@@ -14,7 +15,7 @@
     <%= good.description.upcase %> (<%= good.build_year %>)
     <span class="float-right">
       <span data-toggle="popover" title="Informazioni originali in ugov" data-html="true" data-content="<%= h good.unibo_description %><br/><hr/><%= h good.build_year %><br/>&euro; <%= h good.price %>"><%= icon('info-circle') %></span>
-    <%= link_to_edit edit_good_path(good) %>  
+    <%= link_to_edit edit_good_path(good), modal: true %>  
     </span>
   </div>
 </div>

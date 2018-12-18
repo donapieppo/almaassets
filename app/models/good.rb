@@ -1,6 +1,6 @@
 class Good < ApplicationRecord
   belongs_to :user, optional: true
-  belongs_to :cathegory, optional: true
+  belongs_to :category, optional: true
   belongs_to :location, optional: true
 
   validates :inv_number, uniqueness: {}

@@ -2,7 +2,7 @@ class GoodsController < ApplicationController
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
   def index
-    @goods = Good.includes(:cathegory, :user)
+    @goods = Good.includes(:category, :user)
 
     if current_user.is_admin? and params[:unassigned]
       @goods = @goods.where(user_id: nil) if params[:unassigned]
@@ -15,10 +15,10 @@ class GoodsController < ApplicationController
       @title = "Elenco beni #{@user}"
     end
 
-    if current_user.is_admin? and params[:cathegory_id]
-      @cathegory = Cathegory.find(params[:cathegory_id])
-      @goods = @goods.where(cathegory_id: @cathegory.id)
-      @title = "Elenco beni tipo \"#{@cathegory}\""
+    if current_user.is_admin? and params[:category_id]
+      @category = Category.find(params[:category_id])
+      @goods = @goods.where(category_id: @category.id)
+      @title = "Elenco beni tipo \"#{@category}\""
     end
 
     if current_user.is_admin? and params[:location_id]
@@ -33,13 +33,13 @@ class GoodsController < ApplicationController
   end
 
   def new 
-    @cathegory = Cathegory.find(params[:cathegory_id])
-    @good = @cathegory.goods.new
+    @category = Category.find(params[:category_id])
+    @good = @category.goods.new
   end
 
   def create
-    @cathegory = Cathegory.find(params[:cathegory_id])
-    @good = @cathegory.goods.new(good_params)
+    @category = Category.find(params[:category_id])
+    @good = @category.goods.new(good_params)
     @good.user = current_user
     if @good.save
       redirect_to goods_path, notice: "La richiesta è stata creato correttamente."
@@ -68,10 +68,10 @@ class GoodsController < ApplicationController
 
   def good_params
     if current_user.is_admin?
-      params[:good].permit(:user_request, :user_justification, :cathegory_id, :user_upn)
+      params[:good].permit(:user_request, :user_justification, :category_id, :user_upn)
     else
-      # cathegory_id only if new
-      params[:good].permit(:user_request, :user_justification, :cathegory_id)
+      # category_id only if new
+      params[:good].permit(:user_request, :user_justification, :category_id)
     end
   end
 end

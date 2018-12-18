@@ -1,5 +1,5 @@
-module CathegoriesHelper
-  def cathegory_icon(c, size: 20)
+module CategoriesHelper
+  def category_icon(c, size: 20)
     c or return ''
 
     case c.code

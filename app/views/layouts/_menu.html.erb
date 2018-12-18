@@ -3,15 +3,19 @@
   <%= dm_nav do  %>  
     <li><%= link_to big_icon('home', text: 'Home'), root_path %></li>
     <% if current_user.is_admin? %>  
-      <li><%= link_to big_icon('list', text: 'list'), goods_path(all: true) %></li>
-      <%= dropdown_menu :amm, big_icon('euro-sign') + ' Categorie' do  %>
-        <% Cathegory.find_each do |cat| %>  
-          <%= link_to (fwicon('wallet') + " #{cat}"), goods_path(cathegory_id: cat.id) %>
+      <%= dropdown_menu :amm, big_icon('bookmark') + ' Categorie' do  %>
+        <% Category.find_each do |cat| %>  
+          <%= link_to (fwicon('wallet') + " #{cat}"), goods_path(category_id: cat.id) %>
         <% end %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('euro-sign') + ' Locations' do  %>
+      <%= dropdown_menu :amm, big_icon('door-open') + ' Ubicazioni' do  %>
         <% Location.find_each do |location| %>  
           <%= link_to (fwicon('wallet') + " #{location}"), goods_path(location_id: location.id) %>
+        <% end %>
+      <% end %>
+      <%= dropdown_menu :amm, big_icon('user') + ' Utenti' do  %>
+        <% User.order(:surname, :name).each do |user| %>
+          <%= link_to (fwicon('wallet') + " #{user.cn_militar}"), goods_path(user_id: user.id) %>
         <% end %>
       <% end %>
     <% end %>
