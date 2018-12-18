@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :goods
 
-  resources :cathegories do 
+  resources :categories do 
     resources :goods
   end
 

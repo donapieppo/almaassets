@@ -39,13 +39,13 @@ namespace :almaassets do
     end
   end
 
-  desc "parsa cathegory"
-  task parse_cathegory: :environment do
+  desc "parsa category"
+  task parse_category: :environment do
     excel = UniboFileParser.new(ARGV[1])
     excel.each do |unibo_good|
-      c_code  = unibo_good.get_cathegory or next
-      if cathegory = Cathegory.find_by_code(c_code)
-        Good.find_by_inv_number(unibo_good.get(:inv_number)).update_attribute(:cathegory_id, cathegory.id)
+      c_code  = unibo_good.get_category or next
+      if category = Category.find_by_code(c_code)
+        Good.find_by_inv_number(unibo_good.get(:inv_number)).update_attribute(:category_id, category.id)
       end
     end
   end

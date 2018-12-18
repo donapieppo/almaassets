@@ -41,13 +41,28 @@ CREATE TABLE `locations` (
   `name` varchar(255),
   PRIMARY KEY (`id`)
 );
-INSERT INTO `locations` VALUES (1, 1, 'Ufficio docente assegnatario del bene');
-INSERT INTO `locations` VALUES (2, 1, 'Lab Docenti');
-INSERT INTO `locations` VALUES (3, 1, 'Lab Studenti I piano');
-INSERT INTO `locations` VALUES (4, 1, 'Lab Studenti piano terra');
 
-DROP TABLE IF EXISTS `cathegories`;
-CREATE TABLE `cathegories` (
+INSERT INTO `locations` VALUES (0, 1, 'Ufficio docente assegnatario del bene');
+INSERT INTO `locations` VALUES (0, 1, 'Lab Docenti');
+INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti I piano');
+INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti piano terra');
+INSERT INTO `locations` VALUES (0, 1, 'Portineria');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Vitali (p.t.)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Enriques (p.t.)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Pincherle (p.I)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Bombelli (p.III)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Cremona (p.IV)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Arzela (p.V)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula Tonelli (p.VI)');
+INSERT INTO `locations` VALUES (0, 1, 'Aula VII piano');
+INSERT INTO `locations` VALUES (0, 1, 'Aula VIII piano');
+INSERT INTO `locations` VALUES (0, 1, 'Seminario I');
+INSERT INTO `locations` VALUES (0, 1, 'Seminario II');
+INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi II piano');
+INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi VIII piano');
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -56,22 +71,22 @@ CREATE TABLE `cathegories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-INSERT INTO `cathegories` VALUES (1, 'notebook', 'Pc portatile', '', 1), 
-                                 (2, 'pc', 'Pc fisso', '', 2),
-                                 (3, 'hd', 'Hard disk esterno', '', 3),
-                                 (4, 'printer', 'Stampante', '', 4), 
-                                 (5, 'tablet', 'Tablet', '', 5),
-                                 (6, 'monitor', 'Monitor', '', 6),
-                                 (7, 'software', 'Software - licenze', '', 7),
-                                 (8, 'video', 'Videocamera - Tv', '', 8),
-                                 (9, 'chair', 'Sedia', '', 9); 
-                                 (10, 'projector', 'Projector', '', 10); 
+INSERT INTO `categories` VALUES (1, 'notebook', 'Pc portatile', '', 1), 
+                                (2, 'pc', 'Pc fisso', '', 2),
+                                (3, 'hd', 'Hard disk esterno', '', 3),
+                                (4, 'printer', 'Stampante', '', 4), 
+                                (5, 'tablet', 'Tablet', '', 5),
+                                (6, 'monitor', 'Monitor', '', 6),
+                                (7, 'software', 'Software - licenze', '', 7),
+                                (8, 'video', 'Videocamera - Tv', '', 8),
+                                (9, 'chair', 'Sedia', '', 9),
+                                (10, 'projector', 'Projector', '', 10); 
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `actual_status` ENUM('wished', 'asked', 'accepted', 'present', 'dismissed'),
-  `cathegory_id` int(11) unsigned,
+  `category_id` int(11) unsigned,
   `location_id` int(11) unsigned,
   `inv_number` int(11) unsigned, 
   `user_id` int(11) unsigned,
@@ -92,7 +107,7 @@ CREATE TABLE `goods` (
   `user_request` varchar(255),
 
   PRIMARY KEY (`id`),
-	CONSTRAINT `fk_goods_cathegories` FOREIGN KEY (cathegory_id) REFERENCES cathegories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
 	CONSTRAINT `fk_goods_locations`   FOREIGN KEY (location_id)  REFERENCES locations(id)   ON DELETE CASCADE ON UPDATE RESTRICT,
 	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)      REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;

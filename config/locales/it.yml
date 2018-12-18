@@ -1,5 +1,5 @@
 it:
-  cathegory: Categoria
+  category: Categoria
   good: Oggetto
 
   activerecord:

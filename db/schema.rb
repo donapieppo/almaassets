@@ -12,9 +12,14 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "cathegories", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "unibo_code", limit: 30
-    t.text "unibo_description"
+  create_table "buildings", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "city"
+  end
+
+  create_table "categories", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "code", null: false
     t.string "name", null: false
     t.text "description"
     t.integer "number", limit: 2
@@ -22,12 +27,14 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "goods", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "actual_status", limit: 9
-    t.integer "cathegory_id", unsigned: true
+    t.integer "category_id", unsigned: true
+    t.integer "location_id", unsigned: true
     t.integer "inv_number", unsigned: true
     t.integer "user_id", unsigned: true
     t.string "name"
     t.text "description"
-    t.string "user_request"
+    t.text "unibo_description"
+    t.integer "build_year"
     t.float "price"
     t.integer "load_number"
     t.date "load_date"
@@ -35,8 +42,20 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "unibo_number", unsigned: true
     t.string "old_org"
     t.integer "old_inv_number", unsigned: true
-    t.index ["cathegory_id"], name: "fk_goods_cathegories"
+    t.string "user_request"
+    t.index ["category_id"], name: "fk_goods_categories"
+    t.index ["location_id"], name: "fk_goods_locations"
     t.index ["user_id"], name: "fk_goods_users"
+  end
+
+  create_table "locations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "building_id", unsigned: true
+    t.string "name"
+  end
+
+  create_table "organizations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "code", null: false
+    t.string "name", null: false
   end
 
   create_table "users", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -48,6 +67,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["upn"], name: "index_upn_on_users", length: 191
   end
 
-  add_foreign_key "goods", "cathegories", name: "fk_goods_cathegories", on_delete: :cascade
+  add_foreign_key "goods", "categories", name: "fk_goods_categories", on_delete: :cascade
+  add_foreign_key "goods", "locations", name: "fk_goods_locations", on_delete: :cascade
   add_foreign_key "goods", "users", name: "fk_goods_users", on_delete: :cascade
 end

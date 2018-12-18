@@ -22,8 +22,8 @@ class UniboGood
     (get(:cib) || "").split('/')[0]
   end
 
-  def get_cathegory
-    UniboExcelMappings.tipologia(get(:cathegory_unibo_description))
+  def get_category
+    UniboExcelMappings.tipologia(get(:category_unibo_description))
   end
 end
 
