@@ -3,13 +3,33 @@ class GoodsController < ApplicationController
 
   def index
     @goods = Good.includes(:cathegory, :user)
-    # if current_user.is_admin?
-    #   @goods = @goods.where(user_id: nil) if params[:unassigned]
-    #   @goods = @goods.where(user_id: params[:user_id]) if params[:user_id]
-    #   @goods = @goods.where(cathegory_id: params[:cathegory_id]) if params[:cathegory_id]
-    # else
+
+    if current_user.is_admin? and params[:unassigned]
+      @goods = @goods.where(user_id: nil) if params[:unassigned]
+      @title = 'Elenco beni non assegnati'
+    end
+
+    if current_user.is_admin? and params[:user_id]
+      @user  = User.find(params[:user_id])
+      @goods = @goods.where(user_id: @user.id)
+      @title = "Elenco beni #{@user}"
+    end
+
+    if current_user.is_admin? and params[:cathegory_id]
+      @cathegory = Cathegory.find(params[:cathegory_id])
+      @goods = @goods.where(cathegory_id: @cathegory.id)
+      @title = "Elenco beni tipo \"#{@cathegory}\""
+    end
+
+    if current_user.is_admin? and params[:location_id]
+      @location = Location.find(params[:location_id])
+      @goods = @goods.where(location_id: @location.id)
+      @title = "Elenco beni tipo \"#{@location}\""
+    end
+
+    if ! current_user.is_admin?
       @goods = @goods.where(user_id: current_user.id)
-    # end
+    end
   end
 
   def new 
@@ -29,6 +49,7 @@ class GoodsController < ApplicationController
   end
 
   def edit
+    render layout: false
   end
 
   def update
