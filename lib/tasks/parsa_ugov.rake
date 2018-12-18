@@ -28,13 +28,24 @@ namespace :almaassets do
     excel.each do |unibo_good|
       unibouser = unibo_good.get(:unibouser) or next
       surname, name = unibouser.split(/ /)
-      u = User.where(name: name).where(surname: surname).first
-      g = Good.find_by_inv_number(unibo_good.get(:inv_number))
+      u = user.where(name: name).where(surname: surname).first
+      g = good.find_by_inv_number(unibo_good.get(:inv_number))
       if u 
         g.update_attribute(:user_id, u.id) 
       else
         p unibouser
         p g.description
+      end
+    end
+  end
+
+  desc "parsa cathegory"
+  task parse_cathegory: :environment do
+    excel = UniboFileParser.new(ARGV[1])
+    excel.each do |unibo_good|
+      c_code  = unibo_good.get_cathegory or next
+      if cathegory = Cathegory.find_by_code(c_code)
+        Good.find_by_inv_number(unibo_good.get(:inv_number)).update_attribute(:cathegory_id, cathegory.id)
       end
     end
   end
@@ -46,10 +57,20 @@ namespace :almaassets do
     excel.each do |unibo_good|
       old = Good.find_by_inv_number(unibo_good.get(:inv_number))
       unless old
-        p unibo_good
+        desc = unibo_good.get(:description)
+        u    = unibo_good.get(:unibouser)
+        n    = unibo_good.get(:notes)
+
+        # to keep and not change
+        unibo_desc = desc
+        unibo_desc = unibo_desc + " [[#{u}]]" unless u.blank?
+        unibo_desc = unibo_desc + " {{#{n}}}" unless n.blank?
+
         g = Good.create!(inv_number:     unibo_good.get(:inv_number),
                          name:           unibo_good.get(:name),
-                         description:    unibo_good.get(:description),
+                         description:    desc,
+                         unibo_description: unibo_desc,
+                         build_year:     unibo_good.get(:build_year), 
                          price:          unibo_good.get(:price),
                          old_org:        unibo_good.get_cib_organization,
                          old_inv_number: unibo_good.get_cib_inv_number)
