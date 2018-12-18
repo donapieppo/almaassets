@@ -3,6 +3,15 @@ create database almaassets;
 
 use 'almaassets';
 
+DROP TABLE IF EXISTS `organizations`;
+CREATE TABLE `organizations` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB; 
+INSERT INTO `organizations` VALUES (1, 'dipmat', 'Dipartimento di Matematica');
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -19,42 +28,57 @@ DROP TABLE IF EXISTS `buildings`;
 CREATE TABLE `buildings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255),
+  `address` varchar(255),
+  `city` varchar(255),
+  PRIMARY KEY (`id`)
 );
+INSERT INTO `buildings` VALUES (1, 'Dipartimento di Matematica', 'P.zza Porta San Donato, 5', 'Bologna');
 
 DROP TABLE IF EXISTS `locations`;
-CREATE TABLE `cathegories` (
+CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `building_id`, int(11) unsigned,
-  `name` varchar(255)
+  `building_id` int(11) unsigned,
+  `name` varchar(255),
+  PRIMARY KEY (`id`)
 );
+INSERT INTO `locations` VALUES (1, 1, 'Ufficio docente assegnatario del bene');
+INSERT INTO `locations` VALUES (2, 1, 'Lab Docenti');
+INSERT INTO `locations` VALUES (3, 1, 'Lab Studenti I piano');
+INSERT INTO `locations` VALUES (4, 1, 'Lab Studenti piano terra');
 
 DROP TABLE IF EXISTS `cathegories`;
 CREATE TABLE `cathegories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `unibo_code` varchar(30), 
-  `unibo_description` text,
+  `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text,
   `number` smallint,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-/* INSERT INTO `cathegories` VALUES (1, 'Pc portatile', '', 1), */ 
-/*                                  (2, 'Pc fisso', '', 2), */
-/*                                  (3, 'Hard disk esterno', '', 3), */
-/*                                  (4, 'Stampante', '', 4), */ 
-/*                                  (5, 'Tablet', '', 5); */ 
+INSERT INTO `cathegories` VALUES (1, 'notebook', 'Pc portatile', '', 1), 
+                                 (2, 'pc', 'Pc fisso', '', 2),
+                                 (3, 'hd', 'Hard disk esterno', '', 3),
+                                 (4, 'printer', 'Stampante', '', 4), 
+                                 (5, 'tablet', 'Tablet', '', 5),
+                                 (6, 'monitor', 'Monitor', '', 6),
+                                 (7, 'software', 'Software - licenze', '', 7),
+                                 (8, 'video', 'Videocamera - Tv', '', 8),
+                                 (9, 'chair', 'Sedia', '', 9); 
+                                 (10, 'projector', 'Projector', '', 10); 
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `actual_status` ENUM('wished', 'asked', 'accepted', 'present', 'dismissed'),
   `cathegory_id` int(11) unsigned,
+  `location_id` int(11) unsigned,
   `inv_number` int(11) unsigned, 
   `user_id` int(11) unsigned,
   `name` varchar(255),
   `description` text,
-  `user_request` varchar(255),
+  `unibo_description` text,
+  `build_year` int(2),
 
   `price` float,
   `load_number` int(11),
@@ -65,16 +89,14 @@ CREATE TABLE `goods` (
   `old_org` varchar(255),
   `old_inv_number` int(11) unsigned,
 
+  `user_request` varchar(255),
+
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_goods_cathegories` FOREIGN KEY (cathegory_id) REFERENCES cathegories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_locations`   FOREIGN KEY (location_id)  REFERENCES locations(id)   ON DELETE CASCADE ON UPDATE RESTRICT,
 	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)      REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
-
-
-
-
-
-
-INSERT INTO `users` VALUES (364089,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31'),(436108,'pietro.donatini@unibo.it','Pietro','Donatini',NULL,NULL);
+-- tester
+INSERT INTO `users` VALUES (364089,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31');
 
