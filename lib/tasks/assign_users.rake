@@ -25,25 +25,25 @@ namespace :almaassets do
       end
     end
 
-    # # nome E cognome
-    # User.find_each do |u|
-    #   x = "#{u.name} #{u.surname}"
-    #   y = "#{u.surname} #{u.name}"
-    #   Good.where(user_id: nil).find_each do |good|
-    #     if good.description =~ /#{x}/i or good.description.downcase =~ /#{y}/i 
-    #       puts "----"
-    #       puts good.description.downcase
-    #       puts u
-    #       good.update_attribute(:user_id, u.id)
-    #     end
-    #   end
-    # end
+    # nome E cognome
+    User.find_each do |u|
+      x = "#{u.name} #{u.surname}"
+      y = "#{u.surname} #{u.name}"
+      Good.where(user_id: nil).find_each do |good|
+        if good.description =~ /#{x}/i or good.description =~ /#{y}/i 
+          puts "----"
+          puts good.description.downcase
+          puts u
+          good.update_attribute(:user_id, u.id)
+        end
+      end
+    end
 
     # solo cognome con prof.
     User.find_each do |u|
       Good.where(user_id: nil).find_each do |good|
         if good.description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.surname}/i or
-            good.description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.name[0]}\.\s?#{u.surname}/i
+           good.description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.name[0]}\.\s?#{u.surname}/i
           puts "----"
           puts good.description.downcase
           puts u
