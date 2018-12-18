@@ -1,6 +1,18 @@
-<%= dm_form_for [@cathegory, @good], title: "Nuova richiesta di #{@cathegory}" do |good| %>  
-  <%= good.input :name %>  
-  <%= good.input :description %>  
-  <%= good.submit %>  
+<% if @good.inv_number %>  
+  <%= dm_form_for @good do |good| %>  
+    <%= good.input :inv_number, disabled: true, as: :string %>  
+    <%= good.input :description, input_html: {rows: 4}  %>  
+    <%= good.input :user_upn %>
+    <%= good.association :cathegory %>
+    <%= good.association :location %>
+    <%= good.submit %>  
+  <% end %>
+<% else %>
+  <%= dm_form_for [@cathegory, @good], title: "Nuova richiesta di #{@cathegory}" do |good| %>  
+    <%= good.input :user_request %>  
+    <%= good.input :user_justification %>  
+    <%= good.submit %>  
+  <% end %>
 <% end %>
 
+<%= render "dsausers/typeahead" %>  

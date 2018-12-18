@@ -9,3 +9,5 @@ it:
       good:
         name: Nome
         description: Descrizione
+        user_request: Descrizione 
+        user_justification: Motivazione della richiesta

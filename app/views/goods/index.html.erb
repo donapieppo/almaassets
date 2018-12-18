@@ -1,15 +1,15 @@
 <h1>Oggetti</h1>
 
 <h2>Nuova richiesta di acquisto</h2>
-<div class="card-group">
+<div class="card-columns">
   <% Cathegory.order(:number).find_each do |c| %>  
     <div class="card">
       <%= link_to new_cathegory_good_path(c) do %>
-        <div class="card-header">
-          <h4 class="text-center"><%= c %></h4>
+        <div class="card-header text-center">
+          <%= cathegory_icon(c, size: 40)  %>  
         </div>
         <div class="card-body">
-          <%= c.description %>  
+          <p class="text-center font-weight-bold"><%= c %></p>
         </div>
       <% end %>
     </div>
@@ -18,16 +18,10 @@
 
 <h2>Posseduto</h2>
 <div class="list-group">
-<% @goods.each do |good| %>  
-  <%= link_to edit_good_path(good), class: "list-group-item list-group-item-action" do %>
-    <span class="badge <%= good.user_id ? "badge-info" : "badge-danger" %>"><%= good.inv_number %></span>
-    <%= good.user if good.user_id %>  
-    <% if good.old_inv_number %>
-      <span class="badge badge-warning float-right"><%= good.old_inv_number %> - <%= good.old_org %> </span>
-    <% end %>
-    <br/>
-    <span class="ml-5"><%= good.description %></span>
+  <% @goods.each do |good| %>  
+    <div class="list-group-item list-group-item-action">
+      <%= render good %>  
+    </div>
   <% end %>
-<% end %>
 </div>
 

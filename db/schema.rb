@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.date "load_date"
     t.text "user_justification"
     t.integer "unibo_number", unsigned: true
+    t.string "old_org"
+    t.integer "old_inv_number", unsigned: true
     t.index ["cathegory_id"], name: "fk_goods_cathegories"
     t.index ["user_id"], name: "fk_goods_users"
   end

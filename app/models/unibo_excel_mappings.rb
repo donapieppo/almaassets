@@ -16,12 +16,12 @@ class UniboExcelMappings
     "Numero seriale"=>:sn,
     "CIB"=>:cib, # !!!!!
     "Marca"=>:brand,
+    "Note"=>:notes
     # "Numero targa"=>nil
     # "Condizione Bene"=>nil
     # "Garanzia Da"=>nil
     # "Garanzia A"=>nil
     # "Uo di riferimento"=>"000963"
-    # "Note"=>nil
     # "Nome Tipo DG"=>"Fattura Acquisto"
     # "Data Dg"=>"25/10/2018"
     # "Numero DG"=>"257PA"
@@ -58,6 +58,35 @@ class UniboExcelMappings
     "EX_I055"  => 'ciram', 
     "I040"     => nil # 4 cose
   }
+
+  @@tipologie = {
+    "ALTRE ATTREZZATURE" => nil, 
+    "ALTRE ATTREZZATURE INFORMATICHE" => nil,
+    "ALTRI BENI" => nil,
+    "ALTRI MOBILI E ARREDI" => nil, 
+    "APPARECCHIATURE DI RETE" => 'network',
+    "ARMADIO, LIBRERIA, SOPRALZO, SCAFFALATURA" => nil,
+    "ATTREZZATURE SCIENTIFICHE PER PROGETTI DI RICERCA" => nil,
+    "CASSETTIERA, SCHEDARIO, CLASSIFICATORE E MOBILI ARCHIVIO" => nil,
+    "ELABORATORI E SISTEMI INFORMATICI FISSI" => 'pc',
+    "ELABORATORI PORTATILI" => 'notebook',
+    "FAX - FOTOCOPIATRICI - DISTRUGGIDOCUMENTI - RILEGATRICI - TAGLIERINE" => nil,
+    "LAVAGNE -LAVAGNE LUMINOSE- PROIETTORI -TELI PER PROIEZIONE" => nil,
+    "LICENZE D'USO SOFTWARE" => 'software',
+    "MONITOR" => 'monitor',
+    "SEDIA, POLTRONA, SGABELLO, SEDUTE IN GENERE" => 'chair',
+    "SOFTWARE" => 'software',
+    "STAMPANTI / SCANNER" => 'printer',
+    "STRUMENTI MUSICALI" => nil,
+    "STRUMENTI OTTICI E APPARECCHIATURE FOTOGRAFICHE" => nil,
+    "TAVOLO-SCRIVANIA" => nil,
+    "TV - TELEFONI - CUFFIE - MICROFONI - VIDEOREGISTRATORI - VIDEO/FOTOCAMERE E SIMILI" => 'video',
+    "UTENSILI" => nil
+  }
+
+  def self.tipologia(s)
+    @@tipologie[s.strip]
+  end
 
   def self.old_organization(s)
     @@old_organizations[s]

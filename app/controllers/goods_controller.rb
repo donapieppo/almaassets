@@ -3,7 +3,13 @@ class GoodsController < ApplicationController
 
   def index
     @goods = Good.includes(:cathegory, :user)
-    @goods = @goods.where(user_id: nil) if params[:unassigned]
+    # if current_user.is_admin?
+    #   @goods = @goods.where(user_id: nil) if params[:unassigned]
+    #   @goods = @goods.where(user_id: params[:user_id]) if params[:user_id]
+    #   @goods = @goods.where(cathegory_id: params[:cathegory_id]) if params[:cathegory_id]
+    # else
+      @goods = @goods.where(user_id: current_user.id)
+    # end
   end
 
   def new 
@@ -25,6 +31,14 @@ class GoodsController < ApplicationController
   def edit
   end
 
+  def update
+    if @good.update_attributes(good_params)
+      redirect_to edit_good_path(@good), notice: "Aggiornamento registrato correttamente."
+    else
+      render action: :edit
+    end
+  end
+
   private
 
   def set_good
@@ -32,6 +46,11 @@ class GoodsController < ApplicationController
   end
 
   def good_params
-    params[:good].permit(:user_request, :user_justification, :cathegory_id)
+    if current_user.is_admin?
+      params[:good].permit(:user_request, :user_justification, :cathegory_id, :user_upn)
+    else
+      # cathegory_id only if new
+      params[:good].permit(:user_request, :user_justification, :cathegory_id)
+    end
   end
 end

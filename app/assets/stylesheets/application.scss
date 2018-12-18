@@ -33,3 +33,11 @@ span.twitter-typeahead {
   }
 }
 
+.card-columns {
+  column-count: 2;
+  @media (min-width: 800px) { 
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    column-count: 4;
+  }
+}

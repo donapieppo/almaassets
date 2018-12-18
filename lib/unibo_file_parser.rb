@@ -21,6 +21,10 @@ class UniboGood
   def get_cib_inv_number
     (get(:cib) || "").split('/')[0]
   end
+
+  def get_cathegory
+    UniboExcelMappings.tipologia(get(:cathegory_unibo_description))
+  end
 end
 
 # pass an excel file from unibo 
