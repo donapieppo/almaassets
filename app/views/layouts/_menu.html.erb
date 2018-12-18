@@ -4,6 +4,16 @@
     <li><%= link_to big_icon('home', text: 'Home'), root_path %></li>
     <% if current_user.is_admin? %>  
       <li><%= link_to big_icon('list', text: 'list'), goods_path(all: true) %></li>
+      <%= dropdown_menu :amm, big_icon('euro-sign') + ' Categorie' do  %>
+        <% Cathegory.find_each do |cat| %>  
+          <%= link_to (fwicon('wallet') + " #{cat}"), goods_path(cathegory_id: cat.id) %>
+        <% end %>
+      <% end %>
+      <%= dropdown_menu :amm, big_icon('euro-sign') + ' Locations' do  %>
+        <% Location.find_each do |location| %>  
+          <%= link_to (fwicon('wallet') + " #{location}"), goods_path(location_id: location.id) %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
