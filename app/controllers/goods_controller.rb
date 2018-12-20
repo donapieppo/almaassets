@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :set_good, only: [:show, :edit, :update, :destroy]
+  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :destroy]
 
   def index
     @goods = Good.includes(:category, :user)
@@ -49,29 +49,45 @@ class GoodsController < ApplicationController
   end
 
   def edit
-    render layout: false
+    render layout: false if modal_page
   end
 
   def update
     if @good.update_attributes(good_params)
-      redirect_to edit_good_path(@good), notice: "Aggiornamento registrato correttamente."
+      redirect_to good_path(@good), notice: "Aggiornamento registrato correttamente."
     else
-      render action: :edit
+      render action: :show
     end
+  end
+
+  def find
+    @search_string = params[:search_string] || ''
+    @title = "Ricerca per #{@search_string}"
+    @goods = []
+    if params[:search_string] =~ /\A[0-9]+\Z/
+      @goods << Good.where(inv_number: @search_string.to_i).to_a
+      @goods << Good.where(old_inv_number: @search_string.to_i).to_a
+    elsif @search_string.size > 2
+      sql_string = "%#{@search_string}%"
+      @goods << Good.where("goods.description like ? or goods.unibo_description like ?", sql_string, sql_string).to_a
+    end
+    @goods.flatten!
+    render action: :index
   end
 
   private
 
-  def set_good
+  def set_good_and_check_permission
     @good = Good.find(params[:id])
+    authorize @good
   end
 
   def good_params
     if current_user.is_admin?
-      params[:good].permit(:user_request, :user_justification, :category_id, :user_upn)
+      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id)
     else
       # category_id only if new
-      params[:good].permit(:user_request, :user_justification, :category_id)
+      params[:good].permit(:user_request, :user_justification, :category_id, :user_upn)
     end
   end
 end
