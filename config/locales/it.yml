@@ -11,3 +11,8 @@ it:
         description: Descrizione
         user_request: Descrizione 
         user_justification: Motivazione della richiesta
+
+        inv_number: Numero di inventario
+        user_upn: Assegnatario
+        category: Categoria
+        location: Ubicazione
