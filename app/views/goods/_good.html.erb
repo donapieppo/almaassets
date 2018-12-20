@@ -4,7 +4,7 @@
     <span class="float-right"><%= category_icon(good.category, size: 30) if good.category_id %></span>
     <% if good.old_inv_number %>
       <br/>
-      <span class="badge badge-warning"><%= good.old_inv_number %> - <%= good.old_org %></span>
+      <span class="badge badge-default"><%= good.old_inv_number %> - <%= good.old_org %></span>
     <% end %>
     <% if good.user_id %>  
       <br/>
@@ -12,10 +12,10 @@
     <% end %>
   </div>
   <div class="col">
-    <%= good.description.upcase %> (<%= good.build_year %>)
+    <%= good.name.blank? ? good.description.upcase : good.name.upcase %> (<%= good.build_year %>)
     <span class="float-right">
       <span data-toggle="popover" title="Informazioni originali in ugov" data-html="true" data-content="<%= h good.unibo_description %><br/><hr/><%= h good.build_year %><br/>&euro; <%= h good.price %>"><%= icon('info-circle') %></span>
-    <%= link_to_edit edit_good_path(good), modal: true %>  
+      <%= link_to_edit(edit_good_path(good), modal: true) if current_user.is_admin? %>  
     </span>
   </div>
 </div>

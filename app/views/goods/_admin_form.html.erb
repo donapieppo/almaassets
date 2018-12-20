@@ -1,0 +1,11 @@
+<%= dm_form_for @good do |good| %>  
+  <%= good.input :inv_number, disabled: true, as: :string %>  
+  <%= good.input :name %>  
+  <%= good.input :description, input_html: {rows: 4}  %>  
+  <%= good.input :user_upn %>
+  <%= good.association :category %>
+  <%= good.association :location %>
+  <%= good.submit %>  
+<% end %>
+
+<%= render "dsausers/typeahead" %>  

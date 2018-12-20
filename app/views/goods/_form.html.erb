@@ -1,18 +1,6 @@
 <% if @good.inv_number %>  
-  <%= dm_form_for @good do |good| %>  
-    <%= good.input :inv_number, disabled: true, as: :string %>  
-    <%= good.input :description, input_html: {rows: 4}  %>  
-    <%= good.input :user_upn %>
-    <%= good.association :category %>
-    <%= good.association :location %>
-    <%= good.submit %>  
-  <% end %>
+  <%= render partial: 'admin_form' %>  
 <% else %>
-  <%= dm_form_for [@category, @good], title: "Nuova richiesta di #{@category}" do |good| %>  
-    <%= good.input :user_request %>  
-    <%= good.input :user_justification %>  
-    <%= good.submit %>  
-  <% end %>
+  <%= render partial: 'new_request_form' %>  
 <% end %>
 
-<%= render "dsausers/typeahead" %>  
