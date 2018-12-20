@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :goods
+  resources :goods do
+    get 'find', on: :collection
+  end
 
   resources :categories do 
     resources :goods
