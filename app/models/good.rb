@@ -4,6 +4,8 @@ class Good < ApplicationRecord
   belongs_to :location, optional: true
 
   validates :inv_number, uniqueness: {}
+  # validates :name, presence: {}
+
   validate  :validate_user_upn
 
   def to_s
@@ -29,6 +31,10 @@ class Good < ApplicationRecord
     Rails.logger.info("validating user_upn=#{@_user_upn}")
 
     u = User.find_by_upn(@_user_upn)
-    self.user_id = u.id
+
+    if u
+      Rails.logger.info("found #{@_user_upn} -> #{u.inspect}")
+      self.user_id = u.id
+    end
   end
 end
