@@ -1,3 +1,5 @@
+ORG_ID = 1
+
 require 'unibo_file_parser' 
 
 namespace :almaassets do
