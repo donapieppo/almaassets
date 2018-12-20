@@ -15,13 +15,15 @@ INSERT INTO `organizations` VALUES (1, 'dipmat', 'Dipartimento di Matematica');
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `organization_id` int(11) unsigned,
   `upn` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `index_upn_on_users` (`upn`)
+  KEY `index_upn_on_users` (`upn`),
+	CONSTRAINT `fk_users_organizations` FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB; 
 
 DROP TABLE IF EXISTS `buildings`;
@@ -38,15 +40,17 @@ DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `building_id` int(11) unsigned,
+  `building_id` int(11) unsigned,
   `name` varchar(255),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+	CONSTRAINT `fk_locations_buildings` FOREIGN KEY (building_id) REFERENCES buildings(id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
-INSERT INTO `locations` VALUES (0, 1, 'Ufficio docente assegnatario del bene');
+INSERT INTO `locations` VALUES (1, 1, 'Ufficio docente assegnatario del bene');
+
 INSERT INTO `locations` VALUES (0, 1, 'Lab Docenti');
 INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti I piano');
 INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti piano terra');
-INSERT INTO `locations` VALUES (0, 1, 'Portineria');
 INSERT INTO `locations` VALUES (0, 1, 'Aula Vitali (p.t.)');
 INSERT INTO `locations` VALUES (0, 1, 'Aula Enriques (p.t.)');
 INSERT INTO `locations` VALUES (0, 1, 'Aula Pincherle (p.I)');
@@ -60,6 +64,13 @@ INSERT INTO `locations` VALUES (0, 1, 'Seminario I');
 INSERT INTO `locations` VALUES (0, 1, 'Seminario II');
 INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi II piano');
 INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi VIII piano');
+INSERT INTO `locations` VALUES (0, 1, 'Portineria');
+INSERT INTO `locations` VALUES (0, 1, 'Amministrazione');
+INSERT INTO `locations` VALUES (0, 1, 'Direzione');
+INSERT INTO `locations` VALUES (0, 1, 'Scantinato Server');
+INSERT INTO `locations` VALUES (0, 1, 'Biblioteca');
+INSERT INTO `locations` VALUES (0, 1, 'Biblioteca Bortolotti');
+INSERT INTO `locations` VALUES (0, 1, 'Armadi di rete');
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -108,10 +119,10 @@ CREATE TABLE `goods` (
 
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_goods_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_locations`   FOREIGN KEY (location_id)  REFERENCES locations(id)   ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_users`       FOREIGN KEY (user_id)      REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
+	CONSTRAINT `fk_goods_locations`  FOREIGN KEY (location_id) REFERENCES locations(id)   ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
 -- tester
-INSERT INTO `users` VALUES (364089,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31');
+INSERT INTO `users` VALUES (364089,1,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31');
 

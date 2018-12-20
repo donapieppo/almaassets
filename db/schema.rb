@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "locations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "building_id", unsigned: true
     t.string "name"
+    t.index ["building_id"], name: "fk_locations_buildings"
   end
 
   create_table "organizations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -59,15 +60,19 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "users", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
     t.string "upn", null: false
     t.string "name"
     t.string "surname"
     t.string "email"
     t.datetime "updated_at"
+    t.index ["organization_id"], name: "fk_users_organizations"
     t.index ["upn"], name: "index_upn_on_users", length: 191
   end
 
   add_foreign_key "goods", "categories", name: "fk_goods_categories", on_delete: :cascade
   add_foreign_key "goods", "locations", name: "fk_goods_locations", on_delete: :cascade
   add_foreign_key "goods", "users", name: "fk_goods_users", on_delete: :cascade
+  add_foreign_key "locations", "buildings", name: "fk_locations_buildings", on_delete: :cascade
+  add_foreign_key "users", "organizations", name: "fk_users_organizations", on_delete: :cascade
 end
