@@ -66,10 +66,10 @@ class GoodsController < ApplicationController
 
   def find
     authorize(:good)
+    @search_string = params[:search_string] || ''
     @title = "Ricerca per #{@search_string}"
 
     @goods = []
-    @search_string = params[:search_string] || ''
 
     if @search_string =~ /\A[0-9]+\Z/
       @goods << Good.where(inv_number: @search_string.to_i).to_a
