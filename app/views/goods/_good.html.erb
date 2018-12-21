@@ -1,21 +1,31 @@
-<div class="row">
-  <div class="col-2">
-    <span class="badge <%= good.user_id ? "badge-info" : "badge-danger" %>">inv. <%= good.inv_number %></span>
-    <span class="float-right"><%= category_icon(good.category, size: 30) if good.category_id %></span>
-    <% if good.old_inv_number %>
-      <br/>
-      <span class="badge badge-default"><%= good.old_inv_number %> - <%= good.old_org %></span>
-    <% end %>
-    <% if good.user_id %>  
-      <br/>
-      <%= link_to good.user, goods_path(user_id: good.user.id) %>
-    <% end %>
+<div class="card my-1" id="<%= "good_#{good.id}" %>">
+  <div class="card-header <%= 'bg-warning' if good.to_unload  %>">
+    <div class="row">
+      <div class="col-5">
+        <%= category_icon(good.category, size: 25) %>
+      </div>
+
+      <div class="col-2 centered">
+        <span class="btn btn-sm font-weight-bold <%= good.user_id ? "btn-info" : "btn-danger" %>">inv. <%= good.inv_number %></span>
+      </div>
+
+      <div class="col-5">
+        <span class="float-right">
+          <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
+          <%= original_info(good) %>  
+        </span>
+      </div>
+    </div>
   </div>
-  <div class="col">
+
+  <div class="card-body">
     <%= good.name.blank? ? good.description.upcase : good.name.upcase %> (<%= good.build_year %>)
     <span class="float-right">
-      <span data-toggle="popover" title="Informazioni originali in ugov" data-html="true" data-content="<%= h good.unibo_description %><br/><hr/><%= h good.build_year %><br/>&euro; <%= h good.price %>"><%= icon('info-circle') %></span>
+      <% if good.old_inv_number %>
+        <span class="badge badge-secondary p-1"><%= good.old_inv_number %> - <%= good.old_org %></span>
+      <% end %>
       <%= link_to_edit(edit_good_path(good), modal: true) if current_user.is_admin? %>  
+      <%= link_to(icon('trash-alt', prefix: 'far'), unload_good_path(good), remote: true) if current_user.is_admin? %>  
     </span>
   </div>
 </div>

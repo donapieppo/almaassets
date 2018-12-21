@@ -14,12 +14,11 @@
 <%#   <% end %1> %>
 <%# </div> %>
 
-<h1><%= @title %></h1>
+<h1><span class="mr-5"><%= category_icon(@category, size: 40) if @category %></span> <%= @title %></h1>
+
 <div class="list-group">
   <% @goods.each do |good| %>  
-    <div class="list-group-item list-group-item-action">
-      <%= render good %>  
-    </div>
+    <%= render good, no_icon: @no_icon %>  
   <% end %>
 </div>
 
