@@ -1,33 +1,34 @@
 class GoodsController < ApplicationController
-  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :destroy]
+  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload]
 
   def index
     @goods = Good.includes(:category, :user)
 
-    if current_user.is_admin? and params[:unassigned]
-      @goods = @goods.where(user_id: nil) if params[:unassigned]
-      @title = 'Elenco beni non assegnati'
-    end
-
-    if current_user.is_admin? and params[:user_id]
-      @user  = User.find(params[:user_id])
-      @goods = @goods.where(user_id: @user.id)
-      @title = "Elenco beni #{@user}"
-    end
-
-    if current_user.is_admin? and params[:category_id]
-      @category = Category.find(params[:category_id])
-      @goods = @goods.where(category_id: @category.id)
-      @title = "Elenco beni tipo \"#{@category}\""
-    end
-
-    if current_user.is_admin? and params[:location_id]
-      @location = Location.find(params[:location_id])
-      @goods = @goods.where(location_id: @location.id)
-      @title = "Elenco beni tipo \"#{@location}\""
-    end
-
-    if ! current_user.is_admin?
+    if current_user.is_admin? 
+      if params[:unassigned]
+        @goods = @goods.where(user_id: nil) 
+        @title = 'Elenco beni non assegnati'
+      elsif  params[:user_id]
+        @user  = User.find(params[:user_id])
+        @goods = @goods.where(user_id: @user.id)
+        @title = "Elenco beni #{@user}"
+      elsif params[:category_id]
+        @category = Category.find(params[:category_id])
+        @goods = @goods.where(category_id: @category.id)
+        @title = "Elenco beni tipo \"#{@category}\""
+        @no_icon = true
+      elsif params[:location_id]
+        @location = Location.find(params[:location_id])
+        @goods = @goods.where(location_id: @location.id)
+        @title = "Elenco beni tipo \"#{@location}\""
+      elsif params[:unload]
+        @goods = @goods.where(to_unload: true)
+        @title = "Elenco beni da disinventariare"
+      else
+        @goods = @goods.where(user_id: nil)
+        @title = 'Elenco beni non assegnati'
+      end
+    else
       @goods = @goods.where(user_id: current_user.id)
     end
   end
@@ -61,6 +62,7 @@ class GoodsController < ApplicationController
   end
 
   def find
+    authorize(:good)
     @search_string = params[:search_string] || ''
     @title = "Ricerca per #{@search_string}"
     @goods = []
@@ -75,6 +77,11 @@ class GoodsController < ApplicationController
     render action: :index
   end
 
+  def unload
+    @good.update_attribute(:to_unload, ! @good.to_unload)
+    @to_unload = @good.reload.to_unload
+  end
+
   private
 
   def set_good_and_check_permission
@@ -84,10 +91,10 @@ class GoodsController < ApplicationController
 
   def good_params
     if current_user.is_admin?
-      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id)
+      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id)
     else
       # category_id only if new
-      params[:good].permit(:user_request, :user_justification, :category_id, :user_upn)
+      params[:good].permit(:user_request, :user_justification, :category_id)
     end
   end
 end
