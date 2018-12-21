@@ -8,6 +8,9 @@ class GoodsController < ApplicationController
       if params[:unassigned]
         @goods = @goods.where(user_id: nil) 
         @title = 'Elenco beni non assegnati'
+      elsif params[:no_category]
+        @goods = @goods.where(category_id: nil).order(:description)
+        @title = 'Elenco beni senza categoria'
       elsif  params[:user_id]
         @user  = User.find(params[:user_id])
         @goods = @goods.where(user_id: @user.id)
@@ -63,23 +66,27 @@ class GoodsController < ApplicationController
 
   def find
     authorize(:good)
-    @search_string = params[:search_string] || ''
     @title = "Ricerca per #{@search_string}"
+
     @goods = []
-    if params[:search_string] =~ /\A[0-9]+\Z/
+    @search_string = params[:search_string] || ''
+
+    if @search_string =~ /\A[0-9]+\Z/
       @goods << Good.where(inv_number: @search_string.to_i).to_a
       @goods << Good.where(old_inv_number: @search_string.to_i).to_a
-    elsif @search_string.size > 2
+    end
+    if @search_string.size > 2
       sql_string = "%#{@search_string}%"
       @goods << Good.where("goods.description like ? or goods.unibo_description like ?", sql_string, sql_string).to_a
     end
+
     @goods.flatten!
     render action: :index
   end
 
   def unload
     @good.update_attribute(:to_unload, ! @good.to_unload)
-    @to_unload = @good.reload.to_unload
+    # @to_unload = @good.reload.to_unload
   end
 
   private
