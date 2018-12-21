@@ -1,0 +1,6 @@
+<% if @to_unload %>  
+    $('#good_<%= @good.id %> > .card-header').addClass('bg-warning');
+<% else %>
+    $('#good_<%= @good.id %> > .card-header').removeClass('bg-warning');
+<% end %>
+
