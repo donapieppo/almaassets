@@ -5,8 +5,10 @@
     <% if current_user.is_admin? %>  
       <%= dropdown_menu :amm, big_icon('bookmark') + ' Categorie' do  %>
         <% Category.find_each do |cat| %>  
-          <%= link_to (fwicon('wallet') + " #{cat}"), goods_path(category_id: cat.id) %>
+          <%= link_to (fwicon('angle-right') + " #{cat}"), goods_path(category_id: cat.id) %>
         <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to (fwicon('question-circle') + " sconosciuto"), goods_path(no_category: 1) %>
       <% end %>
       <%= dropdown_menu :amm, big_icon('door-open') + ' Ubicazioni' do  %>
         <% Location.find_each do |location| %>  
