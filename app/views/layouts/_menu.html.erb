@@ -18,6 +18,7 @@
           <%= link_to (fwicon('wallet') + " #{user.cn_militar}"), goods_path(user_id: user.id) %>
         <% end %>
       <% end %>
+      <li><%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %></li>
       <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search", method: :get do %>
         <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
       <% end %>
@@ -25,3 +26,6 @@
   <% end %>
 <% end %>
 
+<%= javascript_tag do %>  
+  document.querySelector('[aria-label="Cerca"]').focus();
+<% end %>
