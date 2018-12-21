@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
 
   before_action :log_current_user, :force_sso_user
-  after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate]
+  after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate, :shibboleth]
 
   def current_organization
     # tmp TODO FIXME
