@@ -25,7 +25,7 @@
         <span class="badge badge-secondary p-1"><%= good.old_inv_number %> - <%= good.old_org %></span>
       <% end %>
       <%= link_to_edit(edit_good_path(good), modal: true) if current_user.is_admin? %>  
-      <%= link_to(icon('trash-alt', prefix: 'far'), unload_good_path(good), remote: true) if current_user.is_admin? %>  
+      <%= link_to_unload(good) %>  
     </span>
   </div>
 </div>
