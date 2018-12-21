@@ -1,6 +1,7 @@
-<% if @to_unload %>  
-    $('#good_<%= @good.id %> > .card-header').addClass('bg-warning');
-<% else %>
-    $('#good_<%= @good.id %> > .card-header').removeClass('bg-warning');
-<% end %>
+<%# <% if @to_unload %1> %>  
+<%#     $('#good_<%= @good.id %1> > .card-header').addClass('bg-warning'); %>
+<%# <% else %1> %>
+<%#     $('#good_<%= @good.id %1> > .card-header').removeClass('bg-warning'); %>
+<%# <% end %1> %>
 
+$('#good_<%= @good.id %>').hide('slow');
