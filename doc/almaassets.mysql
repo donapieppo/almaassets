@@ -10,6 +10,7 @@ CREATE TABLE `organizations` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB; 
+
 INSERT INTO `organizations` VALUES (1, 'dipmat', 'Dipartimento di Matematica');
 
 DROP TABLE IF EXISTS `users`;
@@ -34,12 +35,12 @@ CREATE TABLE `buildings` (
   `city` varchar(255),
   PRIMARY KEY (`id`)
 );
+
 INSERT INTO `buildings` VALUES (1, 'Dipartimento di Matematica', 'P.zza Porta San Donato, 5', 'Bologna');
 
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `building_id` int(11) unsigned,
   `building_id` int(11) unsigned,
   `name` varchar(255),
   PRIMARY KEY (`id`),
@@ -83,15 +84,30 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB;
 
 INSERT INTO `categories` VALUES (1, 'notebook', 'Pc portatile', '', 1), 
-                                (2, 'pc', 'Pc fisso', '', 2),
-                                (3, 'hd', 'Hard disk esterno', '', 3),
-                                (4, 'printer', 'Stampante', '', 4), 
-                                (5, 'tablet', 'Tablet', '', 5),
-                                (6, 'monitor', 'Monitor', '', 6),
-                                (7, 'software', 'Software - licenze', '', 7),
-                                (8, 'video', 'Videocamera - Tv', '', 8),
-                                (9, 'chair', 'Sedia', '', 9),
-                                (10, 'projector', 'Projector', '', 10); 
+                                (0, 'pc', 'Pc fisso', '', 2),
+                                (0, 'printer', 'Stampante', '', 3), 
+                                (0, 'tablet', 'Tablet', '', 4),
+                                (0, 'monitor', 'Monitor', '', 5),
+                                (0, 'video', 'Videocamera - Tv', '', 6),
+                                (0, 'hd', 'Hard disk esterno', '', 7),
+                                (0, 'projector', 'Projector', '', 8),
+                                (0, 'server', 'Server e accessori', '', 9),
+                                (0, 'audio', 'Audio', '', 10); 
+                                (0, 'software', 'Software - licenze', '', 11),
+                                (0, 'chair', 'Sedia', '', 12),
+
+DROP TABLE IF EXISTS `good_requests`;                                
+CREATE TABLE `good_requests` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) unsigned,
+  `name` varchar(255),
+   `description` text,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_goods_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
+)
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
