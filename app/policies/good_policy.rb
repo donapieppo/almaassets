@@ -34,7 +34,11 @@ class GoodPolicy
     false
   end
 
-  def find
+  def find?
+    @user.is_admin?
+  end
+
+  def unload?
     @user.is_admin?
   end
 end
