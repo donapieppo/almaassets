@@ -1,6 +1,6 @@
 module CategoriesHelper
   def category_icon(c, size: 20)
-    c or return ''
+    c or return "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
 
     case c.code
     when 'pc'
