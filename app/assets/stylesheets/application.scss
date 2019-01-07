@@ -41,3 +41,17 @@ span.twitter-typeahead {
     column-count: 4;
   }
 }
+
+.inv_number {
+  @extend .btn;
+  @extend .btn-sm;
+  font-weight: bold;
+  font-size: 16px;
+}
+  .without-owner {
+    @extend .btn-danger;
+  }
+  .with-owner {
+    @extend .btn-success;
+  }
+
