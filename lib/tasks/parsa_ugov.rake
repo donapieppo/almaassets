@@ -4,13 +4,19 @@ require 'unibo_file_parser'
 
 namespace :almaassets do
 
+  desc "show fields" 
+  task show_excel_headers: :environment do
+    excel = UniboFileParser.new(ARGV[1])
+    excel.get(1).keys.each do |k|
+      puts "#{k.ljust(40, '.')} #{UniboExcelMappings.unibo_to_sym_attr(k)}"
+    end
+  end
+
   desc "test excel file" 
   task test_file: :environment do
     excel = UniboFileParser.new(ARGV[1])
     excel.each do |unibo_good|
       unibouser = unibo_good.get(:unibouser)
-      next if unibouser.blank?
-      # puts unibo_good.get(:inv_number) + " - " + (unibo_good.get(:cib) || "-") + " - " + unibo_good.get(:description) + " - " + (unibo_good.get(:brand) || "?")
       puts unibo_good.get(:inv_number) + " - " + (unibo_good.get(:cib) || "-") + " - " + unibo_good.get(:description) + " - " + unibouser
     end
   end
