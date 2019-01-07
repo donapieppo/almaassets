@@ -9,11 +9,14 @@
         <% end %>
         <div class="dropdown-divider"></div>
         <%= link_to (fwicon('question-circle') + " sconosciuto"), goods_path(no_category: 1) %>
+        <%= link_to (fwicon('plus') + " nuova categoria"), new_category_path %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('door-open') + ' Ubicazioni' do  %>
+      <%= dropdown_menu :amm, big_icon('map-marker') + ' Ubicazioni' do  %>
         <% Location.find_each do |location| %>  
-          <%= link_to (fwicon('wallet') + " #{location}"), goods_path(location_id: location.id) %>
+          <%= link_to (fwicon('angle-right') + " #{location}"), goods_path(location_id: location.id) %>
         <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to (fwicon('plus') + " nuova ubicazioone"), new_location_path %>
       <% end %>
       <%= dropdown_menu :amm, big_icon('user') + ' Utenti' do  %>
         <% User.order(:surname, :name).each do |user| %>
