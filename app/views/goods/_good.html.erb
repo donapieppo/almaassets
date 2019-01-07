@@ -1,4 +1,4 @@
-<div class="card my-1" id="<%= "good_#{good.id}" %>">
+<div class="card my-1" id="<%= div_good_id(good) %>">
   <div class="card-header <%= 'bg-warning' if good.to_unload  %>">
     <div class="row">
       <div class="col-5">
@@ -6,22 +6,21 @@
       </div>
 
       <div class="col-2 centered">
-        <span class="btn btn-sm font-weight-bold <%= good.user_id ? "btn-info" : "btn-danger" %>">inv. <%= good.inv_number %></span>
+        <%= inv_number(good) %>  
       </div>
 
       <div class="col-5">
         <span class="float-right">
           <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
           <%= old_inv_number(good) %>  
-          <%= original_info(good) %>  
         </span>
       </div>
     </div>
   </div>
 
   <div class="card-body">
-    <%= good.name.blank? ? good.description.upcase : good.name.upcase %> (<%= good.build_year %>)
-    <span class="float-right">
+    <%= (good.name.blank? ? good.description : good.name).upcase %> (<%= good.build_year %>)
+    <span class="actions float-right">
       <%= link_to_edit(edit_good_path(good), modal: true) if current_user.is_admin? %>  
       <%= link_to_unload(good) %>  
     </span>
