@@ -8,9 +8,9 @@ confermare l'attuale presenza del bene.
 
 ## Installazione
 
-Applicazione piuttosto standard in ruby on rails su mariadb ch utilizza 
+Applicazione piuttosto standard in ruby on rails su mariadb che utilizza 
 (https://github.com/donapieppo/dm_unibo_common). 
-`git clone` e poi `rake db schema load`.
+Quindi, essenzialmente, `git clone`, `cp doc/dm_unibo_common.yml config/dm_unibo_common.yml` e poi `rake db schema load`.
 
 ## Per iniziare (tet del file UGOV)
 
