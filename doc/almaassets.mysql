@@ -11,7 +11,6 @@ CREATE TABLE `organizations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB; 
 
-INSERT INTO `organizations` VALUES (1, 'dipmat', 'Dipartimento di Matematica');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -36,8 +35,6 @@ CREATE TABLE `buildings` (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO `buildings` VALUES (1, 'Dipartimento di Matematica', 'P.zza Porta San Donato, 5', 'Bologna');
-
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -46,32 +43,6 @@ CREATE TABLE `locations` (
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_locations_buildings` FOREIGN KEY (building_id) REFERENCES buildings(id) ON DELETE CASCADE ON UPDATE RESTRICT
 );
-
-INSERT INTO `locations` VALUES (1, 1, 'Ufficio docente assegnatario del bene');
-
-INSERT INTO `locations` VALUES (0, 1, 'Lab Docenti');
-INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti I piano');
-INSERT INTO `locations` VALUES (0, 1, 'Lab Studenti piano terra');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Vitali (p.t.)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Enriques (p.t.)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Pincherle (p.I)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Bombelli (p.III)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Cremona (p.IV)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Arzela (p.V)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula Tonelli (p.VI)');
-INSERT INTO `locations` VALUES (0, 1, 'Aula VII piano');
-INSERT INTO `locations` VALUES (0, 1, 'Aula VIII piano');
-INSERT INTO `locations` VALUES (0, 1, 'Seminario I');
-INSERT INTO `locations` VALUES (0, 1, 'Seminario II');
-INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi II piano');
-INSERT INTO `locations` VALUES (0, 1, 'Uffcio Dottrandi VIII piano');
-INSERT INTO `locations` VALUES (0, 1, 'Portineria');
-INSERT INTO `locations` VALUES (0, 1, 'Amministrazione');
-INSERT INTO `locations` VALUES (0, 1, 'Direzione');
-INSERT INTO `locations` VALUES (0, 1, 'Scantinato Server');
-INSERT INTO `locations` VALUES (0, 1, 'Biblioteca');
-INSERT INTO `locations` VALUES (0, 1, 'Biblioteca Bortolotti');
-INSERT INTO `locations` VALUES (0, 1, 'Armadi di rete');
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -82,19 +53,6 @@ CREATE TABLE `categories` (
   `number` smallint,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
-
-INSERT INTO `categories` VALUES (1, 'notebook', 'Pc portatile', '', 1), 
-                                (0, 'pc', 'Pc fisso', '', 2),
-                                (0, 'printer', 'Stampante', '', 3), 
-                                (0, 'tablet', 'Tablet', '', 4),
-                                (0, 'monitor', 'Monitor', '', 5),
-                                (0, 'video', 'Videocamera - Tv', '', 6),
-                                (0, 'hd', 'Hard disk esterno', '', 7),
-                                (0, 'projector', 'Projector', '', 8),
-                                (0, 'server', 'Server e accessori', '', 9),
-                                (0, 'audio', 'Audio', '', 10),
-                                (0, 'software', 'Software, licenze', '', 11),
-                                (0, 'chair', 'Sedia, Armadio, Tavolo', '', 12);
 
 DROP TABLE IF EXISTS `good_requests`;                                
 CREATE TABLE `good_requests` (
@@ -143,6 +101,4 @@ CREATE TABLE `goods` (
 	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
--- tester
-INSERT INTO `users` VALUES (364089,1,'valeria.montesi4@unibo.it','Valeria','Montesi','valeria.montesi4@unibo.it','2018-11-12 09:47:31');
 
