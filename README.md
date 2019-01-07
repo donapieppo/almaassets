@@ -12,7 +12,9 @@ Applicazione piuttosto standard in ruby on rails su mariadb che utilizza
 (https://github.com/donapieppo/dm_unibo_common). 
 Quindi, essenzialmente, `git clone`, `cp doc/dm_unibo_common.yml config/dm_unibo_common.yml` e poi `rake db schema load`.
 
-## Per iniziare (tet del file UGOV)
+## Per iniziare 
+
+### Test del file UGOV
 
 Si supponga che il file excel scaricato da U-GOV con la situazione attuale
 degli inventari sia "tmp/ELENCO\ BENI1.xls"
@@ -24,7 +26,8 @@ rake almaassets:show_excel_headers tmp/ELENCO\ BENI1.xls
 ```
 
 si vedono i campi che verranno utilizzati e il mapping tra il 
-nume in excel e quello che usiamo nel programma.
+nome della colonna nell'header del file excel e quello che usiamo nel programma
+come attributo (o metodo) del bene.
 
 Per exempio: "Num inventario Ateneo" diventa "unibo_number"
 
@@ -33,9 +36,10 @@ Il task
 ```ruby
 rake almaassets:test_file tmp/ELENCO\ BENI1.xls 
 ```
-mostra ivvece il contenuto excel con una pagina per ogni bene.
 
-## Popolare gli utenti
+mostra invece il contenuto excel con una pagina per ogni bene.
+
+### Popolare gli utenti
 
 Per popolare gli utenti deve essere riempita la tabella
 
@@ -52,6 +56,30 @@ Per popolare gli utenti deve essere riempita la tabella
 | updated_at      | datetime         | YES  |     | NULL    |                |
 +-----------------+------------------+------+-----+---------+----------------+
 ```
+
+con i dati dei vostri utenti (per ora `organization_id=1`).
+
+### Popolare gli oggetti inventariati
+
+```ruby
+rake almaassets:insert_or_update_assets tmp/ELENCO\ BENI1.xls
+```
+
+### Associare, per quanto possibile, gli utenti
+
+Gli utenti in UGOV sono id nel campo 'Codice Possessore' (boh) o stringhe in 'Possessore' 
+oppure compaiono in 'Descrizione bene'. 
+
+con 
+
+```ruby
+rake almaassets:assign_users 
+```
+
+ma avrete da modificare a mano `lib/tasks/assign_users.rake` per soddisfare le vostre esigenze.
+Si tratta essenzialmente di una serie di regular expressions per indovinare a chi è 
+assegnato il materiale.
+
 
 
 
