@@ -92,22 +92,23 @@ INSERT INTO `categories` VALUES (1, 'notebook', 'Pc portatile', '', 1),
                                 (0, 'hd', 'Hard disk esterno', '', 7),
                                 (0, 'projector', 'Projector', '', 8),
                                 (0, 'server', 'Server e accessori', '', 9),
-                                (0, 'audio', 'Audio', '', 10); 
-                                (0, 'software', 'Software - licenze', '', 11),
-                                (0, 'chair', 'Sedia', '', 12),
+                                (0, 'audio', 'Audio', '', 10),
+                                (0, 'software', 'Software, licenze', '', 11),
+                                (0, 'chair', 'Sedia, Armadio, Tavolo', '', 12);
 
 DROP TABLE IF EXISTS `good_requests`;                                
 CREATE TABLE `good_requests` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned,
   `category_id` int(11) unsigned,
   `name` varchar(255),
-   `description` text,
+  `description` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_goods_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
-)
+  CONSTRAINT `fk_good_requests_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_good_requests_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
+);
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
@@ -130,8 +131,6 @@ CREATE TABLE `goods` (
 
   `old_org` varchar(255),
   `old_inv_number` int(11) unsigned,
-
-  `user_request` varchar(255),
 
   `to_unload` BOOL, 
 
