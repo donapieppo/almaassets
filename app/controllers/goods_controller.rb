@@ -32,7 +32,7 @@ class GoodsController < ApplicationController
         @title = 'Elenco beni non assegnati'
       end
     else
-      @goods = @goods.where(user_id: current_user.id)
+      @goods = @goods.where(user_id: current_user.id).where(to_unload: nil)
     end
   end
 
