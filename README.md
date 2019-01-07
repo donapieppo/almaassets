@@ -10,7 +10,11 @@ confermare l'attuale presenza del bene.
 
 Applicazione piuttosto standard in ruby on rails su mariadb che utilizza 
 (https://github.com/donapieppo/dm_unibo_common). 
-Quindi, essenzialmente, `git clone`, `cp doc/dm_unibo_common.yml config/dm_unibo_common.yml` e poi `rake db schema load`.
+Quindi, essenzialmente, `git clone`, `cp doc/dm_unibo_common.yml config/dm_unibo_common.yml`, 
+aggiungi 
+SECRET_KEY_BASE_ALMAASSETS e 
+ALMAASSETS_DATABASE_PASSWORD 
+nel tuo environment (per esempio .bashrc) e poi `rake db schema load`.
 
 ## Per iniziare 
 
