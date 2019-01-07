@@ -21,7 +21,7 @@ degli inventari sia "tmp/ELENCO\ BENI1.xls"
 
 Attraverso il task 
 
-```ruby
+```bash
 rake almaassets:show_excel_headers tmp/ELENCO\ BENI1.xls 
 ```
 
@@ -33,7 +33,7 @@ Per exempio: "Num inventario Ateneo" diventa "unibo_number"
 
 Il task 
 
-```ruby
+```bash
 rake almaassets:test_file tmp/ELENCO\ BENI1.xls 
 ```
 
@@ -61,7 +61,7 @@ con i dati dei vostri utenti (per ora `organization_id=1`).
 
 ### Popolare gli oggetti inventariati
 
-```ruby
+```bash
 rake almaassets:insert_or_update_assets tmp/ELENCO\ BENI1.xls
 ```
 
@@ -70,15 +70,41 @@ rake almaassets:insert_or_update_assets tmp/ELENCO\ BENI1.xls
 Gli utenti in UGOV sono id nel campo 'Codice Possessore' (boh) o stringhe in 'Possessore' 
 oppure compaiono in 'Descrizione bene'. 
 
-con 
+Con 
 
-```ruby
+```bash
 rake almaassets:assign_users 
 ```
 
-ma avrete da modificare a mano `lib/tasks/assign_users.rake` per soddisfare le vostre esigenze.
+il task prova ad azzeccare quello che ha inserito l'operatore a mano e associarlo
+ad uno degli utenti che avete inserito nel database.
+
+Avrete comunque da modificare a mano `lib/tasks/assign_users.rake` per soddisfare le vostre esigenze.
+
 Si tratta essenzialmente di una serie di regular expressions per indovinare a chi è 
 assegnato il materiale.
+
+### Associare, per quanto possibile, le categorie
+
+Inserite le categorie che volete trattare via interfaccia o direttamente nel
+database tipo
+
+```mysql
+INSERT INTO `categories` VALUES (1, 'notebook', 'Pc portatile', '', 1), (0, 'pc', 'Pc fisso', '', 2), (0, 'printer', 'Stampante', '', 3), (0, 'tablet', 'Tablet', '', 4), (0, 'monitor', 'Monitor', '', 5), (0, 'video', 'Videocamera - Tv', '', 6), (0, 'hd', 'Hard disk esterno', '', 7), (0, 'projector', 'Projector', '', 8), (0, 'server', 'Server e accessori', '', 9), (0, 'audio', 'Audio', '', 10), (0, 'software', 'Software, licenze', '', 11), (0, 'chair', 'Sedia, Armadio, Tavolo', '', 12);
+```
+
+e modificate di conseguenza `lib/tasks/assign_categories.rake`.
+
+Anche quì si tratta di una serie di regular expressions per indovinare la tipologia
+di materiale.
+
+Quindi eseguite il task
+
+```bash
+rake almaassets:assign_categories 
+```
+
+
 
 
 
