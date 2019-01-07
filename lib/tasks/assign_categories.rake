@@ -2,9 +2,9 @@ namespace :almaassets do
 
   desc "inserisce le categorie"
   task assign_categories: :environment do
-    chair_id     = Category.find_by_code('chair').id
-    video_id     = Category.find_by_code('video').id
-    server_id    = Category.find_by_code('server').id
+    chair_id   = Category.find_by_code('chair').id
+    video_id   = Category.find_by_code('video').id
+    server_id  = Category.find_by_code('server').id
     printer_id = Category.find_by_code('printer').id
 
     Good.where(category_id: nil).find_each do |good|

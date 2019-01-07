@@ -37,6 +37,12 @@ class UniboFileParser
     @file_content = excel.parse(headers: true, clean: true).drop(1)
   end
 
+  def each_original
+    @file_content.each do |excel_line|
+      yield excel_line
+    end
+  end
+
   def each
     @file_content.each do |excel_line|
       yield UniboGood.new(excel_line)
