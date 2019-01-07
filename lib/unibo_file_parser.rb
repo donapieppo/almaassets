@@ -31,6 +31,7 @@ end
 # excel = UniboFileParser.new('/tmp/pippo')
 class UniboFileParser
   def initialize(file)
+    file or raise "Please give excel file name"
     excel = Roo::Excel.new(file) 
     # facciamo leggere con gli headers e poi li buttiamo
     @file_content = excel.parse(headers: true, clean: true).drop(1)
@@ -40,6 +41,10 @@ class UniboFileParser
     @file_content.each do |excel_line|
       yield UniboGood.new(excel_line)
     end
+  end
+
+  def get(num)
+    @file_content[num]
   end
 
   private 
