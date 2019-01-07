@@ -5,7 +5,6 @@ namespace :almaassets do
   desc "inserisce gli utenti"
   task assign_users: :environment do
     pietro = User.find_by_upn('pietro.donatini@unibo.it')
-    p pietro
 
     Good.where(user_id: nil).find_each do |good|
       if good.description =~ /laboratorio piano terra/i or 
@@ -18,9 +17,8 @@ namespace :almaassets do
          good.description =~ /multimediale.*terra/i or
          good.description =~ /ufficio tecnici/i or
          good.description =~ /uff\.?\s*tecnici/i or
-         good.description =~ /sala server/i or
-         good.description =~ /scantinato server/i 
-        p good.description
+         good.description =~ /server/i 
+
         good.update_attribute(:user_id, pietro.id)
       end
     end
@@ -30,7 +28,7 @@ namespace :almaassets do
       x = "#{u.name} #{u.surname}"
       y = "#{u.surname} #{u.name}"
       Good.where(user_id: nil).find_each do |good|
-        if good.description =~ /#{x}/i or good.description =~ /#{y}/i 
+        if good.unibo_description =~ /#{x}/i or good.unibo_description =~ /#{y}/i 
           puts "----"
           puts good.description.downcase
           puts u
@@ -42,8 +40,8 @@ namespace :almaassets do
     # solo cognome con prof.
     User.find_each do |u|
       Good.where(user_id: nil).find_each do |good|
-        if good.description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.surname}/i or
-           good.description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.name[0]}\.\s?#{u.surname}/i
+        if good.unibo_description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.surname}/i or
+           good.unibo_description =~ /(prof|dott)(\.ssa)?\.?\s*#{u.name[0]}\.\s?#{u.surname}/i
           puts "----"
           puts good.description.downcase
           puts u
