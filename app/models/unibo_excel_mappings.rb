@@ -51,6 +51,10 @@ class UniboExcelMappings
     @@sym_to_unibo_mappings[s]
   end
 
+  def self.unibo_to_sym_attr(s)
+    @@unibo_to_sym_mappings[s]
+  end
+
   @@old_organizations = {
     "EX85"     => 'matpre2013',
     "EXE3_DIP" => 'matemates', 
