@@ -27,8 +27,4 @@ module CategoriesHelper
       "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
     end
   end
-
-  def confirmed_icon(c, size: 20)
-    c ? "<i class='fas fa-exclamation-circle text-success' style='font-size: #{size}px'></i>".html_safe : ''
-  end
 end

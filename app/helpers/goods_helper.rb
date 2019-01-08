@@ -1,11 +1,18 @@
 module GoodsHelper
-  def inv_number(good)
+  def inv_number(good, found: nil)
     content_tag :button, title: "Informazioni originali in ugov", 
-                         class: "inv_number #{good.user_id ? 'with-owner' : 'without-owner'}",
+      class: "inv_number #{good.user_id ? 'with-owner' : 'without-owner'} #{'found' if found}",
                          data: { toggle: "popover", 
                                  html: "true",
                                  content: "#{h good.unibo_description}<br/><hr/>#{h good.build_year}<br/>&euro; #{h good.price}".html_safe } do
-      "inv. #{good.inv_number}"
+      "inv. #{good.inv_number.to_i}"
+    end
+  end
+
+  def old_inv_number(good, found: nil)
+    return "" unless good.old_inv_number 
+    content_tag :span, class: "old_inv_number p-1 #{'found' if found}" do
+      "#{good.old_inv_number.to_i} - #{good.old_org}"
     end
   end
 
@@ -17,14 +24,11 @@ module GoodsHelper
     link_to icon, unload_good_path(good), remote: true, title: title
   end
 
-  def old_inv_number(good)
-    return "" unless good.old_inv_number 
-    content_tag :span, class: "badge badge-secondary p-1" do
-      good.old_inv_number.to_s + " - " + good.old_org.to_s
-    end
-  end
-
   def div_good_id(good)
     "good_#{good.id}"
+  end
+
+  def confirmed_icon(t, size: 20)
+    t ? "<i class='fas fa-exclamation-circle text-success' style='font-size: #{size}px'></i>".html_safe : ''
   end
 end
