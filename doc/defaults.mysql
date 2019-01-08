@@ -1,3 +1,5 @@
+use `almaassets`;
+
 INSERT INTO `organizations` VALUES (1, 'dipmat', 'Dipartimento di Matematica');
 
 INSERT INTO `buildings` VALUES (1, 'Dipartimento di Matematica', 'P.zza Porta San Donato, 5', 'Bologna');
