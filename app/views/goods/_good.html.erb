@@ -6,12 +6,14 @@
       </div>
 
       <div class="col-2 centered">
+        <%= big_icon('arrow-circle-right') if (search_string and good.inv_number == search_string.to_i) %>  
         <%= inv_number(good) %>  
       </div>
 
       <div class="col-5">
         <span class="float-right">
           <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
+          <%= big_icon('arrow-circle-right') if (search_string and good.old_inv_number == search_string.to_i) %>  
           <%= old_inv_number(good) %>  
         </span>
       </div>
