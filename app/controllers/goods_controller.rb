@@ -71,6 +71,7 @@ class GoodsController < ApplicationController
 
     @goods = []
 
+    # first by inv num
     if @search_string =~ /\A[0-9]+\Z/
       @goods << Good.where(inv_number: @search_string.to_i).to_a
       @goods << Good.where(old_inv_number: @search_string.to_i).to_a
@@ -98,7 +99,7 @@ class GoodsController < ApplicationController
 
   def good_params
     if current_user.is_admin?
-      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id)
+      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id, :confirmed)
     else
       # category_id only if new
       params[:good].permit(:user_request, :user_justification, :category_id)
