@@ -4,19 +4,18 @@
   <div class="card-header <%= 'bg-warning' if good.to_unload  %>">
     <div class="row">
       <div class="col-5">
+        <%= confirmed_icon(good.confirmed, size: 25) %>
         <%= category_icon(good.category, size: 25) %>
       </div>
 
       <div class="col-2 centered">
-        <%= big_icon('arrow-circle-right') if (search_string and good.inv_number == search_string.to_i) %>  
-        <%= inv_number(good) %>  
+        <%= inv_number(good, found: (search_string and good.inv_number == search_string.to_i)) %>  
       </div>
 
       <div class="col-5">
         <span class="float-right">
           <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
-          <%= big_icon('arrow-circle-right') if (search_string and good.old_inv_number == search_string.to_i) %>  
-          <%= old_inv_number(good) %>  
+          <%= old_inv_number(good, found: (search_string and good.old_inv_number == search_string.to_i)) %>  
         </span>
       </div>
     </div>
