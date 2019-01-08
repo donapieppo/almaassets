@@ -47,11 +47,24 @@ span.twitter-typeahead {
   @extend .btn-sm;
   font-weight: bold;
   font-size: 16px;
+  &.found {
+    @extend .badge-primary;
+    font-size: 130%;
+  }
 }
-  .without-owner {
-    @extend .btn-danger;
+.without-owner {
+  @extend .btn-danger;
+}
+.with-owner {
+  @extend .btn-success;
+}
+
+.old_inv_number {
+  @extend .badge;
+  @extend .badge-secondary;
+  &.found {
+    @extend .badge-primary;
+    font-size: 130%;
   }
-  .with-owner {
-    @extend .btn-success;
-  }
+}
 
