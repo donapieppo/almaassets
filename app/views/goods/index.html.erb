@@ -18,7 +18,7 @@
 
 <div class="list-group">
   <% @goods.each do |good| %>  
-    <%= render good, no_icon: @no_icon %>  
+    <%= render good, no_icon: @no_icon, search_string: @search_string %>  
   <% end %>
 </div>
 
