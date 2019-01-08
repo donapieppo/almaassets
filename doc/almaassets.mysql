@@ -65,13 +65,12 @@ CREATE TABLE `good_requests` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_good_requests_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_good_requests_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
+	CONSTRAINT `fk_good_requests_users`      FOREIGN KEY (user_id)     REFERENCES users(id)      ON DELETE CASCADE ON UPDATE RESTRICT
 );
 
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `actual_status` ENUM('wished', 'asked', 'accepted', 'present', 'dismissed'),
   `category_id` int(11) unsigned,
   `location_id` int(11) unsigned,
   `inv_number` int(11) unsigned, 
@@ -90,6 +89,7 @@ CREATE TABLE `goods` (
   `old_org` varchar(255),
   `old_inv_number` int(11) unsigned,
 
+  `confirmed` BOOL,
   `to_unload` BOOL, 
 
   `created_at` datetime DEFAULT NULL,
@@ -97,8 +97,8 @@ CREATE TABLE `goods` (
 
   PRIMARY KEY (`id`),
 	CONSTRAINT `fk_goods_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_locations`  FOREIGN KEY (location_id) REFERENCES locations(id)   ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)       ON DELETE CASCADE ON UPDATE RESTRICT
+	CONSTRAINT `fk_goods_locations`  FOREIGN KEY (location_id) REFERENCES locations(id)  ON DELETE CASCADE ON UPDATE RESTRICT,
+	CONSTRAINT `fk_goods_users`      FOREIGN KEY (user_id)     REFERENCES users(id)      ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE=InnoDB;
 
 

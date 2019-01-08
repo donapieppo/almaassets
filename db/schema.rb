@@ -25,8 +25,18 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "number", limit: 2
   end
 
+  create_table "good_requests", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id", unsigned: true
+    t.integer "category_id", unsigned: true
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["category_id"], name: "fk_good_requests_categories"
+    t.index ["user_id"], name: "fk_good_requests_users"
+  end
+
   create_table "goods", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "actual_status", limit: 9
     t.integer "category_id", unsigned: true
     t.integer "location_id", unsigned: true
     t.integer "inv_number", unsigned: true
@@ -42,7 +52,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "unibo_number", unsigned: true
     t.string "old_org"
     t.integer "old_inv_number", unsigned: true
-    t.string "user_request"
+    t.boolean "confirmed"
+    t.boolean "to_unload"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["category_id"], name: "fk_goods_categories"
     t.index ["location_id"], name: "fk_goods_locations"
     t.index ["user_id"], name: "fk_goods_users"
@@ -70,6 +83,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["upn"], name: "index_upn_on_users", length: 191
   end
 
+  add_foreign_key "good_requests", "categories", name: "fk_good_requests_categories", on_delete: :cascade
+  add_foreign_key "good_requests", "users", name: "fk_good_requests_users", on_delete: :cascade
   add_foreign_key "goods", "categories", name: "fk_goods_categories", on_delete: :cascade
   add_foreign_key "goods", "locations", name: "fk_goods_locations", on_delete: :cascade
   add_foreign_key "goods", "users", name: "fk_goods_users", on_delete: :cascade
