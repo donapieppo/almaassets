@@ -1,8 +1,8 @@
 class GoodsController < ApplicationController
-  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload]
+  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm]
 
   def index
-    @goods = Good.includes(:category, :user)
+    @goods = Good.includes(:category, :user, :location)
 
     if current_user.is_admin? 
       if params[:unassigned]
@@ -32,6 +32,7 @@ class GoodsController < ApplicationController
         @title = 'Elenco beni non assegnati'
       end
     else
+      @title = 'Elenco beni a lei assegnati'
       @goods = @goods.where(user_id: current_user.id).where(to_unload: nil)
     end
   end
@@ -90,6 +91,19 @@ class GoodsController < ApplicationController
     # @to_unload = @good.reload.to_unload
   end
 
+  def new_confirm
+  end
+
+  # only simple users
+  def confirm
+  end
+
+  def new_unconfirm
+  end
+
+  def unconfirm
+  end
+
   private
 
   def set_good_and_check_permission
@@ -98,8 +112,12 @@ class GoodsController < ApplicationController
   end
 
   def good_params
+    # confirmed in database is datetime and in form is just bool
+    if params[:good][:confirmed] == "1"
+      params[:good][:confirmed] = Time.now
+    end
     if current_user.is_admin?
-      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id, :confirmed)
+      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id, :confirmed, :admin_notes)
     else
       # category_id only if new
       params[:good].permit(:user_request, :user_justification, :category_id)

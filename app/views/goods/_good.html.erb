@@ -22,10 +22,15 @@
   </div>
 
   <div class="card-body">
-    <%= (good.name.blank? ? good.description : good.name).upcase %> (<%= good.build_year %>)
+    <%= (good.name.blank? ? good.description : good.name).upcase %> <small>(<%= good.build_year %> <%= good.location %>)</small>
+    <% if (! good.admin_notes.blank?) and current_user.is_admin? %>  
+      <span class="text-info"><%= good.admin_notes %></span>
+    <% end %>
     <span class="actions float-right">
       <%= link_to_edit(edit_good_path(good), modal: true) if current_user.is_admin? %>  
       <%= link_to_unload(good) %>  
     </span>
   </div>
+
+  <%= simple_user_actions(good) %>  
 </div>
