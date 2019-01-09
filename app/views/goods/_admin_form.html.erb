@@ -5,7 +5,12 @@
   <%= good.input :user_upn %>
   <%= good.association :category %>
   <%= good.association :location %>
-  <%= good.input :confirmed %>
+
+  <%= good.input :admin_notes, as: :string %>  
+
+  <% confirmed_hint = @good.confirmed ? "Ultima conferma di presenza: #{I18n.l(@good.confirmed)}. Fare check per confermare nuovamente" : "Fare check per confermare la presenza" %>  
+  <%= good.input :confirmed, as: :boolean, input_html: { checked: false }, hint: confirmed_hint %>
+
   <%= good.submit %>  
 <% end %>
 

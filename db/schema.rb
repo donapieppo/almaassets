@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "name"
     t.text "description"
     t.text "unibo_description"
+    t.text "admin_notes"
     t.integer "build_year"
     t.float "price"
     t.integer "load_number"
@@ -52,7 +53,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "unibo_number", unsigned: true
     t.string "old_org"
     t.integer "old_inv_number", unsigned: true
-    t.boolean "confirmed"
+    t.datetime "confirmed"
     t.boolean "to_unload"
     t.datetime "created_at"
     t.datetime "updated_at"
