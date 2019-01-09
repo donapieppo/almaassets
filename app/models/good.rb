@@ -37,4 +37,9 @@ class Good < ApplicationRecord
       self.user_id = u.id
     end
   end
+ 
+  # we want the user to confirm every year
+  def better_to_confirm
+    ! (self.confirmed and (((Time.zone.now - self.confirmed).to_i/86400) < 365))
+  end
 end
