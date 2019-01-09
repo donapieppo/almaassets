@@ -16,3 +16,7 @@ it:
         user_upn: Assegnatario
         category: Categoria
         location: Ubicazione
+        
+  time:
+    formats:
+      only_day: ! '%d %b %Y'
