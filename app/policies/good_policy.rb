@@ -41,4 +41,20 @@ class GoodPolicy
   def unload?
     @user.is_admin?
   end
+
+  def new_confirm?
+    record.user_id == @user.id
+  end
+
+  def confirm?
+    record.user_id == @user.id
+  end
+
+  def new_unconfirm?
+    record.user_id == @user.id
+  end
+
+  def unconfirm?
+    record.user_id == @user.id
+  end
 end
