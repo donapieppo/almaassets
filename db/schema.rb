@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "old_org"
     t.integer "old_inv_number", unsigned: true
     t.datetime "confirmed"
+    t.integer "confirmed_by", unsigned: true
     t.boolean "to_unload"
     t.datetime "created_at"
     t.datetime "updated_at"

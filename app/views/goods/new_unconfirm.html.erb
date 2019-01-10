@@ -1,6 +1,16 @@
-<%= simple_form_for :unconfirm do |f| %>  
-  <%= f.input :motivation, label: "Messaggio", as: :text %> 
-  <%= f.submit "Invia richiesta" %>
+<div class="info">
+  <p>Da questa pagina può segnalare che l'oggetto</p>
+  <p class="m-3"><%= description_for_owner(@good) %></p>
+  <p>non risulta più in suo possesso.</p>
+</div>
+
+<p>
+  Per completare la segnalazione lasciando un messaggio:
+</p>
+
+<%= simple_form_for :unconfirm, url: unconfirm_good_path(@good) do |f| %>  
+  <%= f.input :motivation, label: "Messaggio", as: :text, required: false %> 
+  <%= f.submit "Invia segnalazione" %>
 <% end %>
 
 

@@ -1,6 +1,11 @@
-<%= simple_form_for :confirm do |f| %>  
-  <%= f.input :motivation, label: "Messaggio", as: :text %> 
-  <%= f.submit "Invia richiesta" %>
+<div class="info">
+  <p>Da questa pagina può segnalare che l'oggetto</p>
+  <p class="m-3"><%= description_for_owner(@good) %></p>
+  <p>risulta in suo possesso.</p>
+</div>
+
+<%= form_tag confirm_good_path(@good) do %>  
+  <%= submit_tag "Confermo il possesso" %>
 <% end %>
 
 

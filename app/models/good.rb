@@ -42,4 +42,12 @@ class Good < ApplicationRecord
   def better_to_confirm
     ! (self.confirmed and (((Time.zone.now - self.confirmed).to_i/86400) < 365))
   end
+
+  def confirm_presence(user)
+    self.update_attributes(confirmed: Time.now, confirmed_by: user.id)
+  end
+
+  def unconfirm_presence
+    self.update_attributes(confirmed: nil)
+  end
 end

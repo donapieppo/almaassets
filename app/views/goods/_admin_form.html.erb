@@ -8,7 +8,7 @@
 
   <%= good.input :admin_notes, as: :string %>  
 
-  <% confirmed_hint = @good.confirmed ? "Ultima conferma di presenza: #{I18n.l(@good.confirmed)}. Fare check per confermare nuovamente" : "Fare check per confermare la presenza" %>  
+  <% confirmed_hint = @good.confirmed ? "Ultima conferma di presenza: #{I18n.l(@good.confirmed)} da #{User.find(@good.confirmed_by)}. Fare check per confermare nuovamente" : "Fare check per confermare la presenza" %>  
   <%= good.input :confirmed, as: :boolean, input_html: { checked: false }, hint: confirmed_hint %>
 
   <%= good.submit %>  
