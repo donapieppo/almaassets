@@ -37,27 +37,28 @@ class GoodsController < ApplicationController
     end
   end
 
-  def new 
-    @category = Category.find(params[:category_id])
-    @good = @category.goods.new
-  end
+  # def new 
+  #   @category = Category.find(params[:category_id])
+  #   @good = @category.goods.new
+  # end
 
-  def create
-    @category = Category.find(params[:category_id])
-    @good = @category.goods.new(good_params)
-    @good.user = current_user
-    if @good.save
-      redirect_to goods_path, notice: "La richiesta è stata creato correttamente."
-    else
-      render action: :new
-    end
-  end
+  # def create
+  #   @category = Category.find(params[:category_id])
+  #   @good = @category.goods.new(good_params)
+  #   @good.user = current_user
+  #   if @good.save
+  #     redirect_to goods_path, notice: "La richiesta è stata creato correttamente."
+  #   else
+  #     render action: :new
+  #   end
+  # end
 
   def edit
     render layout: false if modal_page
   end
 
   def update
+    manage_confirmed_param
     if @good.update_attributes(good_params)
       redirect_to good_path(@good), notice: "Aggiornamento registrato correttamente."
     else
@@ -96,12 +97,16 @@ class GoodsController < ApplicationController
 
   # only simple users
   def confirm
+    @good.confirm_presence(current_user)
+    redirect_to good_path(@good)
   end
 
   def new_unconfirm
   end
 
   def unconfirm
+    # TODO
+    redirect_to good_path(@good)
   end
 
   private
@@ -111,11 +116,17 @@ class GoodsController < ApplicationController
     authorize @good
   end
 
-  def good_params
+  # FIXME how to unconfirm
+  def manage_confirmed_param
     # confirmed in database is datetime and in form is just bool
-    if params[:good][:confirmed] == "1"
-      params[:good][:confirmed] = Time.now
+    if current_user.is_admin? 
+      if params[:good].delete(:confirmed) == "1"
+        @good.confirm_presence(current_user)
+      end
     end
+  end
+
+  def good_params
     if current_user.is_admin?
       params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id, :confirmed, :admin_notes)
     else

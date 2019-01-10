@@ -1,0 +1,5 @@
+<ul>
+<% @users.each do |user| %>  
+  <li><%= link_to (fwicon('wallet') + " #{user.cn_militar}"), goods_path(user_id: user.id) %></li>
+<% end %>
+</ul>
