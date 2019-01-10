@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     post 'unconfirm',     on: :member
   end
 
+  resources :users 
+
   resources :categories do 
     resources :goods
   end
