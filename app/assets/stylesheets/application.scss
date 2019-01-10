@@ -58,6 +58,9 @@ span.twitter-typeahead {
 .with-owner {
   @extend .btn-success;
 }
+.unload-good {
+  @extend .bg-secondary;
+}
 
 .old_inv_number {
   @extend .badge;
