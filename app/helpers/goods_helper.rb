@@ -44,4 +44,8 @@ module GoodsHelper
                                         class: 'btn btn-success m-1') : " Ultima conferma del bene il #{I18n.l good.confirmed, format: :only_day}")
     end 
   end
+
+  def description_for_owner(good)
+    "#{good.name} #{good.description} (descrizione originale in u-gov: #{good.unibo_description})  "
+  end
 end
