@@ -20,10 +20,10 @@
         <%= link_to (fwicon('plus') + " nuova ubicazioone"), new_location_path %>
       <% end %>
       <li><%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %></li>
-      <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search", method: :get do %>
-        <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
-      <% end %>
     <% end %>
+  <% end %>
+  <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search", method: :get do %>
+    <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
   <% end %>
 <% end %>
 
