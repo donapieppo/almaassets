@@ -17,8 +17,10 @@ module CategoriesHelper
       "<i class='far fa-hdd' style='font-size: #{size}px'></i>".html_safe
     when 'monitor'
       "<i class='fas fa-tv' style='font-size: #{size}px'></i>".html_safe
-    when 'video'
+    when 'projector'
       "<i class='fas fa-video' style='font-size: #{size}px'></i>".html_safe
+    when 'video'
+      "<i class='fas fa-camera' style='font-size: #{size}px'></i>".html_safe
     when 'software'
       "<i class='fas fa-code' style='font-size: #{size}px'></i>".html_safe
     when 'server'
@@ -27,4 +29,5 @@ module CategoriesHelper
       "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
     end
   end
+
 end
