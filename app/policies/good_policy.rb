@@ -57,4 +57,12 @@ class GoodPolicy
   def unconfirm?
     record.user_id == @user.id
   end
+
+  def ask_category?
+    @user.is_admin?
+  end
+
+  def set_category?
+    @user.is_admin?
+  end
 end
