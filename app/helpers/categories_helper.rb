@@ -25,6 +25,8 @@ module CategoriesHelper
       "<i class='fas fa-code' style='font-size: #{size}px'></i>".html_safe
     when 'server'
       "<i class='fas fa-server' style='font-size: #{size}px'></i>".html_safe
+    when 'network'
+      "<i class='fas fa-network-wired' style='font-size: #{size}px'></i>".html_safe
     else
       "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
     end
