@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm]
+  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm, :ask_category, :set_category]
 
   def index
     @goods = Good.includes(:category, :user, :location)
@@ -98,7 +98,7 @@ class GoodsController < ApplicationController
   # only simple users
   def confirm
     @good.confirm_presence(current_user)
-    redirect_to good_path(@good)
+    redirect_to goods_path
   end
 
   def new_unconfirm
@@ -106,7 +106,16 @@ class GoodsController < ApplicationController
 
   def unconfirm
     # TODO
-    redirect_to good_path(@good)
+    redirect_to goods_path
+  end
+
+  def ask_category
+    render layout: false
+  end
+
+  def set_category
+    @good.update_attribute(:category_id, params[:category_id])
+    @good.reload
   end
 
   private

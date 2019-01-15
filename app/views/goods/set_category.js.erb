@@ -1,0 +1,7 @@
+$('#main-modal .modal-title').text("");
+$('#main-modal .modal-body').text("");
+$('#main-modal').modal('hide');
+
+$("#<%= div_good_id(@good) %> .category_icon").html("<%= category_icon(@good.category) %>");
+
+

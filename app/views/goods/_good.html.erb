@@ -5,7 +5,13 @@
     <div class="row">
       <div class="col-5">
         <%= confirmed_icon(good.confirmed, size: 25) %>
-        <%= category_icon(good.category, size: 25) %>
+        <span class="category_icon">
+          <% if current_user.is_admin? %>  
+            <%= modal_link_to category_icon(good.category, size: 25), ask_category_good_path(good) %>
+          <% else %>
+            <%= category_icon(good.category, size: 25) %>
+          <% end %>
+        </span>
       </div>
 
       <div class="col-2 centered">
