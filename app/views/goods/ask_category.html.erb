@@ -1,7 +1,0 @@
-<%= main_title("Scelta categoria") %> 
-
-<ul>
-<% Category.find_each do |c| %>
-  <li><%= link_to c, set_category_good_path(@good, category_id: c.id), method: :put, remote: true %></li>
-<% end %>
-</ul>

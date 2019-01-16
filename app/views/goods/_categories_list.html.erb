@@ -1,0 +1,5 @@
+<div class="list-group list-group-flush">
+  <% Category.find_each do |c| %>
+    <%= link_to c, set_category_good_path(@good, category_id: c.id), method: :put, remote: true, class: "list-group-item list-group-item-action m-0" %>
+  <% end %>
+</div>

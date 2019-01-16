@@ -1,0 +1,4 @@
+$(".category_icon").popover('hide');
+$("#<%= div_good_id(@good) %> .category_icon").popover({ title: 'Scelta categoria',
+                                                         content: '<%= escape_javascript(render(partial: 'categories_list')) %>',
+                                                         html: true }).popover('show');

@@ -7,7 +7,7 @@
         <%= confirmed_icon(good.confirmed, size: 25) %>
         <span class="category_icon">
           <% if current_user.is_admin? %>  
-            <%= modal_link_to category_icon(good.category, size: 25), ask_category_good_path(good) %>
+            <%= link_to category_icon(good.category, size: 25), ask_category_good_path(good), remote: true %>
           <% else %>
             <%= category_icon(good.category, size: 25) %>
           <% end %>
