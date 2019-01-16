@@ -1,4 +1,8 @@
-$(".category_icon").popover('hide');
-$("#<%= div_good_id(@good) %> .category_icon").popover({ title: 'Scelta categoria',
-                                                         content: '<%= escape_javascript(render(partial: 'categories_list')) %>',
-                                                         html: true }).popover('show');
+if ($("#<%= div_good_id(@good) %> .category_icon").attr('aria-describedby')) {
+  $("#<%= div_good_id(@good) %> .category_icon").attr('aria-describedby', NULL).popover('hide');
+} else {
+  $(".category_icon").popover('hide');
+  $("#<%= div_good_id(@good) %> .category_icon").popover({ title: 'Scelta categoria',
+                                                           content: '<%= escape_javascript(render(partial: 'categories_list')) %>',
+                                                           html: true }).popover('toggle');
+}
