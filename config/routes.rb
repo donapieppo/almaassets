@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     post 'unconfirm',     on: :member
     get  'ask_category', on: :member
     put  'set_category', on: :member
+
+    get  'print', on: :collection
   end
 
   resources :users 
