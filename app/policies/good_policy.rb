@@ -65,4 +65,8 @@ class GoodPolicy
   def set_category?
     @user.is_admin?
   end
+
+  def print?
+    @user.is_admin?
+  end
 end
