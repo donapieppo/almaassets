@@ -6,10 +6,14 @@ class ApplicationController < ActionController::Base
 
   impersonates :user
 
-  before_action :log_current_user, :force_sso_user
+  before_action :log_current_user, :force_sso_user, :retrive_authlevel
   after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate, :shibboleth]
 
   def current_organization
+    @current_organization
+  end
+
+  def retrive_authlevel
     # tmp TODO FIXME
     session[:oid] = 1 unless session[:oid]
 
