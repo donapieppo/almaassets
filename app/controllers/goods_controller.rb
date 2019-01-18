@@ -118,6 +118,12 @@ class GoodsController < ApplicationController
     @good.reload
   end
 
+  def print
+    authorize Good
+    @goods = Good.where(to_unload: true)
+    render layout: false
+  end
+
   private
 
   def set_good_and_check_permission
