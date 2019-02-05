@@ -23,7 +23,7 @@ class GoodsController < ApplicationController
       elsif params[:location_id]
         @location = Location.find(params[:location_id])
         @goods = @goods.where(location_id: @location.id)
-        @title = "Elenco beni tipo \"#{@location}\""
+        @title = "Elenco beni presso \"#{@location}\""
       elsif params[:unload]
         @goods = @goods.where(to_unload: true)
         @title = "Elenco beni da disinventariare"
@@ -120,8 +120,12 @@ class GoodsController < ApplicationController
 
   def print
     authorize Good
-    @goods = Good.where(to_unload: true)
-    render layout: false
+    @goods = Good.where(to_unload: true).select(:inv_number, :unibo_description).to_a
+    respond_to do |format|
+      format.html { render layout: false }
+      format.csv { send_data @goods.map{|x| [x.inv_number, x.unibo_description].to_csv}.join, 
+                   filename: "Richiesta_scarichi_#{I18n.l Date.today}_#{current_organization.name}.csv" }
+    end
   end
 
   private

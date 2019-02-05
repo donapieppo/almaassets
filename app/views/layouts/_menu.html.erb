@@ -20,7 +20,7 @@
         <%= link_to (fwicon('plus') + " nuova ubicazioone"), new_location_path %>
       <% end %>
       <li><%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %></li>
-      <li><%= link_to big_icon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true) %></li>
+      <li><%= link_to big_icon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true, format: :csv) %></li>
     <% end %>
   <% end %>
   <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
