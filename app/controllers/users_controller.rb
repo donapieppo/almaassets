@@ -7,13 +7,16 @@ class UsersController < ApplicationController
   end
 
   def new
+    authorize User.new
   end
 
   def create
     if r = /\A(\w+\.\w+)(@unibo.it)?\z/.match(params[:upn])
       upn = r[1] + '@unibo.it'
       begin
-        User.syncronize(upn)
+        user = User.syncronize(upn)
+        user.update_attribute(:organization_id, current_organization.id)
+        authorize user
       rescue DmUniboCommon::NoUser
         flash[:alert] = "Non esiste l'utente selezionato nel database di Ateneo."
       end
