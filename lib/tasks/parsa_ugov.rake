@@ -80,6 +80,7 @@ namespace :almaassets do
       good.old_org           = unibo_good.get_cib_organization
       good.old_inv_number    = unibo_good.get_cib_inv_number
       good.price             = unibo_good.get(:price)
+      good.sn                = unibo_good.get(:sn)
 
       # attributes for rails (changable)
       if good.new_record?
