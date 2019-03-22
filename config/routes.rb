@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     get  'print', on: :collection
   end
 
+  resources :uploads
+
   resources :users 
 
   resources :categories do 

@@ -1,0 +1,10 @@
+<%= dm_card title: 'Carica il file excel di Ugov' do %>
+  <%= form_tag({action: :create}, multipart: true) do %>
+    <p>
+    <%= file_field_tag 'ugov_excel' %>
+    </p>
+    <p>
+    <%= submit_tag 'invia' %>
+    </p>
+  <% end %>
+<% end %>

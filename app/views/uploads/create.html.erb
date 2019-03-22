@@ -1,0 +1,17 @@
+<h2>Nuovi inventari</h2>
+
+<div class="list-group">
+  <% @new_goods.each do |good| %>  
+    <%= render good, no_icon: true %>  
+  <% end %>
+</div>
+
+<h2>Modifiche</h2>
+
+<pre>
+<% @differences.each do |good, d| %>  
+ <%= link_to "#{good.id} - #{good.name}", good_path(good) %>
+ <%= good.inspect %>  
+ <%= d.inspect %>   
+<% end %>
+</pre>
