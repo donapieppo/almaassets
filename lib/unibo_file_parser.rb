@@ -1,3 +1,4 @@
+# https://github.com/roo-rb/roo
 require 'roo' 
 require 'roo-xls'
 
@@ -34,7 +35,7 @@ class UniboFileParser
     file or raise "Please give excel file name"
     excel = Roo::Excel.new(file) 
     # facciamo leggere con gli headers e poi li buttiamo
-    @file_content = excel.parse(headers: true, clean: true).drop(1)
+    @file_content = excel.parse(header_search:[/Inventario/, /Descrizione Inventario/], headers: true, clean: true).drop(1)
   end
 
   def each_original
