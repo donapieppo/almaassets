@@ -27,6 +27,9 @@ class GoodsController < ApplicationController
       elsif params[:unload]
         @goods = @goods.where(to_unload: true)
         @title = "Elenco beni da disinventariare"
+      elsif params[:newer]
+        @goods = @goods.where("created_at > ?", 4.days.ago)
+        @title = "Elenco ultimi inserimenti"
       else
         @goods = @goods.where(user_id: nil)
         @title = 'Elenco beni non assegnati'
