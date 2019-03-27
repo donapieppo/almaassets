@@ -12,6 +12,9 @@ class UploadsController < ApplicationController
 
     begin
       parse_unibo_excel.each do |unibo_good|
+        if unibo_good.get(:sub_inventory) == '1'
+          next
+        end
         inv_number = unibo_good.get(:inv_number) or raise "No inv_number in #{unibo_good.inspect}"
 
         good = Good.find_by_inv_number(inv_number) || Good.new(inv_number: inv_number)

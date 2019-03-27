@@ -8,10 +8,12 @@
 
 <h2>Modifiche</h2>
 
-<pre>
 <% @differences.each do |good, d| %>  
- <%= link_to "#{good.id} - #{good.name}", good_path(good) %>
- <%= good.inspect %>  
- <%= d.inspect %>   
+  <div class="my-2 alert alert-info">
+    <%= link_to "#{good.id} - #{good.name}", good_path(good) %>
+    <% d.each do |a, v| %>   
+      <div><%= a %>  old : <%= v %></div>
+      <div><%= a %>  new : <%= good.send(a) %></div>
+    <% end %>
+  </div>
 <% end %>
-</pre>
