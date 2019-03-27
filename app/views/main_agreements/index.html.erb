@@ -1,0 +1,7 @@
+<h1>Convenzioni</h1>
+
+<% @main_agreements.each do |ma| %>  
+  <%= render ma %>  
+  <%= link_to icon('edit', text: 'Modifica'), edit_main_agreement_path(ma), class: 'btn btn-primary' %>  
+<% end %>
+

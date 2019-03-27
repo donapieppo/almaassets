@@ -1,0 +1,14 @@
+<h1>Nuova convenzione</h1>
+
+<%= dm_form_for @main_agreement do |ma| %>  
+  <%= ma.association :category, include_blank: false %>  
+  <%= ma.input :name %>  
+  <%= ma.input :code %>  
+  <%= ma.input :vendor_and_model %>  
+  <%= ma.input :description, input_html: { rows: 10 } %>  
+  <%= ma.input :notes %>  
+  <%= ma.input :price %> &euro;  
+  <%= ma.submit %>  
+<% end %>
+
+

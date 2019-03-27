@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :main_agreements
+
   resources :goods do
     get  'find', on: :collection
     post 'find', on: :collection
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
 
     get  'print', on: :collection
   end
+  resources :good_requests
 
   resources :uploads
 
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :categories do 
     resources :goods
+    resources :good_requests
   end
 
   resources :organizations
