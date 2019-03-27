@@ -54,20 +54,6 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS `good_requests`;                                
-CREATE TABLE `good_requests` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned,
-  `category_id` int(11) unsigned,
-  `name` varchar(255),
-  `description` text,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_good_requests_categories` FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE RESTRICT,
-	CONSTRAINT `fk_good_requests_users`      FOREIGN KEY (user_id)     REFERENCES users(id)      ON DELETE CASCADE ON UPDATE RESTRICT
-);
-
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
