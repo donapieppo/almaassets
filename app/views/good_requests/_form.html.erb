@@ -1,0 +1,24 @@
+<% if @main_agreement %>  
+  <%= render @main_agreement %>  
+<% elsif @outside_agreements %>
+  Nel caso nessuna convenzione soddisfi il fabbisogno specifico connesso, compilare la seguente richiesta:....
+<% else %>
+  <div class="alert alert-warning">
+    Tipologia: <%= @category %>. Non ci sono al momento convenzioni attive.</div>
+<% end %>
+
+<%= dm_form_for [@category, @good_request], title: "Richiesta di #{current_user.cn} per #{@category}" do |g| %>  
+  <div>Io, <%= current_user.cn %> richiedo l'acquisto di<br/>
+    <% if @main_agreement %>  
+      <%= @main_agreement.vendor_and_model %> in convenzione
+    <% end %>
+  </div>
+
+  <%= g.input :name %>  
+  <%= g.input :description %>  
+  <% if @outside_agreements  %>  
+    <%= g.input :derogation, hint: 'Indicare il fabbisogno specifico per cui non è possibile acquistare il prodotto in adesione alle convenzioni. Indicare le caratteristiche essenziali mancanti ai prodotti in convenzione.' %>
+  <% end %>
+  <%= g.submit %>
+<% end %>
+
