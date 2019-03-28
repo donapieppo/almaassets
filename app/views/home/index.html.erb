@@ -1,0 +1,24 @@
+<h1>Gestione materiale inventariabile<br/><small><%= current_organization %></small></h1>
+
+<% @good_requests.each do |gr| %>  
+  <%= render gr %>  
+<% end %>
+<div style="text-align: center">
+  <div class="my-3">
+    <%= link_to new_good_request_path do %>
+      <button class="btn btn-lg btn-info" style="width: 75%; font-size: 200%">
+        <%= icon('plus', size: 60) %> <br/> NUOVA <br/>RICHIESTA DI ACQUISTO
+      </button>
+    <% end %>
+  </div>
+  <div class="my-3">
+    <%= link_to goods_path do %>
+      <button class="btn btn-lg btn-info" style="width: 75%; font-size: 200%">
+        <%= icon('search', size: 60) %> <br/> PROPRIA <br/>SITUAZIONE INVENTARIALE
+      </button> 
+    <% end %>
+  </div>
+</div>
+
+
+

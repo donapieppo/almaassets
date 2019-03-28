@@ -29,5 +29,5 @@ Rails.application.routes.draw do
   resources :organizations
   resources :locations
 
-  root to: 'goods#index'
+  root to: 'home#index'
 end
