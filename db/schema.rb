@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "name"
     t.text "description"
     t.text "derogation"
+    t.integer "holder_id", unsigned: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["category_id"], name: "fk_good_requests_categories"
     t.index ["main_agreement_id"], name: "fk_good_requests_agreements"
-    t.index ["user_id"], name: "fk_good_requests_users"
+    t.index ["user_id"], name: "fk_good_requests_holders"
   end
 
   create_table "goods", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_foreign_key "good_requests", "categories", name: "fk_good_requests_categories", on_delete: :cascade
   add_foreign_key "good_requests", "main_agreements", name: "fk_good_requests_agreements", on_delete: :cascade
+  add_foreign_key "good_requests", "users", name: "fk_good_requests_holders", on_delete: :cascade
   add_foreign_key "good_requests", "users", name: "fk_good_requests_users", on_delete: :cascade
   add_foreign_key "goods", "categories", name: "fk_goods_categories", on_delete: :cascade
   add_foreign_key "goods", "locations", name: "fk_goods_locations", on_delete: :cascade
