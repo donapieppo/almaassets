@@ -15,8 +15,9 @@
 <% end %>
 
 <div class="alert alert-warning">
-  <strong>Descrizione in Ugov:</strong>
-  <i><%= @good.unibo_description %></i>
+  in Ugov:<br/>
+  <strong>sn:</strong><%= @good.sn %><br/>
+  <strong>Descrizione:</strong><i><%= @good.unibo_description %></i><br/>
 </div>
 
 <%= render "dsausers/typeahead" %>  

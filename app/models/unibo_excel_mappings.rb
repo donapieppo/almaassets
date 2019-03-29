@@ -16,7 +16,8 @@ class UniboExcelMappings
     "Numero seriale"=>:sn,
     "CIB"=>:cib, # !!!!!
     "Marca"=>:brand,
-    "Note"=>:notes
+    "Note"=>:notes,
+    "Sub inventario"=>:sub_inventory
     # "Numero targa"=>nil
     # "Condizione Bene"=>nil
     # "Garanzia Da"=>nil
