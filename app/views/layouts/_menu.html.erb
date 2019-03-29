@@ -4,7 +4,7 @@
     <li><%= link_to big_icon('home', text: 'Home'), root_path %></li>
     <% if current_user.is_admin? %>  
       <li><%= modal_link_to big_icon('user', text: 'Utenti'), users_path %></li>
-      <%= dropdown_menu :amm, big_icon('bookmark') + ' Categorie' do  %>
+      <%= dropdown_menu :amm, big_icon('bookmark') + ' Categorie' do %>
         <% Category.find_each do |cat| %>  
           <%= link_to (fwicon('angle-right') + " #{cat}"), goods_path(category_id: cat.id) %>
         <% end %>
@@ -12,20 +12,23 @@
         <%= link_to (fwicon('question-circle') + " sconosciuto"), goods_path(no_category: 1) %>
         <%= link_to (fwicon('plus') + " nuova categoria"), new_category_path %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('map-marker') + ' Ubicazioni' do  %>
+      <%= dropdown_menu :amm, big_icon('map-marker') + ' Ubicazioni' do %>
         <% Location.find_each do |location| %>  
           <%= link_to (fwicon('angle-right') + " #{location}"), goods_path(location_id: location.id) %>
         <% end %>
         <div class="dropdown-divider"></div>
         <%= link_to (fwicon('plus') + " nuova ubicazioone"), new_location_path %>
       <% end %>
-      <li><%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %></li>
-      <li><%= link_to big_icon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true, format: :csv) %></li>
+      <%= dropdown_menu :amm, big_icon('trash') + ' Scarichi' do %>
+        <%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %>
+        <%= link_to big_icon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true, format: :csv) %>
+      <% end %>
+      <li><%= link_to big_icon('star', text: 'Convenzioni'), main_agreements_path %></li>
       <li><%= link_to big_icon('upload', text: 'Aggiorna da Ugov'), new_upload_path %></li>
+      <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
+        <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
-    <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
   <% end %>
 <% end %>
 
