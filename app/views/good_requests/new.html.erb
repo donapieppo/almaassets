@@ -1,14 +1,19 @@
-<% if @main_agreement or @outside_agreements or @available_agreements.empty? %>  
+<% if @good_request.main_agreement or @outside_agreements or (@good_request.category and @available_agreements.empty?) %>  
   <%= render 'form' %>  
-<% else %>
+<% elsif @good_request.category %>
   Sono disponibili le seguenti convenzioni attive da cui scegliere:  
   <% @available_agreements.each do |ma| %>  
     <div>
-      <%= render ma %>  
-      <%= link_to icon('plus', text: 'scelgo questa convenzione'), new_category_good_request_path(@category, main_agreement_id: ma.id), class: 'btn btn-success' %>  
+      <%= render ma, with_button: true %>  
     </div>
   <% end %>
-
-  Altrimenti
-  <%= link_to icon('plus', text: 'Fuori dalle convenzioni'), new_category_good_request_path(@category, outside_agreements: 1), class: 'btn btn-success' %>  
+  <p>
+  Altrimenti, qualora le convenzioni attive [........]
+  </p>
+  <p>
+  <%= link_to icon('plus', text: 'Richiedo di acquistare fuori dalle convenzioni'), new_category_good_request_path(@good_request.category, outside_agreements: 1), class: 'btn btn-danger' %>  
+  </p>
+<% else %>
+  <%= render 'good_requests/categories' %>  
 <% end %>
+
