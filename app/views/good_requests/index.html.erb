@@ -1,5 +1,17 @@
-<ul>
+<h1>Nuove richieste di acquisto</h1>
+
+<div class="list-group">
   <% @good_requests.each do |g| %>  
-    <li><%= g.user %> <%= g.name %> </li>
+    <%= link_to edit_good_request_path(g), class: "list-group-item list-group-item-#{g.main_agreement ? 'success' : 'warning'} list-group-item-action" do %>  
+      <strong><%= g.user %></strong> 
+      <span class="float-right">
+        <% if g.main_agreement %>  
+          <%= g.main_agreement %>  
+        <% else %>
+          FUORI CONVENZIONE
+        <% end %>
+      </span> <br/>
+      <%= g.name %> su fondi di <%= g.holder %>  
+    <% end %>
   <% end %>
-</ul>
+</div>
