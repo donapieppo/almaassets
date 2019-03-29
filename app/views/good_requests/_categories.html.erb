@@ -3,11 +3,11 @@
   <% Category.buyable.order(:number).find_each do |c| %>  
     <div class="card">
       <%= link_to new_category_good_request_path(c) do %>
-        <div class="card-body">
+        <button class="card-body btn btn-lg bt-info" style="width: 100%">
           <%= category_icon(c, size: 40)  %> 
           <br/><br/>
           <%= c.name.upcase %>
-        </div>
+        </button>
       <% end %>
     </div>
   <% end %>
