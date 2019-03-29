@@ -11,7 +11,7 @@ class GoodRequestPolicy
   end
 
   def create?
-    @user and @record.user_id == @user.id
+    @user and (@record.user_id == @user.id or @user.is_admin?)
   end
 
   def new?
