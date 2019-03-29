@@ -20,9 +20,16 @@ it:
         category: Categoria
         location: Ubicazione
       good_request:
-        name: Nome
-        description: Descrizione
+        user: Richiesta di 
+        name: Oggetto dell’acquisto
+        description: Interesse pubblico da soddisfare
         derogation: Ragioni per andare in deroga alle convenzioni
+        holder: Responsabile dei fondi
+
+  simple_form:
+    hints:
+      good_request:
+        description: A cosa serve? Motivazione particolareggiata
         
   time:
     formats:
