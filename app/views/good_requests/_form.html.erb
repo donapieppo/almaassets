@@ -1,5 +1,5 @@
-<% if @main_agreement %>  
-  <%= render @main_agreement %>  
+<% if @good_request.main_agreement %>  
+  <%= render @good_request.main_agreement %>  
 <% elsif @outside_agreements %>
   Nel caso nessuna convenzione soddisfi il fabbisogno specifico connesso, compilare la seguente richiesta:....
 <% else %>
@@ -7,10 +7,11 @@
     Tipologia: <%= @category %>. Non ci sono al momento convenzioni attive.</div>
 <% end %>
 
-<%= dm_form_for [@good_request.category, @good_request], title: "Richiesta di #{current_user.cn} per #{@good_request.category}" do |g| %>  
+<% title = "Richiesta di #{current_user.cn} per #{@good_request.main_agreement ? @good_request.main_agreement.vendor_and_model : @good_request.category}" %>  
+<%= dm_form_for [@good_request.category, @good_request], title: title do |g| %>  
   <div>Io <%= current_user.cn %> richiedo di acquistare<br/>
-    <% if @main_agreement %>  
-      <%= @main_agreement.vendor_and_model %> in convenzione
+    <% if @good_request.main_agreement %>  
+      <%= @good_request.main_agreement.vendor_and_model %> in convenzione ``<%= @good_request.main_agreement.name %>''.  
     <% end %>
   </div>
 
