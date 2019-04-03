@@ -11,7 +11,10 @@ class GoodRequestsController < ApplicationController
     @good_request = GoodRequest.new
 
     @good_request.category = Category.find(params[:category_id]) if params[:category_id]
-    @good_request.main_agreement = MainAgreement.find(params[:main_agreement_id]) if params[:main_agreement_id]
+    if params[:main_agreement_id]
+      @good_request.main_agreement = MainAgreement.find(params[:main_agreement_id]) 
+      @good_request.name = @good_request.main_agreement.vendor_and_model
+    end
     @outside_agreements = params[:outside_agreements]
 
     if @good_request.category
