@@ -1,8 +1,10 @@
 <h1>Gestione materiale inventariabile<br/><small><%= current_organization %></small></h1>
 
+<div class="list-group">
 <% @good_requests.each do |gr| %>  
   <%= render gr %>  
 <% end %>
+</div>
 <div style="text-align: center">
   <div class="my-3">
     <%= link_to new_good_request_path do %>
