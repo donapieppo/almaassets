@@ -1,3 +1,17 @@
-<%= dm_card title: good_request.name do %>  
-  Richiesta di 
-<% end %>
+<div class="list-group-item list-group-item-<%= good_request.main_agreement ? 'success' : 'warning' %>">
+  <strong><%= good_request.user.cn %></strong> 
+  <span class="float-right">
+    <% if good_request.main_agreement %>  
+      in convenzione <%= good_request.main_agreement %>  
+    <% else %>
+      FUORI CONVENZIONE
+    <% end %>
+  </span> <br/>
+  <%= good_request.name %> su fondi di <%= good_request.holder %>  
+  <span class="float-right">
+    <%= link_to icon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
+    <%= link_to icon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
+    <%= link_to icon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+  </span>
+</div>
+

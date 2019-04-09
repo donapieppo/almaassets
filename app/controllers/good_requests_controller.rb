@@ -1,25 +1,33 @@
 class GoodRequestsController < ApplicationController
-  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update]
+  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print]
 
   def index
-    @good_requests = GoodRequest.order('users.surname, users.name, category_id').includes(:category, :user)
-    @good_requests = @good_requests.where(user: current_user) unless current_user.is_admin?
+    if current_user.is_admin?
+      @good_requests = GoodRequest
+    else
+      @good_requests = current_user.good_requests
+    end
+    @good_requests = @good_requests.order('users.surname, users.name, category_id').includes(:category, :user)
     authorize :good_request
   end
 
   def new 
     @good_request = GoodRequest.new
 
-    @good_request.category = Category.find(params[:category_id]) if params[:category_id]
+    if params[:category_id]
+      @good_request.category = Category.find(params[:category_id])
+      @available_agreements = @good_request.category.main_agreements.all 
+    end
+
     if params[:main_agreement_id]
       @good_request.main_agreement = MainAgreement.find(params[:main_agreement_id]) 
       @good_request.name = @good_request.main_agreement.vendor_and_model
     end
-    @outside_agreements = params[:outside_agreements]
 
-    if @good_request.category
-      @available_agreements = @good_request.category.main_agreements.all 
-    end
+    @good_request.outside_agreements = params[:outside_agreements]
+
+    # se in convenzione o ha scelto fuori convenzione o se nella cateoria non ci sono convenzioni
+    @can_ask = @good_request.main_agreement || @good_request.outside_agreements || (@good_request.category && @available_agreements.empty?) 
 
     authorize @good_request
   end
@@ -37,14 +45,27 @@ class GoodRequestsController < ApplicationController
   end
 
   def edit
-    @main_agreement = @good_request.main_agreement
+    @good_request.outside_agreements = (! @good_request.main_agreement_id and @good_request.category.main_agreements.any?)
   end
 
   def update
     if @good_request.update_attributes(good_request_params)
-      redirect_to edit_good_request(@good_request) and return
+      redirect_to root_path, notice: 'La richiesta è stata aggiornata.'
     else
       render :edit
+    end
+  end
+
+  def print
+    filename = params[:man] ? 'manifestazione_esigenza_' : 'relazione_rup_'
+    filename += @good_request.user.cn.gsub(' ', '_') + '.docx'
+    respond_to do |format|
+      format.docx do
+        headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" 
+        if params[:man]
+          render 'good_requests/print_manifestazione'
+        end
+      end
     end
   end
 

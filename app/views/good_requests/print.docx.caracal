@@ -1,0 +1,19 @@
+letter_defaults(docx)
+docx_header(docx)
+
+docx.p
+docx.p
+
+docx.p
+docx.p 
+docx.p 
+docx.p 
+docx.p "Data  ___________"
+docx.p
+docx.p "Firma ________________________"
+docx.p
+docx.p
+docx.p 
+docx.p 
+docx.p "INFORMATIVA AI FINI DELLA PRIVACY", align: :center, bold: true
+docx.p "S’informa che, ai sensi del D.Lgs 196/2003 e D.Lgs. 101/2018 sulla tutela dei dati personali, i dati raccolti con la presente dichiarazione saranno trattati in modo lecito e secondo correttezza per le finalità connesse all’erogazione dei compensi nonché per gli adempimenti imposti dalla legge."

@@ -1,0 +1,43 @@
+letter_defaults(docx)
+docx_header(docx)
+
+docx.p
+docx.p
+docx.p 'MANIFESTAZIONE DELL’ESIGENZA', align: :center, bold: true
+docx.p
+
+docx.p "Il sottoscritto #{@good_request.user.cn}"
+docx.p
+docx.p "Richiede di acquistare", align: :center, bold: true
+docx.p
+
+docx.p @good_request.name
+
+if @good_request.main_agreement
+  docx.p "in convenzione " + @good_request.main_agreement.to_s
+else 
+  docx.p "FUORI CONVENZIONE. Fabbisogno specifico per cui non è possibile acquistare il prodotto in adesione alle convenzioni:", bold: true
+  docx.p @good_request.derogation
+end
+
+docx.p
+docx.p "importo massimo: " + @good_request.max_price.to_s + '€'
+docx.p "su fondi di " + @good_request.holder.cn
+docx.p 
+docx.p 
+docx.p "Data ___________"
+docx.p
+docx.p "Firma del richiedenete "
+docx.p
+docx.p "________________________", line: 400
+docx.p
+docx.p "Firma del responsabile dei fondi (#{@good_request.holder.cn})"
+docx.p
+docx.p "_______________________________________"
+docx.p
+
+docx.p 
+docx.p 
+docx.p "INFORMATIVA AI FINI DELLA PRIVACY", align: :center, bold: true
+docx.p "S’informa che, ai sensi del D.Lgs 196/2003 e D.Lgs. 101/2018 sulla tutela dei dati personali, i dati raccolti con la presente dichiarazione saranno trattati in modo lecito e secondo correttezza per le finalità connesse all’erogazione dei compensi nonché per gli adempimenti imposti dalla legge."
+

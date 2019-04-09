@@ -1,13 +1,17 @@
+<% title = "Richiesta di #{current_user.cn} per #{@good_request.main_agreement ? @good_request.main_agreement.vendor_and_model : @good_request.category}" %>  
+
 <% if @good_request.main_agreement %>  
   <%= render @good_request.main_agreement %>  
-<% elsif @outside_agreements %>
-  Nel caso nessuna convenzione soddisfi il fabbisogno specifico connesso, compilare la seguente richiesta:....
+<% elsif @good_request.outside_agreements %>
+  <div class="alert alert-danger">
+    Nel caso nessuna convenzione soddisfi il fabbisogno specifico connesso, compilare la seguente richiesta:....
+  </div>
 <% else %>
   <div class="alert alert-warning">
-    Tipologia: <%= @category %>. Non ci sono al momento convenzioni attive.</div>
+    Tipologia: <%= @good_request.category %>. Non ci sono al momento convenzioni attive.
+  </div>
 <% end %>
 
-<% title = "Richiesta di #{current_user.cn} per #{@good_request.main_agreement ? @good_request.main_agreement.vendor_and_model : @good_request.category}" %>  
 <%= dm_form_for [@good_request.category, @good_request], title: title do |g| %>  
   <div>Io <%= current_user.cn %> richiedo di acquistare<br/>
     <% if @good_request.main_agreement %>  
@@ -21,19 +25,19 @@
   <%= g.input :main_agreement_id, as: :hidden %>  
   <%= g.input :name %>  
   <%= g.input :description, input_html: { rows: 6 } %>  
-  <% if @outside_agreements  %>  
+  <% if @good_request.outside_agreements  %>  
     <%= g.input :derogation, hint: 'Indicare il fabbisogno specifico per cui non è possibile acquistare il prodotto in adesione alle convenzioni. Indicare le caratteristiche essenziali mancanti ai prodotti in convenzione.', input_html: { rows: 6 } %>
   <% end %>
   <%= g.association :holder, label_method: :cn_militar, include_blank: false %>
   <%= g.input :max_price %>
   <%= g.submit %>
-
-  <div class="alert alert-warning mt-3">Esempi di interesse pubblico da soddisfare:
-    <ul>
-      <li>computer per lo svolgimento di attività di ricerca per il progetto _____</li>
-      <li>computer per lo svolgimento di attività di didattica conseguente all’avvio di un nuovo corso di studio in _______</li>
-      <li>servizio di manutenzione dello strumento X per il ripristino delle funzionalità ai fini dello svolgimento dell’ attività di didattica relativa al corso di studio in ..............</li>
-    </ul>
-  </div>
 <% end %>
+
+<div class="alert alert-warning mt-3">Esempi di interesse pubblico da soddisfare:
+  <ul>
+    <li>computer per lo svolgimento di attività di ricerca per il progetto _____</li>
+    <li>computer per lo svolgimento di attività di didattica conseguente all’avvio di un nuovo corso di studio in _______</li>
+    <li>servizio di manutenzione dello strumento X per il ripristino delle funzionalità ai fini dello svolgimento dell’ attività di didattica relativa al corso di studio in ______</li>
+  </ul>
+</div>
 
