@@ -6,8 +6,9 @@ class GoodRequestPolicy
     @record = record
   end
 
+  # see controller, only admins see them all
   def index?
-    @user.is_admin?
+    true
   end
 
   def create?
@@ -19,7 +20,7 @@ class GoodRequestPolicy
   end
 
   def edit?
-    @user and (@record.user_id = @user.id or @user.is_admin?)
+    @user and (@record.user_id == @user.id or @user.is_admin?)
   end
 
   def update?
@@ -27,6 +28,10 @@ class GoodRequestPolicy
   end
 
   def destroy
+    edit?
+  end
+
+  def print?
     edit?
   end
 end
