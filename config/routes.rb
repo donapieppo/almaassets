@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
     get  'print', on: :collection
   end
-  resources :good_requests
+
+  resources :good_requests do
+    get :print, on: :member
+  end
 
   resources :uploads
 
