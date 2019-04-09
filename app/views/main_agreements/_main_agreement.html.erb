@@ -3,12 +3,14 @@
   <div class="font-weight-bold mb-3">
     <%= main_agreement.vendor_and_model.upcase %> 
     <span class="float-right badge badge-pill badge-info" style="font-size: 110%">
-      <%= main_agreement.price %>  &euro; + iva
+      <%= main_agreement.price %> &euro; + iva
     </span>
   </div>
-  <div class="alert alert-info">
-    <%= main_agreement_description(main_agreement.description) %>  
-  </div>
+  <% unless main_agreement.description.blank? %>  
+    <div class="alert alert-info">
+      <%= main_agreement_description(main_agreement.description) %>  
+    </div>
+  <% end %>
   <% unless main_agreement.notes.blank? %>  
     <strong>note:</strong> <%= main_agreement.notes %><br/>
   <% end %>
