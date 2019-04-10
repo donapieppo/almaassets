@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "derogation"
     t.integer "holder_id", unsigned: true
     t.integer "max_price"
+    t.string "aasm_state"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["category_id"], name: "fk_good_requests_categories"
