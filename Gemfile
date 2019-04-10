@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'pundit'
+gem 'aasm'
 
 gem 'roo'
 gem 'roo-xls'
