@@ -3,6 +3,7 @@ docx_header(docx)
 
 docx.p
 docx.p
+docx.p "RELAZIONE DEL RUP E REFERENTE TECNICO", align: :center, bold: true
 
 docx.p
 docx.p 
