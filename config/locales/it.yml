@@ -8,6 +8,7 @@ it:
       good: Oggetto
       good_request: Richiesta
       main_agreement: Convenzione 
+      mainagreement: Convenzione  # FIXME bug?
     attributes:
       good:
         name: Nome
