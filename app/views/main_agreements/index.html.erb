@@ -3,5 +3,12 @@
 <% @main_agreements.each do |ma| %>  
   <%= render ma %>  
   <%= link_to icon('edit', text: 'Modifica'), edit_main_agreement_path(ma), class: 'btn btn-primary' %>  
+  <%= link_to 'Elimina la Convenzione', main_agreement_path(ma), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: 'btn btn-danger' %>
+<% end %>
+
+<% if user_admin? %>  
+<p class="m-3">
+<%= link_to 'NUOVA CONVENZIONE', new_main_agreement_path, class: 'btn btn-primary' %>  
+</p>
 <% end %>
 
