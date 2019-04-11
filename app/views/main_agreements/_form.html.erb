@@ -9,6 +9,7 @@
   <%= ma.input :notes %>  
   <%= ma.input :price %> &euro;  
   <%= ma.submit %>  
+  <%= link_to 'Elimina la Convenzione', main_agreement_path(ma.object), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: 'btn btn-danger' %>
 <% end %>
 
 
