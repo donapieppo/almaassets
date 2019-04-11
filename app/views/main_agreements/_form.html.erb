@@ -1,5 +1,6 @@
 <%= dm_form_for @main_agreement do |ma| %>  
   <%= ma.association :category, include_blank: false %>  
+  <%= ma.input :title %>  
   <%= ma.input :name %>  
   <%= ma.input :code %>  
   <%= ma.input :vendor_and_model %>  
