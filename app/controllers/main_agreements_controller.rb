@@ -2,7 +2,7 @@ class MainAgreementsController < ApplicationController
   before_action :set_main_agreement_and_check_permission, only: [:show, :edit, :update]
 
   def index
-    @main_agreements = MainAgreement.order(:category_id, :price).includes(:category).all
+    @main_agreements = MainAgreement.order(:category_id, :price).includes(:category, :good_requests).all
     authorize :main_agreement
   end
 

@@ -1,9 +1,12 @@
 <h1>Convenzioni</h1>
 
 <% @main_agreements.each do |ma| %>  
-  <%= render ma %>  
-  <%= link_to icon('edit', text: 'Modifica'), edit_main_agreement_path(ma), class: 'btn btn-primary' %>  
-  <%= link_to 'Elimina la Convenzione', main_agreement_path(ma), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: 'btn btn-danger' %>
+  <%= render ma, with_button: true %>  
+  <div class="list-group">
+  <% ma.good_requests.each do |gr| %>  
+    <div class="list-group-item list-group-item-success"><%= gr.user.cn %>: <%= link_to gr, [:edit, gr] %></div>
+  <% end %>
+  </div>
 <% end %>
 
 <% if user_admin? %>  
