@@ -14,6 +14,7 @@
       <%= link_to icon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
     <% end %>
     <%= link_to icon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+    <%= link_to_delete good_request_path(good_request) %> 
   </span>
 </div>
 

@@ -27,7 +27,7 @@ class GoodRequestPolicy
     edit?
   end
 
-  def destroy
+  def destroy?
     edit?
   end
 
