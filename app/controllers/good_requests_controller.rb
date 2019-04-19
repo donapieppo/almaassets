@@ -1,5 +1,5 @@
 class GoodRequestsController < ApplicationController
-  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print]
+  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print, :destroy]
 
   def index
     if current_user.is_admin?
@@ -67,6 +67,11 @@ class GoodRequestsController < ApplicationController
         end
       end
     end
+  end
+
+  def destroy
+    @good_request.destroy
+    redirect_to root_path
   end
 
   private
