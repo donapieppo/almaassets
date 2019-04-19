@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "main_agreement_id", unsigned: true
     t.string "name"
     t.text "description"
+    t.text "teach_description"
     t.text "derogation"
     t.integer "holder_id", unsigned: true
     t.integer "max_price"

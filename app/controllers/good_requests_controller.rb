@@ -82,7 +82,7 @@ class GoodRequestsController < ApplicationController
   end
 
   def good_request_params
-    p = [:category_id, :main_agreement_id, :holder_id, :name, :description, :derogation, :max_price]
+    p = [:category_id, :main_agreement_id, :holder_id, :name, :description, :teach_description, :derogation, :max_price]
     (p << :user_id) if user_admin?
     params[:good_request].permit(p)
   end

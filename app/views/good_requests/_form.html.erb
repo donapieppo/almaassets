@@ -24,7 +24,8 @@
   <% end %>
   <%= g.input :main_agreement_id, as: :hidden %>  
   <%= g.input :name %>  
-  <%= g.input :description, input_html: { rows: 6 } %>  
+  <%= g.input :teach_description, input_html: { rows: 2 } %>  
+  <%= g.input :description, input_html: { rows: 4 } %>  
   <% if @good_request.outside_agreements  %>  
     <%= g.input :derogation, hint: 'Indicare il fabbisogno specifico per cui non è possibile acquistare il prodotto in adesione alle convenzioni. Indicare le caratteristiche essenziali mancanti ai prodotti in convenzione.', input_html: { rows: 6 } %>
   <% end %>

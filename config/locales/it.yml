@@ -23,6 +23,7 @@ it:
       good_request:
         user: Richiesta di 
         name: Oggetto dell’acquisto
+        teach_description: Dettagli tecnici opzionali
         description: Interesse pubblico da soddisfare
         derogation: Ragioni per andare in deroga alle convenzioni
         holder: Responsabile dei fondi
@@ -31,6 +32,7 @@ it:
     hints:
       good_request:
         description: A cosa serve? Motivazione particolareggiata
+        teach_description: È possibile indicare le caratteritiche tecniche desiderate ed eventualmente indicare modelli simili
         
   time:
     formats:
