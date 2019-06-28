@@ -19,6 +19,8 @@ gem 'roo-xls'
 gem "caracal"
 gem 'caracal-rails'
 
+gem 'momentjs-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'bootsnap', '>= 1.1.0', require: false
