@@ -27,6 +27,9 @@ it:
         description: Interesse pubblico da soddisfare
         derogation: Ragioni per andare in deroga alle convenzioni
         holder: Responsabile dei fondi
+      booking:
+        start_at: Inizio
+        duration: Durata
 
   simple_form:
     hints:
@@ -34,6 +37,12 @@ it:
         description: A cosa serve? Motivazione particolareggiata
         teach_description: È possibile indicare le caratteritiche tecniche desiderate ed eventualmente indicare modelli simili
         
+  date:
+    formats:
+      booking: "%a %d %b"
+
   time:
     formats:
+      start_at: "%a %d %b, dalle ore %H:%M"
+      booking: "%a %d %b"
       only_day: ! '%d %b %Y'
