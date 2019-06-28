@@ -17,11 +17,10 @@ class BookingsController < ApplicationController
     @booking = @server.bookings.new(user: current_user)
     @booking.start_at = (Date.today + params[:d].to_i.day + params[:h].to_i.hour)
     authorize(@booking)
-    if @booking.save
-      redirect_to server_bookings_path(@server)
-    else
-      render :new
+    if ! @booking.save
+      flash[:alert] = "Non è stato possibile prenotare."
     end
+    redirect_to server_bookings_path(@server)
   end
 
   def destroy

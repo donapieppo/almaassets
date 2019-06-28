@@ -1,8 +1,11 @@
+<% _today = Date.today %>  
+<% _hour  = Time.now.hour %>  
 <h1>Prenotazioni per <%= @server %> </h1>
 
 <div>
   <% [0, 1, 2, 3, 4, 5, 6].each do |d| %>
-    <% day = Date.today + d.days %>  
+    <% day = _today + d.days %>  
+    <hr/>
     <h2 class="mt-3"><%= icon :calendar %> <%= l day, format: :booking %></h2>
     <div class="day-container">
       <% (0..23).each do |h| %>  
@@ -12,8 +15,10 @@
         <% this_booking = @bookings[day] ? @bookings[day][h] : nil %>  
         <% taken_by_me  = this_booking &&  this_booking.user.upn == current_user.upn %>
 
-        <% if taken_by_me %>  
-          <%= link_to cell_to_s, booking_path(@bookings[day][h]), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: "booking-mine" %>
+        <% if (d == 0 && h <= _hour) %>
+          <%= content_tag :span, "-",  class: 'booking-booked' %>
+        <% elsif taken_by_me %>  
+          <%= link_to cell_to_s, booking_path(@bookings[day][h]), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare la prenotazione?'}, class: "booking-mine" %>
         <% elsif this_booking %>
           <% abbr = this_booking.user.name[0].upcase + this_booking.user.surname[0].upcase%>  
           <%= content_tag :span, abbr, title: this_booking.user.upn, class: 'booking-booked' %>
