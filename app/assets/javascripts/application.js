@@ -12,6 +12,8 @@
 //
 // require turbolinks
 //= require dm_unibo_common
+//= require dm_unibo_common/date_picker
+//= require moment
 //= require activestorage
 //= require typeahead.bundle
 //= require_tree .

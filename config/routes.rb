@@ -32,5 +32,10 @@ Rails.application.routes.draw do
   resources :organizations
   resources :locations
 
+  resources :bookings
+  resources :servers do
+    resources :bookings
+  end
+
   root to: 'home#index'
 end

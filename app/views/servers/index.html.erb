@@ -1,0 +1,13 @@
+<h1>Elenco risorse disponibili<br/><small><%= current_organization %></small></h1>
+
+<% @servers.each do |s| %>  
+  <%= dm_card title: "#{s.name} (#{ s.url })" do %>  
+    <pre><%= s.description %></pre>
+
+    <%= link_to "prenota", server_bookings_path(s), class: "btn btn-primary btn-lg my-3 p-3" %> <br/>
+
+    <% if user_admin? %>  
+      <%= link_to 'modifica', edit_server_path(s) %>  
+    <% end %>
+  <% end %>
+<% end %>
