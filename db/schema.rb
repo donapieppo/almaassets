@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
+  create_table "bookings", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id", unsigned: true
+    t.integer "server_id", unsigned: true
+    t.datetime "start_at"
+    t.integer "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["server_id"], name: "fk_bookings_servers"
+    t.index ["user_id"], name: "fk_bookings_users"
+  end
+
   create_table "buildings", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -99,6 +110,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "name", null: false
   end
 
+  create_table "servers", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
+    t.string "name"
+    t.string "url"
+    t.text "description"
+    t.index ["organization_id"], name: "fk_servers_organizations"
+  end
+
   create_table "users", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "organization_id", unsigned: true
     t.string "upn", null: false
@@ -110,6 +129,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["upn"], name: "index_upn_on_users", length: 191
   end
 
+  add_foreign_key "bookings", "servers", name: "fk_bookings_servers", on_delete: :cascade
+  add_foreign_key "bookings", "users", name: "fk_bookings_users", on_delete: :cascade
   add_foreign_key "good_requests", "categories", name: "fk_good_requests_categories", on_delete: :cascade
   add_foreign_key "good_requests", "main_agreements", name: "fk_good_requests_agreements", on_delete: :cascade
   add_foreign_key "good_requests", "users", name: "fk_good_requests_holders", on_delete: :cascade
@@ -120,5 +141,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "goods", "users", name: "fk_goods_users", on_delete: :cascade
   add_foreign_key "locations", "buildings", name: "fk_locations_buildings", on_delete: :cascade
   add_foreign_key "main_agreements", "main_agreements", column: "category_id", name: "fk_main_agreements_categories", on_delete: :cascade
+  add_foreign_key "servers", "organizations", name: "fk_servers_organizations", on_delete: :cascade
   add_foreign_key "users", "organizations", name: "fk_users_organizations", on_delete: :cascade
 end
