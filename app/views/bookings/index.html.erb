@@ -1,6 +1,16 @@
 <% _today = Date.today %>  
 <% _hour  = Time.now.hour %>  
-<h1>Prenotazioni per <%= @server %> </h1>
+<h1>
+  Prenotazioni per <%= @server %><br/>
+  <small><%= current_organization %></small>
+</h1>
+
+<div>
+  Legenda: 
+  <%= content_tag :span, "&nbsp;".html_safe,  class: 'booking-booked' %> Intervallo di un'ora già prenotato.
+  <%= content_tag :span, "&nbsp;".html_safe,  class: 'booking-bookable' %> Intervallo di un'ora prenotabile.
+  <%= content_tag :span, "&nbsp;".html_safe,  class: 'booking-mine' %> Intervallo di un'ora già prenotato da te.
+</div>
 
 <div>
   <% [0, 1, 2, 3, 4, 5, 6].each do |d| %>
