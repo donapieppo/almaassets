@@ -17,7 +17,7 @@ class UploadsController < ApplicationController
         end
         inv_number = unibo_good.get(:inv_number) or raise "No inv_number in #{unibo_good.inspect}"
 
-        good = Good.find_by_inv_number(inv_number) || Good.new(inv_number: inv_number)
+        good = current_organization.goods.find_by_inv_number(inv_number) || current_organization.goods.new(inv_number: inv_number)
 
         desc      = unibo_good.get(:description)
         unibouser = unibo_good.get(:unibouser)

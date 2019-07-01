@@ -1,4 +1,5 @@
 class Good < ApplicationRecord
+  belongs_to :organization
   belongs_to :user, optional: true
   belongs_to :category, optional: true
   belongs_to :location, optional: true
