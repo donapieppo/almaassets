@@ -11,10 +11,12 @@
       </div>
     </div>
 
-    <%= link_to "prenota", server_bookings_path(s), class: "btn btn-primary btn-lg my-3 p-3" %> <br/>
+    <p class="centered">
+    <%= link_to "PRENOTA", server_bookings_path(s), class: "btn btn-primary btn-lg p-3" %> 
 
     <% if user_admin? %>  
-      <%= link_to 'modifica', edit_server_path(s) %>  
+      - <%= link_to 'modifica', edit_server_path(s) %>  
     <% end %>
+    </p>
   <% end %>
 <% end %>
