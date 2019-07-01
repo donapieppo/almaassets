@@ -114,7 +114,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "organization_id", unsigned: true
     t.string "name"
     t.string "url"
-    t.text "description"
+    t.text "hardware"
+    t.text "software"
     t.index ["organization_id"], name: "fk_servers_organizations"
   end
 

@@ -1,8 +1,15 @@
 <h1>Elenco risorse disponibili<br/><small><%= current_organization %></small></h1>
 
 <% @servers.each do |s| %>  
-  <%= dm_card title: "#{s.name} (#{ s.url })" do %>  
-    <pre><%= s.description %></pre>
+  <%= dm_card title: "#{s.name.upcase} (#{ s.url })" do %>  
+    <div class="row">
+      <div class="col-md-6">
+        <pre><%= s.hardware %></pre>
+      </div>
+      <div class="col-md-6">
+        <pre><%= s.software %></pre>
+      </div>
+    </div>
 
     <%= link_to "prenota", server_bookings_path(s), class: "btn btn-primary btn-lg my-3 p-3" %> <br/>
 

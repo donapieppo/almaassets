@@ -39,7 +39,7 @@ class ServersController < ApplicationController
   private
 
   def server_params
-    params[:server].permit(:name, :url, :description)
+    params[:server].permit(:name, :url, :hardware, :software)
   end
 
   def get_server
