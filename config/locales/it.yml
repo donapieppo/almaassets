@@ -39,7 +39,7 @@ it:
         
   date:
     formats:
-      booking: "%a %d %b"
+      booking: "%A %d %b"
 
   time:
     formats:
