@@ -9,6 +9,7 @@ it:
       good_request: Richiesta
       main_agreement: Convenzione 
       mainagreement: Convenzione  # FIXME bug?
+      server: Server
     attributes:
       good:
         name: Nome

@@ -7,6 +7,7 @@ class ServersController < ApplicationController
 
   def new
     @server = current_organization.servers.new
+    authorize @server
   end
 
   def create

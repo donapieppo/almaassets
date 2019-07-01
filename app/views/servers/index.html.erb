@@ -20,3 +20,7 @@
     </p>
   <% end %>
 <% end %>
+
+<% if current_user.is_admin? %>  
+  <%= link_to 'Nuovo', new_server_path %>  
+<% end %>
