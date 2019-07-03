@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "url"
     t.text "hardware"
     t.text "software"
+    t.string "api_key"
     t.index ["organization_id"], name: "fk_servers_organizations"
   end
 
