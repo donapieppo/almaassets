@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     post 'confirm',       on: :member
     get  'new_unconfirm', on: :member
     post 'unconfirm',     on: :member
-    get  'ask_category', on: :member
-    put  'set_category', on: :member
+    get  'ask_category',  on: :member
+    put  'set_category',  on: :member
 
     get  'print', on: :collection
   end
@@ -32,10 +32,13 @@ Rails.application.routes.draw do
   resources :organizations
   resources :locations
 
-  resources :bookings
+  resources :bookings 
+
   resources :servers do
     resources :bookings
   end
+
+  get '/hg/:id', to: 'bookings#hg', as: :hg, defaults: { format: 'json' }
 
   root to: 'home#index'
 end

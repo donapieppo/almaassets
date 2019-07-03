@@ -21,6 +21,10 @@ class BookingPolicy
   def destroy?
     @record.user_id = @user.id
   end
+
+  def hg?
+    true
+  end
 end
 
 
