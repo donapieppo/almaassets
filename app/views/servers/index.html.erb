@@ -1,23 +1,24 @@
 <h1>Elenco risorse disponibili<br/><small><%= current_organization %></small></h1>
 
-<% @servers.each do |s| %>  
-  <%= dm_card title: "#{s.name.upcase} (#{ s.url })" do %>  
+<% @servers.each do |server| %>  
+  <%= dm_card title: "#{server.name.upcase} (#{ server.url })" do %>  
     <div class="row">
       <div class="col-md-6">
-        <pre><%= s.hardware %></pre>
+        <pre><%= server.hardware %></pre>
       </div>
       <div class="col-md-6">
-        <pre><%= s.software %></pre>
+        <pre><%= server.software %></pre>
       </div>
     </div>
 
-    <p class="centered">
-    <%= link_to "PRENOTA", server_bookings_path(s), class: "btn btn-primary btn-lg p-3" %> 
+    <div class="centered">
+    <%= link_to "PRENOTA", server_bookings_path(server), class: "btn btn-primary btn-lg p-3" %> 
 
     <% if user_admin? %>  
-      - <%= link_to 'modifica', edit_server_path(s) %>  
+      - <%= link_to 'modifica', edit_server_path(server) %>  
+      <p><%= hg_url(id: server.api_key) %>  
     <% end %>
-    </p>
+    </div>
   <% end %>
 <% end %>
 
