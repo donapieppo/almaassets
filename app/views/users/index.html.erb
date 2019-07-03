@@ -1,7 +1,11 @@
 <%= main_title('Utenti') %>
 
-<ul>
-<% @users.each do |user| %>  
-  <li><%= link_to (fwicon('wallet') + " #{user.cn_militar}"), goods_path(user_id: user.id) %></li>
-<% end %>
+<% initial = '' %>  
+<ul class="users-list">
+  <% @users.each do |user| %>  
+    <% if initial != (initial = user.surname[0]) %>  
+      <li class="users-list-letter"><%= initial %></li>
+    <% end %>
+    <li><%= link_to (fwicon('wallet') + " #{user.cn_militar}"), goods_path(user_id: user.id) %></li>
+  <% end %>
 </ul>

@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order(:surname, :name)
-    render layout: false
   end
 
   def new

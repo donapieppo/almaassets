@@ -86,5 +86,16 @@ span.twitter-typeahead {
   }
 }
 
+.users-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.users-list-letter {
+  font-weight: bold;
+  grid-column-start: 1; 
+  grid-column-end: 2; 
+}
+
 @import "bookings";
 
