@@ -8,6 +8,9 @@ class GoodsController < ApplicationController
       if params[:unassigned]
         @goods = @goods.where(user_id: nil) 
         @title = 'Elenco beni non assegnati'
+      elsif params[:unconfirmed]
+        @goods = @goods.where.not(unconfirmed: nil) 
+        @title = 'Elenco beni da verificare'
       elsif params[:no_category]
         @goods = @goods.where(category_id: nil).order(:description)
         @title = 'Elenco beni senza categoria'
@@ -39,22 +42,6 @@ class GoodsController < ApplicationController
       @goods = @goods.where(user_id: current_user.id).where(to_unload: nil)
     end
   end
-
-  # def new 
-  #   @category = Category.find(params[:category_id])
-  #   @good = @category.goods.new
-  # end
-
-  # def create
-  #   @category = Category.find(params[:category_id])
-  #   @good = @category.goods.new(good_params)
-  #   @good.user = current_user
-  #   if @good.save
-  #     redirect_to goods_path, notice: "La richiesta è stata creato correttamente."
-  #   else
-  #     render action: :new
-  #   end
-  # end
 
   def edit
     render layout: false if modal_page
@@ -108,7 +95,7 @@ class GoodsController < ApplicationController
   end
 
   def unconfirm
-    # TODO
+    @good.unconfirm_presence
     redirect_to goods_path
   end
 
