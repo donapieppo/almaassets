@@ -11,7 +11,8 @@ class Server < ApplicationRecord
     self.where(api_key: k).first 
   end
 
-  private 
+  # temporary
+  # private 
 
   def create_api_key
     unless api_key
