@@ -1,6 +1,23 @@
-<% if @good.inv_number %>  
-  <%= render partial: 'admin_form' %>  
-<% else %>
-  <%= render partial: 'new_request_form' %>  
+<%= dm_form_for @good do |good| %>  
+  <%= good.input :inv_number, disabled: true, as: :string %>  
+  <%= good.input :name %>  
+  <%= good.input :description, input_html: {rows: 4} %>  
+  <%= good.input :user_upn %>
+  <%= good.association :category %>
+  <%= good.association :location %>
+
+  <%= good.input :admin_notes, as: :string %>  
+
+  <% confirmed_hint = @good.confirmed ? "Ultima conferma di presenza: #{I18n.l(@good.confirmed)} da #{User.find(@good.confirmed_by)}. Fare check per confermare nuovamente" : "Fare check per confermare la presenza" %>  
+  <%= good.input :confirmed, as: :boolean, input_html: { checked: false }, hint: confirmed_hint %>
+
+  <%= good.submit %>  
 <% end %>
 
+<div class="alert alert-warning">
+  in Ugov:<br/>
+  <strong>sn:</strong><%= @good.sn %><br/>
+  <strong>Descrizione:</strong><i><%= @good.unibo_description %></i><br/>
+</div>
+
+<%= render "dsausers/typeahead" %>  
