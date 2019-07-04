@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
 
   validates :start_at, uniqueness: { scope: :server_id, message: "L'intervallo è già prenotato." }
 
-  scope :future,  -> { where('start_at > NOW()') }
+  scope :future,  -> { where('start_at > NOW() - INTERVAL 1 HOUR') }
   scope :in_week, -> { where('start_at BETWEEN CURDATE() AND (CURDATE() + INTERVAL 7 DAY)') }
   scope :today,   -> { where('start_at BETWEEN CURDATE() AND (CURDATE() + INTERVAL 1 DAY)') }
 end
