@@ -1,10 +1,10 @@
 <% search_string ||= nil %>  
 
 <div class="card my-1" id="<%= div_good_id(good) %>">
-  <div class="card-header <%= 'unload-good' if good.to_unload  %>">
+  <div class="card-header <%= 'unload-good' if good.to_unload %> <%= 'unconfirmed-good' if good.unconfirmed %>">
     <div class="row">
       <div class="col-5">
-        <%= confirmed_icon(good.confirmed, size: 25) %>
+        <%= status_icon(good, size: 25) %>
         <span class="category_icon">
           <% if user_admin? %>  
             <%= link_to category_icon(good.category, size: 25), ask_category_good_path(good), remote: true %>
@@ -46,9 +46,17 @@
 
   <% unless user_admin? %> 
     <div class="card-footer">
-      <%= link_to("NON PIÙ IN MIO POSSESSO", new_unconfirm_good_path(good), class: 'btn btn-danger m-1') %>
-      <%= good.better_to_confirm ? link_to("CONFERMA PRESENZA", new_confirm_good_path(good), class: 'btn btn-success m-1') : 
-                                           "Ultima conferma del bene il #{I18n.l good.confirmed, format: :only_day}" %>
+      <% if good.unconfirmed %>  
+        <strong>BENE NON PIÙ IN MIO POSSESSO.</strong>
+        (<%= good.unconfirmed_text %>)
+      <% else %>
+        <%= link_to("NON PIÙ IN MIO POSSESSO", new_unconfirm_good_path(good), class: 'btn btn-danger m-1') %>
+        <% if good.better_to_confirm %>
+           <%= link_to("CONFERMA PRESENZA", new_confirm_good_path(good), class: 'btn btn-success m-1') %>
+        <% else %>
+          (Presenza del bene confermata il <%= l good.confirmed, format: :only_day %>)
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>

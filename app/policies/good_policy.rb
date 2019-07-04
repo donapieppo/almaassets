@@ -51,11 +51,11 @@ class GoodPolicy
   end
 
   def new_unconfirm?
-    record.user_id == @user.id
+    @user.is_admin? || record.user_id == @user.id
   end
 
   def unconfirm?
-    record.user_id == @user.id
+    @user.is_admin? || record.user_id == @user.id
   end
 
   def ask_category?

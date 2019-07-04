@@ -1,15 +1,11 @@
-<div class="info">
+<div class="alert alert-info">
   <p>Da questa pagina può segnalare che l'oggetto</p>
-  <p class="m-3"><%= description_for_owner(@good) %></p>
+  <p class="m-3 font-weight-bold"><%= description_for_owner(@good) %></p>
   <p>non risulta più in suo possesso.</p>
 </div>
 
-<p>
-  Per completare la segnalazione lasciando un messaggio:
-</p>
-
 <%= simple_form_for :unconfirm, url: unconfirm_good_path(@good) do |f| %>  
-  <%= f.input :motivation, label: "Messaggio", as: :text, required: false %> 
+  <%= f.input :motivation, label: "Messaggio", as: :text, required: false, hint: "Per completare la segnalazione si prega di compilare questo campo fornendo quante più informazioni dispobili per determinare l'attuale posizione del bene."%> 
   <%= f.submit "Invia segnalazione" %>
 <% end %>
 

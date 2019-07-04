@@ -69,12 +69,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.float "price"
     t.integer "load_number"
     t.date "load_date"
-    t.text "user_justification"
     t.integer "unibo_number", unsigned: true
     t.string "old_org"
     t.integer "old_inv_number", unsigned: true
     t.datetime "confirmed"
     t.integer "confirmed_by", unsigned: true
+    t.datetime "unconfirmed"
+    t.text "unconfirmed_text"
     t.boolean "to_unload"
     t.datetime "created_at"
     t.datetime "updated_at"

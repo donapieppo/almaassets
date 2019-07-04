@@ -10,8 +10,8 @@ class GoodsController < ApplicationController
         @title = 'Elenco beni non assegnati'
       elsif params[:unconfirmed]
         @goods = @goods.where.not(unconfirmed: nil) 
-        @title = 'Elenco beni da verificare'
-      elsif params[:no_category]
+        @title = 'Elenco beni dichiarati non posseduti.'
+        elsif params[:no_category]
         @goods = @goods.where(category_id: nil).order(:description)
         @title = 'Elenco beni senza categoria'
       elsif  params[:user_id]
@@ -95,7 +95,7 @@ class GoodsController < ApplicationController
   end
 
   def unconfirm
-    @good.unconfirm_presence
+    @good.unconfirm_presence(params[:unconfirm][:motivation])
     redirect_to goods_path
   end
 
@@ -136,11 +136,6 @@ class GoodsController < ApplicationController
   end
 
   def good_params
-    if current_user.is_admin?
-      params[:good].permit(:name, :description, :user_request, :user_justification, :category_id, :user_upn, :location_id, :confirmed, :admin_notes)
-    else
-      # category_id only if new
-      params[:good].permit(:user_request, :user_justification, :category_id)
-    end
+    params[:good].permit(:name, :description, :user_request, :category_id, :user_upn, :location_id, :confirmed, :admin_notes)
   end
 end

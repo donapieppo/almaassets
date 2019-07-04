@@ -28,8 +28,14 @@ module GoodsHelper
     "good_#{good.id}"
   end
 
-  def confirmed_icon(t, size: 20)
-    t ? "<i class='fas fa-exclamation-circle text-success' style='font-size: #{size}px' title='presenza del bene confermata'></i>".html_safe : ''
+  def status_icon(good, size: 20)
+    if good.unconfirmed
+      "<i class='fas fa-exclamation-triangle text-danger' style='font-size: #{size}px' title='presenza del bene confermata'></i>".html_safe
+    elsif good.confirmed
+      "<i class='fas fa-exclamation-circle text-success' style='font-size: #{size}px' title='presenza del bene confermata'></i>".html_safe
+    else
+      ""
+    end
   end
 
   def description_for_owner(good)

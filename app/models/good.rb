@@ -1,4 +1,6 @@
 class Good < ApplicationRecord
+  include AASM
+
   belongs_to :organization
   belongs_to :user, optional: true
   belongs_to :category, optional: true
@@ -8,6 +10,10 @@ class Good < ApplicationRecord
   # validates :name, presence: {}
 
   validate  :validate_user_upn
+
+  #aasm do
+  #  state :sleeping, initial: true
+  #end
 
   def to_s
     self.name
@@ -45,10 +51,10 @@ class Good < ApplicationRecord
   end
 
   def confirm_presence(user)
-    self.update_attributes(confirmed: Time.now, confirmed_by: user.id)
+    self.update_attributes(confirmed: Time.now, confirmed_by: user.id, unconfirmed: nil)
   end
 
-  def unconfirm_presence
-    self.update_attributes(confirmed: nil)
+  def unconfirm_presence(motivation)
+    self.update_attributes(confirmed: nil, confirmed_by: nil, unconfirmed: Time.now, unconfirmed_text: motivation)
   end
 end

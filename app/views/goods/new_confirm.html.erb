@@ -1,11 +1,11 @@
-<div class="info">
+<div class="alert alert-info">
   <p>Da questa pagina può segnalare che l'oggetto</p>
-  <p class="m-3"><%= description_for_owner(@good) %></p>
+  <p class="m-3 font-weight-bold"><%= description_for_owner(@good) %></p>
   <p>risulta in suo possesso.</p>
 </div>
 
 <%= form_tag confirm_good_path(@good) do %>  
-  <%= submit_tag "Confermo il possesso" %>
+  <%= submit_tag "CONFERMO CHE IL BENE È IN MIO POSSESSO" %>
 <% end %>
 
 
