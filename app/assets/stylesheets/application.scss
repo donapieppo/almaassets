@@ -57,6 +57,12 @@ span.twitter-typeahead {
 .with-owner {
   @extend .btn-success;
 }
+.unconfirmed-good {
+  @extend .bg-warning;
+  a {
+    @extend .text-white;
+  }
+}
 .unload-good {
   @extend .bg-warning;
 }
