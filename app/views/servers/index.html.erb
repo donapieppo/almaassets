@@ -12,11 +12,10 @@
     </div>
 
     <div class="centered">
-    <%= link_to "PRENOTA", server_bookings_path(server), class: "btn btn-primary btn-lg p-3" %> 
+    <%= link_to "PRENOTA", server_bookings_path(server), class: "btn btn-primary btn-lg p-2" %> 
 
     <% if user_admin? %>  
-      - <%= link_to 'modifica', edit_server_path(server) %>  
-      <p><%= hg_url(id: server.api_key) %>  
+      - <%= link_to 'modifica', edit_server_path(server) %> - <%= link_to 'copy link', hg_url(id: server.api_key) %>  
     <% end %>
     </div>
   <% end %>
