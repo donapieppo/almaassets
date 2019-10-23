@@ -1,5 +1,4 @@
-class ServerPolicy < ApplicationPolicy
-
+class DocumentPolicy < ApplicationPolicy
   def index?
     true
   end
@@ -9,7 +8,7 @@ class ServerPolicy < ApplicationPolicy
   end
 
   def create?
-    new?
+    @user.is_admin?
   end
 
   def edit?
@@ -17,12 +16,12 @@ class ServerPolicy < ApplicationPolicy
   end
 
   def update?
-    edit?
+    @user.is_admin?
   end
 
   def destroy?
     @user.is_admin?
   end
-end
 
+end
 

@@ -1,11 +1,4 @@
-class GoodRequestPolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
+class GoodRequestPolicy < ApplicationPolicy
   # see controller, only admins see them all
   def index?
     true

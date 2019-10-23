@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :main_agreements
+  resources :documents
+  resources :main_agreements do
+    resources :documents
+  end
 
   resources :goods do
     get  'find', on: :collection

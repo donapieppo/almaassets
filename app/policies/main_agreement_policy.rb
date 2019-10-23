@@ -1,11 +1,4 @@
-class MainAgreementPolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
+class MainAgreementPolicy < ApplicationPolicy
   def index?
     true
   end
@@ -27,7 +20,7 @@ class MainAgreementPolicy
   end
 
   def destroy?
-    false
+    @user.is_admin?
   end
 
 end

@@ -3,15 +3,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include DmUniboCommon::Controllers::Helpers
+  include UserPermissionHelper # current_organization
 
   impersonates :user
 
   before_action :log_current_user, :force_sso_user, :retrive_authlevel
   after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate, :shibboleth]
-
-  def current_organization
-    @current_organization
-  end
 
   def retrive_authlevel
     # tmp TODO FIXME
@@ -24,7 +21,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_user_can_admin
-    current_user.is_admin?
-  end
 end

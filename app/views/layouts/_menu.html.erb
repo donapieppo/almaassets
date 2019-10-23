@@ -1,32 +1,32 @@
 <%= dm_menu do %>  
   <%= dm_header %>
   <%= dm_nav do  %>  
-    <li><%= link_to big_icon('home', text: 'Home'), root_path %></li>
+    <li><%= link_to big_dmicon('home', text: 'Home'), root_path %></li>
     <% if current_user.is_admin? %>  
-      <%= dropdown_menu :amm, big_icon('bookmark') + ' Categorie' do %>
+      <%= dropdown_menu :amm, big_dmicon('bookmark') + ' Categorie' do %>
         <% Category.find_each do |cat| %>  
-          <%= link_to (fwicon('angle-right') + " #{cat}"), goods_path(category_id: cat.id) %>
+          <%= link_to (fwdmicon('angle-right') + " #{cat}"), goods_path(category_id: cat.id) %>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to (fwicon('question-circle') + " sconosciuto"), goods_path(no_category: 1) %>
-        <%= link_to (fwicon('plus') + " nuova categoria"), new_category_path %>
+        <%= link_to (fwdmicon('question-circle') + " sconosciuto"), goods_path(no_category: 1) %>
+        <%= link_to (fwdmicon('plus') + " nuova categoria"), new_category_path %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('map-marker') + ' Ubicazioni' do %>
+      <%= dropdown_menu :amm, big_dmicon('map-marker') + ' Ubicazioni' do %>
         <% Location.find_each do |location| %>  
-          <%= link_to (fwicon('angle-right') + " #{location}"), goods_path(location_id: location.id) %>
+          <%= link_to (fwdmicon('angle-right') + " #{location}"), goods_path(location_id: location.id) %>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to (fwicon('plus') + " nuova ubicazioone"), new_location_path %>
+        <%= link_to (fwdmicon('plus') + " nuova ubicazioone"), new_location_path %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('trash') + ' Scarichi' do %>
-        <%= link_to big_icon('question-circle', text: 'Da analizzare'), goods_path(unconfirmed: true) %>
-        <%= link_to big_icon('trash', text: 'Scarichi'), goods_path(unload: true) %>
-        <%= link_to big_icon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true, format: :csv) %>
+      <%= dropdown_menu :amm, big_dmicon('trash') + ' Scarichi' do %>
+        <%= link_to big_dmicon('question-circle', text: 'Da analizzare'), goods_path(unconfirmed: true) %>
+        <%= link_to big_dmicon('trash', text: 'Scarichi'), goods_path(unload: true) %>
+        <%= link_to big_dmicon('print', text: 'Stampa Scarichi'), print_goods_path(unload: true, format: :csv) %>
       <% end %>
-      <%= dropdown_menu :amm, big_icon('cog') + ' Altro' do %>
-        <%= link_to big_icon('star', text: 'Convenzioni'), main_agreements_path %>
-        <%= link_to big_icon('upload', text: 'Aggiorna da Ugov'), new_upload_path %>
-        <%= link_to big_icon('user', text: 'Utenti'), users_path %>
+      <%= dropdown_menu :amm, big_dmicon('cog') + ' Altro' do %>
+        <%= link_to big_dmicon('star', text: 'Convenzioni'), main_agreements_path %>
+        <%= link_to big_dmicon('upload', text: 'Aggiorna da Ugov'), new_upload_path %>
+        <%= link_to big_dmicon('user', text: 'Utenti'), users_path %>
       <% end %>
       <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
         <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>

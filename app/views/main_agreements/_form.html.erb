@@ -1,13 +1,31 @@
+<% documents = @main_agreement.documents.all %>  
+
 <%= dm_form_for @main_agreement do |ma| %>  
   <%= ma.association :category, include_blank: false %>  
   <%= ma.input :title %>  
   <%= ma.input :name %>  
   <%= ma.input :code %>  
   <%= ma.input :vendor_and_model %>  
-  <%= ma.input :description, input_html: { rows: 10 } %>  
+  <%= ma.input :description, input_html: { rows: 6 } %>  
   <%= ma.input :notes %>  
   <%= ma.input :price %>  
+
   <%= ma.submit %>  
+<% end %>
+
+<% if documents.any? %>  
+  <h5> Allegati</h5>
+  <ul class="list-group">
+    <% documents.each do |doc| %>  
+      <li class="list-group-item">
+        <%= link_to doc.name, doc.attach %> 
+        <span class="float-right">
+          <%= link_to_delete doc %>
+          <%= link_to_edit edit_document_path(doc) %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
 
 

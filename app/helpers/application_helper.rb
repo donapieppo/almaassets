@@ -1,3 +1,5 @@
+include DmUniboCommonHelper
+
 module ApplicationHelper
   # FIXME
   def current_organization 
