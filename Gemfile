@@ -1,17 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'dm_unibo_common',      git: 'https://github.com/donapieppo/dm_unibo_common.git',      ref: 'master', branch: 'master'
+gem 'dm_unibo_common', git: 'https://github.com/donapieppo/dm_unibo_common.git',           branch: 'ver.3'
 gem 'dm_unibo_user_search', git: 'https://github.com/donapieppo/dm_unibo_user_search.git', ref: 'master', branch: 'master'
 #gem 'dm_unibo_common',          path: '/home/rails/gems/dm_unibo_common/'
 # gem 'dm_unibo_user_search', '= 0.1.1'
 
 gem 'mini_racer', platforms: :ruby
 
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
+#gem 'turbolinks', '~> 5'
 
-gem 'pundit'
 gem 'aasm'
 
 gem 'roo'
