@@ -1,20 +1,27 @@
-<div class="list-group-item list-group-item-<%= good_request.main_agreement ? 'success' : 'warning' %>">
-  <strong>Richiesta di <%= good_request.user.cn.upcase %></strong> 
-  <span class="float-right">
-    <% if good_request.main_agreement %>  
-      in convenzione <%= good_request.main_agreement %>  
-    <% else %>
-      FUORI CONVENZIONE
-    <% end %>
-  </span> <br/>
-  <%= good_request.name %> su fondi di <%= good_request.holder %>  
-  <span class="float-right">
-    <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
-    <% if user_admin? %>  
-      <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
-    <% end %>
-    <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
-    <%= link_to_delete good_request_path(good_request) %> 
-  </span>
+<div class="card bg-<%= good_request.main_agreement ? 'light' : 'warning' %>">
+  <div class="card-header">
+    <strong>Richiesta di <%= good_request.user.cn.upcase %></strong>
+    <span class="float-right">
+      <% if good_request.main_agreement %>  
+        in convenzione <%= good_request.main_agreement %>  
+      <% else %>
+        FUORI CONVENZIONE
+      <% end %>
+    </span>
+  </div>
+  <div class="card-body">
+    <%= good_request.name %>
+  </div>
+  <div class="card-footer">
+    <span><i>su fondi di <%= good_request.holder %></i></span>
+    <span class="float-right">
+      <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
+      <% if user_admin? %>  
+        <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
+      <% end %>
+      <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+      <%= link_to_delete good_request_path(good_request) %> 
+    </span>
+  </div>
 </div>
 
