@@ -13,11 +13,11 @@
 <% end %>
 
 <%= dm_form_for [@good_request.category, @good_request], title: title do |g| %>  
-  <div>Io <%= current_user.cn %> richiedo di acquistare<br/>
+  <p>Io <%= current_user.cn %> richiedo di acquistare<br/>
     <% if @good_request.main_agreement %>  
       <%= @good_request.main_agreement.vendor_and_model %> in convenzione ``<%= @good_request.main_agreement.name %>''.  
     <% end %>
-  </div>
+  </p>
 
   <% if user_admin? %>  
     <%= g.association :user, label_method: :cn_militar, include_blank: false %>  
