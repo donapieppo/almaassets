@@ -2,6 +2,7 @@ it:
   category: Categoria
   good: Oggetto
   good_request: Richiesta
+  new_arguments: "Per aggiungere nuovi argomenti scrivere a %{reply_to}"
 
   activerecord:
     models:
@@ -10,6 +11,7 @@ it:
       main_agreement: Convenzione 
       mainagreement: Convenzione  # FIXME bug?
       server: Server
+      category: Categoria
     attributes:
       good:
         name: Nome
@@ -28,15 +30,28 @@ it:
         description: Interesse pubblico da soddisfare
         derogation: Ragioni per andare in deroga alle convenzioni
         holder: Responsabile dei fondi
+        max_price: Prezzo massimo
       booking:
         start_at: Inizio
         duration: Durata
+      main_agreement:
+        name:     Nome
+        category: Categoria
+        title: Titolo
+        vendor_and_model: Marca e Modello
+        description: Descrizione 
+        notes: Note
+        price: Prezzo
 
   simple_form:
     hints:
       good_request:
-        description: A cosa serve? Motivazione particolareggiata
-        teach_description: È possibile indicare le caratteritiche tecniche desiderate ed eventualmente indicare modelli simili
+        description: A cosa serve? Motivazione particolareggiata.
+        teach_description: È possibile indicare le caratteritiche tecniche desiderate ed eventualmente indicare modelli simili.
+      main_agreement:
+        description: 'Esempio: CPU#Intel i5-7200U; RAM#8Gb; Hard Disk#500 Gb;Dimensioni dello schermo#15,6 pollici'
+        price: Iva esclusa
+
         
   date:
     formats:
