@@ -9,8 +9,6 @@ Bundler.require(*Rails.groups)
 module Almaassets
   class Application < Rails::Application
     config.hosts << "tester.dm.unibo.it"
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
 
     config.time_zone = 'Rome'
     config.i18n.default_locale = :it
