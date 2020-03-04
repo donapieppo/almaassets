@@ -1,4 +1,4 @@
-<h1>Gestione risorse e materiale inventariabile<br/><small><%= current_organization %></small></h1>
+<h1>Gestione risorse e materiale inventariabile<br/><small><%= current_organization.name %></small></h1>
 
 <% @good_requests.each do |gr| %>  
   <%= render gr %>  
@@ -11,14 +11,6 @@
       </button>
     <% end %>
   </div>
-
-  <%# <div class="my-3"> %>
-  <%#   <%= link_to servers_path do %1> %>
-  <%#     <button class="btn btn-lg btn-info py-3" style="width: 75%; font-size: 200%"> %>
-  <%#       <%= dmicon('server', size: 60) %1> <br/> UTILIZZO REMOTO <br/>RISORSE DI CALCOLO %>
-  <%#     </button> %> 
-  <%#   <% end %1> %>
-  <%# </div> %>
 
   <div class="my-3">
     <%= link_to goods_path do %>
