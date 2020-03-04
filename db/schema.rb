@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_12_02_110147) do
 
   create_table "bookings", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
     t.integer "user_id", unsigned: true
     t.integer "server_id", unsigned: true
     t.datetime "start_at"
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_110147) do
   end
 
   create_table "good_requests", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
     t.integer "user_id", unsigned: true
     t.integer "category_id", unsigned: true
     t.integer "main_agreement_id", unsigned: true
