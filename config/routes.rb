@@ -37,9 +37,9 @@ Rails.application.routes.draw do
 
   resources :bookings 
 
-  resources :servers do
-    resources :bookings
-  end
+  # resources :servers do
+  #   resources :bookings
+  # end
 
   get '/hg/:id', to: 'bookings#hg', as: :hg, defaults: { format: 'json' }
 
