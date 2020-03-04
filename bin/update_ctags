@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ctags -R lib app ../gems/dm_unibo_*
+
