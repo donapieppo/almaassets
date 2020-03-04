@@ -8,11 +8,14 @@ Bundler.require(*Rails.groups)
 
 module Almaassets
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 6.0
+
     config.hosts << "tester.dm.unibo.it"
 
     config.time_zone = 'Rome'
     config.i18n.default_locale = :it
-          
+
     config.action_mailer.default_url_options = {protocol: 'https'}
     config.dm_unibo_common = ActiveSupport::HashWithIndifferentAccess.new config_for(:dm_unibo_common)
 
