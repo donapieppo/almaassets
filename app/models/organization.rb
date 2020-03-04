@@ -1,11 +1,7 @@
 class Organization < ApplicationRecord
-  has_many :goods
-  has_many :locations
-  has_many :users
-  has_many :servers
+  include DmUniboCommon::Organization
 
-  def to_s
-    self.name
-  end
+  has_many :goods
+  has_many :good_requests
 end
 
