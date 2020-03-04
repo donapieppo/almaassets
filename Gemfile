@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 #gem 'dm_unibo_common', git: 'https://github.com/donapieppo/dm_unibo_common.git',           branch: 'ver.3'
 gem 'dm_unibo_user_search', git: 'https://github.com/donapieppo/dm_unibo_user_search.git', ref: 'master', branch: 'master'
@@ -8,19 +7,12 @@ gem 'dm_unibo_common',          path: '/home/rails/gems/dm_unibo_common/'
 
 gem 'webpacker', '~> 4.0'
 
-#gem 'mini_racer', platforms: :ruby
-#gem 'turbolinks', '~> 5'
-
 gem 'aasm'
 
 gem 'roo'
 gem 'roo-xls'
 gem "caracal"
 gem 'caracal-rails'
-
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
