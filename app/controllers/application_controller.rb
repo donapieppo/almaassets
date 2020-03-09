@@ -8,17 +8,20 @@ class ApplicationController < ActionController::Base
 
   impersonates :user
 
-  before_action :log_current_user, :force_sso_user, :retrive_authlevel
+  before_action :log_current_user, :force_sso_user, :set_organization, :retrive_authlevels
   after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate, :shibboleth]
 
-  def retrive_authlevel
-    # tmp TODO FIXME
-    session[:oid] = 1 unless session[:oid]
+  # We set organization with params[:__org__] as organization_id in config/routes
+  def set_organization
+    if params[:__org__]
+      session[:oid] = params[:__org__].to_i 
+    end
+    # fallback to default organization
+    session[:oid] ||= 1
 
-    if session[:oid]
-      @current_organization = Organization.find(session[:oid].to_i)
-    else
-      redirect_to choose_current_organization
+    @current_organization = Organization.find(session[:oid].to_i)
+    if current_user
+      current_user.current_organization = @current_organization
     end
   end
 
