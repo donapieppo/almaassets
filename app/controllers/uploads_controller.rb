@@ -7,14 +7,13 @@ class UploadsController < ApplicationController
 
   def create
     authorize :upload
-    @differences = Hash.new 
-    @new_goods   = Array.new 
+    @differences = {} 
+    @new_goods   = [] 
+    excel_id_numbers = []
 
     begin
       parse_unibo_excel.each do |unibo_good|
-        if unibo_good.get(:sub_inventory) == '1'
-          next
-        end
+        next if unibo_good.get(:sub_inventory) == '1'
         inv_number = unibo_good.get(:inv_number) or raise "No inv_number in #{unibo_good.inspect}"
 
         good = current_organization.goods.find_by_inv_number(inv_number) || current_organization.goods.new(inv_number: inv_number)
@@ -42,10 +41,13 @@ class UploadsController < ApplicationController
           @differences[good] = good.changed_attributes if good.changed_attributes.any?
         end
         good.save!
+        excel_id_numbers << good.id
       end
     rescue UniboFileMissingDissertationError => e
       redirect_to new_upload_path, alert: "Errore: #{e.to_s}" and return
     end
+    ids_to_delete = (Good.select(:id).map(&:id).to_a - excel_id_numbers)
+    Good.delete(ids_to_delete)
   end
 
   private
