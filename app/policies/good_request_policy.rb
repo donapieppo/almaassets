@@ -8,16 +8,8 @@ class GoodRequestPolicy < ApplicationPolicy
     @user and (@record.user_id == @user.id or @user.is_admin?)
   end
 
-  def new?
-    @user
-  end
-
-  def edit?
-    @user and (@record.user_id == @user.id or @user.is_admin?)
-  end
-
   def update?
-    edit?
+    @user and (@record.user_id == @user.id or @user.is_admin?)
   end
 
   def destroy?

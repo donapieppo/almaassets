@@ -12,7 +12,7 @@ class GoodRequestsController < ApplicationController
   end
 
   def new 
-    @good_request = GoodRequest.new
+    @good_request = current_user.good_requests.new
 
     if params[:category_id]
       @good_request.category = Category.find(params[:category_id])
