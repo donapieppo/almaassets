@@ -1,6 +1,6 @@
 module CategoriesHelper
   def category_icon(c, size: 20)
-    c or return "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
+    c or return "<i class='fas fa-question-circle' style='font-size: #{size}px'></i>".html_safe
 
     case c.code
     when 'pc'
@@ -30,7 +30,7 @@ module CategoriesHelper
     when 'other'
       "<i class='fas fa-asterisk' style='font-size: #{size}px'></i>".html_safe
     else
-      "<i class='far fa-question-circle' style='font-size: #{size}px'></i>".html_safe
+      "<i class='fas fa-question-circle' style='font-size: #{size}px'></i>".html_safe
     end
   end
 
