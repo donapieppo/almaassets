@@ -4,12 +4,14 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.order(:name)
+    authorize @locations
   end
 
-  # def new
-  #   @location = current_organization.locations.new
-  #   render layout: false if modal_page
-  # end
+  def new
+    @location = current_organization.locations.new
+    authorize @location
+    render layout: false if modal_page
+  end
 
   # def create
   #   @location = current_organization.locations.new(location_params)
@@ -45,7 +47,8 @@ class LocationsController < ApplicationController
   private
 
   def get_location_and_check_permission
-    @location = Location.find(params[:id])
+    @location = current_organization.locations.find(params[:id])
+    authorize @location
   end
 
   # can not choose organization_id
