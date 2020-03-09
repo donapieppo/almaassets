@@ -31,7 +31,7 @@ class GoodsController < ApplicationController
         @goods = @goods.where(to_unload: true)
         @title = "Elenco beni da disinventariare"
       elsif params[:newer]
-        @goods = @goods.where("created_at > ?", 14.days.ago)
+        @goods = @goods.where("created_at > ?", params[:newer].to_i.days.ago)
         @title = "Elenco ultimi inserimenti"
       else
         @goods = @goods.where(user_id: nil)
@@ -70,7 +70,7 @@ class GoodsController < ApplicationController
     end
     if @search_string.size > 2
       sql_string = "%#{@search_string}%"
-      @goods << Good.where("goods.description like ? or goods.unibo_description like ?", sql_string, sql_string).to_a
+      @goods << Good.where("goods.description like ? or goods.unibo_description like ? or goods.sn like ?", sql_string, sql_string, sql_string).to_a
     end
 
     @goods.flatten!
