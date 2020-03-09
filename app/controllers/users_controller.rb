@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order(:surname, :name)
+    authorize :user
   end
 
   def new
