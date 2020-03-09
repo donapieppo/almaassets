@@ -96,9 +96,11 @@ ActiveRecord::Schema.define(version: 2019_12_02_110147) do
   end
 
   create_table "locations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
     t.integer "building_id", unsigned: true
     t.string "name"
     t.index ["building_id"], name: "fk_locations_buildings"
+    t.index ["organization_id"], name: "fk_locations_organizations"
   end
 
   create_table "main_agreements", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -119,6 +121,15 @@ ActiveRecord::Schema.define(version: 2019_12_02_110147) do
   create_table "organizations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
+    t.string "description"
+  end
+
+  create_table "permissions", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id", null: false, unsigned: true
+    t.integer "organization_id", null: false, unsigned: true
+    t.integer "authlevel"
+    t.index ["organization_id"], name: "fk_organization_authorization"
+    t.index ["user_id"], name: "fk_user_authorization"
   end
 
   create_table "servers", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -154,7 +165,10 @@ ActiveRecord::Schema.define(version: 2019_12_02_110147) do
   add_foreign_key "goods", "organizations", name: "fk_goods_organizations", on_delete: :cascade
   add_foreign_key "goods", "users", name: "fk_goods_users", on_delete: :cascade
   add_foreign_key "locations", "buildings", name: "fk_locations_buildings", on_delete: :cascade
+  add_foreign_key "locations", "organizations", name: "fk_locations_organizations"
   add_foreign_key "main_agreements", "categories", name: "fk_main_agreements_categories", on_delete: :cascade
+  add_foreign_key "permissions", "organizations", name: "fk_organization_authorization"
+  add_foreign_key "permissions", "users", name: "fk_user_authorization"
   add_foreign_key "servers", "organizations", name: "fk_servers_organizations", on_delete: :cascade
   add_foreign_key "users", "organizations", name: "fk_users_organizations", on_delete: :cascade
 end
