@@ -26,6 +26,7 @@
       <%= dropdown_menu :amm, big_dmicon('cog') + ' Altro' do %>
         <%= link_to big_dmicon('star', text: 'Convenzioni'), main_agreements_path %>
         <%= link_to big_dmicon('upload', text: 'Aggiorna da Ugov'), new_upload_path %>
+        <%= link_to big_dmicon('sort-amount-up', text: 'Carichi ultimi 14 giorni'), goods_path(newer: 14) %>
         <%= link_to big_dmicon('user', text: 'Utenti'), users_path %>
       <% end %>
       <%= form_tag find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
