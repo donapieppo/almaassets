@@ -12,34 +12,34 @@ class UploadsController < ApplicationController
     excel_id_numbers = []
 
     begin
-      parse_unibo_excel.each do |unibo_good|
-        next if unibo_good.get(:sub_inventory) == '1'
-        inv_number = unibo_good.get(:inv_number) or raise "No inv_number in #{unibo_good.inspect}"
+      parse_unibo_excel.each do |excel_unibo_good|
+        next if excel_unibo_good.get(:sub_inventory) == '1'
+        inv_number = excel_unibo_good.get(:inv_number) or raise "No inv_number in #{excel_unibo_good.inspect}"
 
         good = current_organization.goods.find_by_inv_number(inv_number) || current_organization.goods.new(inv_number: inv_number)
 
-        desc      = unibo_good.get(:description)
-        unibouser = unibo_good.get(:unibouser)
-        notes     = unibo_good.get(:notes)
+        desc      = excel_unibo_good.get(:description)
+        unibouser = excel_unibo_good.get(:unibouser)
+        notes     = excel_unibo_good.get(:notes)
 
         good.unibo_description = desc
         good.unibo_description = good.unibo_description + " [[#{unibouser}]]" unless unibouser.blank?
         good.unibo_description = good.unibo_description + " {{#{notes}}}"     unless notes.blank?
 
-        good.build_year        = unibo_good.get(:build_year) 
-        good.old_org           = unibo_good.get_cib_organization
-        good.old_inv_number    = unibo_good.get_cib_inv_number
-        good.price             = unibo_good.get(:price)
-        good.sn                = unibo_good.get(:sn)
+        good.build_year        = excel_unibo_good.get(:build_year) 
+        good.old_org           = excel_unibo_good.get_cib_organization
+        good.old_inv_number    = excel_unibo_good.get_cib_inv_number
+        good.price             = excel_unibo_good.get(:price)
+        good.sn                = excel_unibo_good.get(:sn)
 
         # attributes changable
         if good.new_record?
-          good.organization_id = current_organization.id
           good.description = desc
           @new_goods << good
-        else
-          @differences[good] = good.changed_attributes if good.changed_attributes.any?
+        elsif good.changed_attributes.any?
+          @differences[good] = good.changed_attributes 
         end
+
         good.save!
         excel_id_numbers << good.id
       end

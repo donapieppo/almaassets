@@ -2,6 +2,8 @@
 require 'roo' 
 require 'roo-xls'
 
+require 'unibo_excel_mappings'
+
 class UniboFileError < RuntimeError; end
 class UniboFileMissingDissertationError < RuntimeError; end
 
@@ -50,8 +52,13 @@ class UniboFileParser
     end
   end
 
+  # @file_content = excel.parse and excel.parse gives array of lines. 
   def get(num)
     @file_content[num]
+  end
+
+  def get_unibo_good(num)
+    UniboGood.new(get(num))
   end
 
   private 
