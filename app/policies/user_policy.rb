@@ -6,9 +6,5 @@ class UserPolicy < ApplicationPolicy
   def create?
     @user.is_admin?
   end
-
-  def new?
-    create?
-  end
 end
 
