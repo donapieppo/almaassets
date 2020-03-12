@@ -3,6 +3,8 @@ if ($("#<%= div_good_id(@good) %> .category_icon").attr('aria-describedby')) {
 } else {
   $(".category_icon").popover('hide');
   $("#<%= div_good_id(@good) %> .category_icon").popover({ title: 'Scelta categoria',
-                                                           content: '<%= raw escape_javascript(render(partial: 'categories_list')) %>',
-                                                           html: true }).popover('toggle');
+                                                           // content: "<a href='/' data-remote='true'>Ciao</a>",
+                                                           content: "<%= raw escape_javascript(render(partial: 'categories_list')) %>",
+                                                           sanitize: false, 
+                                                           html: true }).popover('show');
 }
