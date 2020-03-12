@@ -25,14 +25,11 @@ Rails.application.routes.draw do
 
   resources :uploads
 
-  resources :users 
-
   resources :categories do 
     resources :goods
     resources :good_requests
   end
 
-  resources :organizations
   resources :locations
 
   resources :bookings 
