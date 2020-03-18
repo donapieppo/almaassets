@@ -1,10 +1,12 @@
 module GoodsHelper
   def inv_number(good, found: nil)
+    popover_content = "inv: #{good.inv_number}<br/>" +
+                      "#{h good.unibo_description}<br/>" +
+                      "sn: #{h good.sn}<br/><hr/>" +
+                      "#{h good.build_year}<br/>&euro; #{h good.price}".html_safe
     content_tag :button, title: "Informazioni originali in ugov", 
-      class: "inv_number #{good.user_id ? 'with-owner' : 'without-owner'} #{'found' if found}",
-                         data: { toggle: "popover", 
-                                 html: "true",
-                                 content: "inv: #{good.inv_number}<br/>#{h good.unibo_description}<br/>sn: #{h good.sn}<br/><hr/>#{h good.build_year}<br/>&euro; #{h good.price}".html_safe } do
+                         class: "inv_number #{good.user_id ? 'with-owner' : 'without-owner'} #{'found' if found}",
+                         data: { toggle: "popover", html: "true", content: popover_content } do
       "inv. #{good.inv_number.to_i}"
     end
   end
