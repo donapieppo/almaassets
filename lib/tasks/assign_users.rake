@@ -14,6 +14,7 @@ namespace :almaassets do
          good.description =~ /aula /i or 
          good.description =~ /lab(oratorio)?\.? (docenti|assegnisti)/i or
          good.description =~ /switch hp/i or
+         good.description =~ /SCHEDA AGGIUNTIVA PER SWITCH/i or
          good.description =~ /multimediale.*terra/i or
          good.description =~ /ufficio tecnici/i or
          good.description =~ /uff\.?\s*tecnici/i or
