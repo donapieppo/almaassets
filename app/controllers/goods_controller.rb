@@ -2,7 +2,7 @@ class GoodsController < ApplicationController
   before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm, :ask_category, :set_category]
 
   def index
-    @goods = Good.includes(:category, :user, :location)
+    @goods = current_organization.goods.includes(:category, :user, :location)
 
     if current_user.is_admin? 
       if params[:unassigned]

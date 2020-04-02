@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_action :get_location_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
-    @locations = Location.order(:name)
+    @locations = current_organization.location.order(:name)
     authorize @locations
   end
 
