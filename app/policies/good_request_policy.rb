@@ -5,18 +5,18 @@ class GoodRequestPolicy < ApplicationPolicy
   end
 
   def create?
-    @user and (@record.user_id == @user.id or @user.is_admin?)
+    owner_or_record_organization_manager?
   end
 
   def update?
-    @user and (@record.user_id == @user.id or @user.is_admin?)
+    owner_or_record_organization_manager?
   end
 
   def destroy?
-    edit?
+    update?
   end
 
   def print?
-    edit?
+    update?
   end
 end

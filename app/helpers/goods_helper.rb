@@ -19,7 +19,7 @@ module GoodsHelper
   end
 
   def link_to_unload(good)
-    return "" unless user_admin? 
+    return "" unless policy(good).unload?
     icon = good.to_unload ? dmicon('times-circle') : dmicon('trash-alt')
     title = good.to_unload ? 'cancella lo scarico' : 'da scaricare'
 

@@ -4,23 +4,23 @@ class MainAgreementPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def create?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def edit?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def update?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def destroy?
-    @user.is_admin?
+    record_organization_manager?
   end
 
 end

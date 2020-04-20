@@ -16,7 +16,7 @@
     <span><i>su fondi di <%= good_request.holder %></i></span>
     <span class="float-right">
       <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
-      <% if user_admin? %>  
+      <% if policy(good_request).print? %>  
         <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
       <% end %>
       <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 

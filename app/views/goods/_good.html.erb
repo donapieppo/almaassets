@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-5">
         <span class="category_icon">
-          <% if user_admin? %>  
+          <% if policy(good).edit? %>  
             <%= link_to category_icon(good.category, size: 25), ask_category_good_path(good), remote: true %>
           <% else %>
             <%= category_icon(good.category, size: 25) %>
@@ -19,7 +19,7 @@
 
       <div class="col-5">
         <span class="float-right">
-          <% if user_admin? %>
+          <% if policy(current_organization).edit? %>
             <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
           <% else %>
             <%= good.user %> &nbsp;
@@ -32,14 +32,14 @@
 
   <div class="card-body">
     <%= (good.name.blank? ? good.description : good.name).upcase %> <small>(<%= good.build_year %> <%= good.location %>)</small>
-    <% if (! good.admin_notes.blank?) and current_user.is_admin? %>  
+    <% if (! good.admin_notes.blank?) and policy(good).read_admin_notes? %>  
       <span class="text-info"><%= good.admin_notes %></span>
     <% end %>
   </div>
 
   <div class="card-footer">
     <%= status_icon(good, size: 25) %>
-    <% if user_admin? %>  
+    <% if policy(good).edit? %>  
       <% if good.unconfirmed %>  
         <strong>BENE NON PIÙ IN POSSESSO DI <%= good.user %>.</strong>
         (<%= good.unconfirmed_text %>)

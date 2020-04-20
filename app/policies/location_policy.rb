@@ -4,7 +4,7 @@ class LocationPolicy < ApplicationPolicy
   end
 
   def create?
-    organization_manager?
+    record_organization_manager?
   end
 end
 

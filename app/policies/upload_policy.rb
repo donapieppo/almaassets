@@ -1,10 +1,11 @@
 class UploadPolicy < ApplicationPolicy
+  # no record FIXME
   def new?
-    @user.is_admin?
+    create?
   end
 
   def create?
-    @user.is_admin?
+    @user.authorization.can_manage?(current_organization)
   end
 end
 

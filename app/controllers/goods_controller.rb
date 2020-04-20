@@ -4,7 +4,7 @@ class GoodsController < ApplicationController
   def index
     @goods = current_organization.goods.includes(:category, :user, :location)
 
-    if current_user.is_admin? 
+    if policy(current_organization).edit? 
       if params[:unassigned]
         @goods = @goods.where(user_id: nil) 
         @title = 'Elenco beni non assegnati'
@@ -128,7 +128,7 @@ class GoodsController < ApplicationController
   # FIXME how to unconfirm
   def manage_confirmed_param
     # confirmed in database is datetime and in form is just bool
-    if current_user.is_admin? 
+    if policy(@good).confirm?
       if params[:good].delete(:confirmed) == "1"
         @good.confirm_presence(current_user)
       end

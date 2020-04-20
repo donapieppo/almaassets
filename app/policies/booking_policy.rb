@@ -12,7 +12,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @record.user_id = @user.id
+    owner?
   end
 
   def hg?

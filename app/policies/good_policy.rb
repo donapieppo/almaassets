@@ -4,7 +4,7 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def show?
-    @user.is_admin? or record.user_id == @user.id
+    owner_or_record_organization_manager?
   end
 
   def create?
@@ -16,7 +16,7 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def edit?
@@ -28,38 +28,42 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def find?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def unload?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def new_confirm?
-    record.user_id == @user.id
+    owner?
   end
 
   def confirm?
-    record.user_id == @user.id
+    owner?
   end
 
   def new_unconfirm?
-    @user.is_admin? || record.user_id == @user.id
+    owner_or_record_organization_manager?
   end
 
   def unconfirm?
-    @user.is_admin? || record.user_id == @user.id
+    owner_or_record_organization_manager?
   end
 
   def ask_category?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def set_category?
-    @user.is_admin?
+    record_organization_manager?
   end
 
   def print?
-    @user.is_admin?
+    record_organization_manager?
+  end
+
+  def read_admin_notes?
+    record_organization_manager?
   end
 end
