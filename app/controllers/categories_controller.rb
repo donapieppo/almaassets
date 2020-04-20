@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
-  before_action :check_user_can_admin
   before_action :get_category_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
     @locations = Location.order(:name)
+    authorize @locations
   end
 
   # def new
@@ -46,6 +46,7 @@ class CategoriesController < ApplicationController
 
   def get_category_and_check_permission
     @location = Location.find(params[:id])
+    authorize @location
   end
 
   # can not choose organization_id
