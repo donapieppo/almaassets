@@ -2,7 +2,7 @@
   <%= dm_header %>
   <%= dm_nav do  %>  
     <li><%= link_to big_dmicon('home', text: 'Home'), main_app.root_path %></li>
-    <% if policy(current_organization).edit? %>  
+    <% if current_organization && policy(current_organization).manage? %>  
       <%= dropdown_menu :amm, big_dmicon('bookmark') + ' Categorie' do %>
         <% Category.find_each do |cat| %>  
           <%= link_to (fwdmicon('angle-right') + " #{cat}"), main_app.goods_path(category_id: cat.id) %>
