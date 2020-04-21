@@ -5,7 +5,7 @@ class UploadPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.authorization.can_manage?(current_organization)
+    @user.authorization.can_manage?(@record.organization_id)
   end
 end
 

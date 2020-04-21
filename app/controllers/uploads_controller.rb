@@ -2,11 +2,13 @@ require 'unibo_file_parser'
 
 class UploadsController < ApplicationController
   def new
-    authorize :upload
+    @upload = Upload.new(current_organization)
+    authorize @upload
   end
 
   def create
-    authorize :upload
+    @upload = Upload.new(current_organization)
+    authorize @upload
     @differences = {} 
     @new_goods   = [] 
     excel_id_numbers = []
