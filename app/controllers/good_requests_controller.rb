@@ -2,7 +2,7 @@ class GoodRequestsController < ApplicationController
   before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print, :destroy]
 
   def index
-    if policy(current_organization).edit?
+    if policy(current_organization).manage?
       @good_requests = GoodRequest
     else
       @good_requests = current_user.good_requests
@@ -12,7 +12,7 @@ class GoodRequestsController < ApplicationController
   end
 
   def new 
-    @good_request = current_user.good_requests.new
+    @good_request = current_user.good_requests.new(organization: current_organization)
 
     if params[:category_id]
       @good_request.category = Category.find(params[:category_id])
@@ -35,7 +35,10 @@ class GoodRequestsController < ApplicationController
   def create
     @category = Category.find(params[:category_id])
     @good_request = @category.good_requests.new(good_request_params)
-    @good_request.user = current_user unless policy(current_organization).edit?
+
+    @good_request.user = current_user unless policy(current_organization).manage?
+    @good_request.organization = current_organization unless policy(current_organization).manage?
+
     authorize @good_request
     if @good_request.save
       redirect_to root_path, notice: "La richiesta è stata creato correttamente."
@@ -83,7 +86,7 @@ class GoodRequestsController < ApplicationController
 
   def good_request_params
     p = [:category_id, :main_agreement_id, :holder_id, :name, :description, :teach_description, :derogation, :max_price]
-    (p << :user_id) if policy(current_organization).edit?
+    (p << :user_id) if policy(current_organization).manage?
     params[:good_request].permit(p)
   end
 end
