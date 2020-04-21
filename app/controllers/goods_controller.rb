@@ -4,7 +4,7 @@ class GoodsController < ApplicationController
   def index
     @goods = current_organization.goods.includes(:category, :user, :location)
 
-    if policy(current_organization).edit? 
+    if policy(current_organization).manage? 
       if params[:unassigned]
         @goods = @goods.where(user_id: nil) 
         @title = 'Elenco beni non assegnati'
