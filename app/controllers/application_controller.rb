@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: [:index, :who_impersonate, :impersonate, :shibboleth]
 
   def default_url_options(_options={})
-    { __org__:  current_organization.code }
+    _options[:__org__] = current_organization ? current_organization.code : nil
+    _options
   end
 end
