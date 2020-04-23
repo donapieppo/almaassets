@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
     get '/hg/:id', to: 'bookings#hg', as: :hg, defaults: { format: 'json' }
 
-    root to: 'home#index'
+    get '/', to: 'home#index', as: 'current_organization_root'
   end
+  root to: 'home#index'
 end
