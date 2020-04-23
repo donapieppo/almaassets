@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-  before_action :check_user_can_admin
   before_action :get_location_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
