@@ -19,7 +19,7 @@
     <% end %>
   </p>
 
-  <% if policy(current_organization).edit? %>  
+  <% if policy(current_organization).manage? %>  
     <%= g.association :user, label_method: :cn_militar, include_blank: false %>  
   <% end %>
   <%= g.input :main_agreement_id, as: :hidden %>  
