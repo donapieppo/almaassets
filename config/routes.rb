@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount DmUniboCommon::Engine => "/dm_unibo_common"
 
   scope ":__org__" do
+    resources :users
     resources :documents
     resources :main_agreements do
       resources :documents
