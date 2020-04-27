@@ -109,7 +109,7 @@ class GoodsController < ApplicationController
   end
 
   def print
-    authorize Good
+    authorize :good
     @goods = Good.where(to_unload: true).select(:inv_number, :unibo_description).to_a
     respond_to do |format|
       format.html { render layout: false }
