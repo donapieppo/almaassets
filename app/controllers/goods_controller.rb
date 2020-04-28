@@ -57,7 +57,7 @@ class GoodsController < ApplicationController
   end
 
   def find
-    authorize(:good)
+    authorize current_organization, :manage?
     @search_string = params[:search_string] || ''
     @title = "Ricerca per #{@search_string}"
 
@@ -65,12 +65,12 @@ class GoodsController < ApplicationController
 
     # first by inv num
     if @search_string =~ /\A[0-9]+\Z/
-      @goods << Good.where(inv_number: @search_string.to_i).to_a
-      @goods << Good.where(old_inv_number: @search_string.to_i).to_a
+      @goods << current_organization.goods.where(inv_number: @search_string.to_i).to_a
+      @goods << current_organization.goods.where(old_inv_number: @search_string.to_i).to_a
     end
     if @search_string.size > 2
       sql_string = "%#{@search_string}%"
-      @goods << Good.where("goods.description like ? or goods.unibo_description like ? or goods.sn like ?", sql_string, sql_string, sql_string).to_a
+      @goods << current_organization.goods.where("goods.description like ? or goods.unibo_description like ? or goods.sn like ?", sql_string, sql_string, sql_string).to_a
     end
 
     @goods.flatten!
