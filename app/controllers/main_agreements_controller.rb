@@ -25,7 +25,7 @@ class MainAgreementsController < ApplicationController
   end
 
   def update
-    if @main_agreement.update_attributes(main_agreement_params)
+    if @main_agreement.update(main_agreement_params)
       redirect_to main_agreements_path
     else
       render :edit

@@ -52,7 +52,7 @@ class GoodRequestsController < ApplicationController
   end
 
   def update
-    if @good_request.update_attributes(good_request_params)
+    if @good_request.update(good_request_params)
       redirect_to root_path, notice: 'La richiesta è stata aggiornata.'
     else
       render :edit

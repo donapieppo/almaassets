@@ -49,7 +49,7 @@ class GoodsController < ApplicationController
 
   def update
     manage_confirmed_param
-    if @good.update_attributes(good_params)
+    if @good.update(good_params)
       redirect_to good_path(@good), notice: "Aggiornamento registrato correttamente."
     else
       render action: :show
