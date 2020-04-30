@@ -51,10 +51,10 @@ class Good < ApplicationRecord
   end
 
   def confirm_presence(user)
-    self.update_attributes(confirmed: Time.now, confirmed_by: user.id, unconfirmed: nil)
+    self.update(confirmed: Time.now, confirmed_by: user.id, unconfirmed: nil)
   end
 
   def unconfirm_presence(motivation)
-    self.update_attributes(confirmed: nil, confirmed_by: nil, unconfirmed: Time.now, unconfirmed_text: motivation)
+    self.update(confirmed: nil, confirmed_by: nil, unconfirmed: Time.now, unconfirmed_text: motivation)
   end
 end
