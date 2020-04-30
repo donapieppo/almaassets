@@ -23,10 +23,13 @@ class GoodsController < ApplicationController
         @goods = @goods.where(category_id: @category.id)
         @title = "Elenco beni tipo \"#{@category}\""
         @no_icon = true
-      elsif params[:location_id]
+      elsif params[:location_id] && params[:location_id] != '0'
         @location = Location.find(params[:location_id])
         @goods = @goods.where(location_id: @location.id)
         @title = "Elenco beni presso \"#{@location}\""
+      elsif params[:location_id] == "0"
+        @goods = @goods.where(location_id: nil)
+        @title = "Elenco beni senza ubicazione"
       elsif params[:unload]
         @goods = @goods.where(to_unload: true)
         @title = "Elenco beni da disinventariare"

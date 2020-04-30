@@ -16,7 +16,8 @@
           <%= link_to (fwdmicon('angle-right') + " #{location}"), main_app.goods_path(location_id: location.id) %>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to (fwdmicon('plus') + " nuova ubicazioone"), main_app.new_location_path %>
+        <%= link_to (fwdmicon('question-circle') + " mancanti"), main_app.goods_path(location_id: 0) %>
+        <%= link_to (fwdmicon('plus') + " nuova ubicazione"), main_app.new_location_path %>
       <% end %>
       <%= dropdown_menu :amm, big_dmicon('trash') + ' Scarichi' do %>
         <%= link_to big_dmicon('question-circle', text: 'Da analizzare'), main_app.goods_path(unconfirmed: true) %>
