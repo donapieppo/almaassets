@@ -36,11 +36,11 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def new_confirm?
-    owner?
+    owner_or_record_organization_manager?
   end
 
   def confirm?
-    owner?
+    owner_or_record_organization_manager?
   end
 
   def new_unconfirm?
