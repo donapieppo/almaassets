@@ -1,5 +1,5 @@
 class GoodRequestsController < ApplicationController
-  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print, :destroy]
+  before_action :set_good_request_and_check_permission, only: [:show, :edit, :update, :print, :destroy, :edit_approve, :approve]
 
   def index
     if policy(current_organization).manage?
@@ -75,6 +75,12 @@ class GoodRequestsController < ApplicationController
   def destroy
     @good_request.destroy
     redirect_to root_path
+  end
+
+  def edit_approve
+  end
+
+  def approve
   end
 
   private

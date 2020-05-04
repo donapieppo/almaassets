@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   mount DmUniboCommon::Engine => "/dm_unibo_common"
 
   scope ":__org__" do
-    resources :users
+    resources :users do
+      resources :goods
+      resources :good_requests
+    end
     resources :documents
     resources :main_agreements do
       resources :documents
@@ -24,6 +27,8 @@ Rails.application.routes.draw do
     end
 
     resources :good_requests do
+      get  :edit_approve, on: :member
+      post :approve, on: :member
       get :print, on: :member
     end
 
