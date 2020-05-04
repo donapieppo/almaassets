@@ -19,7 +19,12 @@
       <% if policy(good_request).print? %>  
         <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
       <% end %>
-      <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+      <% if policy(good_request).edit? %>
+        <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+      <% end %>
+      <% if policy(good_request).approve? %>  
+        <%= link_to dmicon('check'), edit_approve_good_request_path(good_request), title: 'Modifica richiesta' %> 
+      <% end %>
       <%= link_to_delete good_request_path(good_request) %> 
     </span>
   </div>
