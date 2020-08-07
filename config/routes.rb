@@ -27,8 +27,7 @@ Rails.application.routes.draw do
     end
 
     resources :good_requests do
-      get  :edit_approve, on: :member
-      post :approve, on: :member
+      put :approve, on: :member
       get :print, on: :member
     end
 

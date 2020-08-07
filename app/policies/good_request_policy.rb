@@ -9,18 +9,14 @@ class GoodRequestPolicy < ApplicationPolicy
   end
 
   def update?
-    owner_or_record_organization_manager?
+    record_organization_manager? || (owner? && (! @record.holder_approved?))
   end
 
   def destroy?
-    update?
+    owner_or_record_organization_manager?
   end
 
   def print?
-    update?
-  end
-
-  def edit_approve?
     approve?
   end
 

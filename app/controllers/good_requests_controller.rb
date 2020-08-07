@@ -77,10 +77,9 @@ class GoodRequestsController < ApplicationController
     redirect_to root_path
   end
 
-  def edit_approve
-  end
-
   def approve
+    @good_request.holder_approve!
+    redirect_to root_path
   end
 
   private
