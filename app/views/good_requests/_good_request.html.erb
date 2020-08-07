@@ -1,31 +1,46 @@
-<div class="card bg-<%= good_request.main_agreement ? 'light' : 'warning' %> my-3">
+<div class="card my-3">
   <div class="card-header">
     <strong>Richiesta di <%= good_request.user.cn.upcase %></strong>
     <span class="float-right">
       <% if good_request.main_agreement %>  
         in convenzione <%= good_request.main_agreement %>  
-      <% else %>
-        FUORI CONVENZIONE
-      <% end %>
+    <% else %>
+      <span class="text-warning"> FUORI CONVENZIONE <%= dmicon('exclamation-triangle') %></span>
+    <% end %>
     </span>
   </div>
   <div class="card-body">
-    <%= good_request.name %>
+    <div style="text-weight: bold"><%= good_request.name %></div>
+    <div style="font-style: italic; margin-left: 10px"><%= good_request.description %></div>
+    <div style="font-style: italic; margin-left: 10px"><%= good_request.derogation %></div>
   </div>
   <div class="card-footer">
-    <span><i>su fondi di <%= good_request.holder %></i></span>
+    <span class="font-italic">
+      Prezzo massimo: <%= good_request.max_price %> &euro; su fondi di <%= good_request.holder %>
+    </span>
+    <% if good_request.holder_approved? %> 
+      <span class="text-success">
+        <%= dmicon('check') %> (approvato)
+      </span>
+    <% end %>
     <span class="float-right">
-      <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
       <% if policy(good_request).print? %>  
+        <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
         <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
       <% end %>
       <% if policy(good_request).edit? %>
         <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
       <% end %>
-      <% if policy(good_request).approve? %>  
-        <%= link_to dmicon('check'), edit_approve_good_request_path(good_request), title: 'Modifica richiesta' %> 
+      <% if policy(good_request).destroy? %>  
+        <%= link_to_delete good_request_path(good_request) %> 
       <% end %>
-      <%= link_to_delete good_request_path(good_request) %> 
+      <% if policy(good_request).approve? %>  
+        <% if good_request.holder_approved? %>  
+          <%= dmicon('check') %> 
+        <% else %>
+          <%= link_to dmicon('check') + ' approva', approve_good_request_path(good_request), class: 'btn btn-success', method: :put %> 
+        <% end %>
+      <% end %>
     </span>
   </div>
 </div>
