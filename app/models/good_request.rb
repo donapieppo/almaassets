@@ -15,10 +15,14 @@ class GoodRequest < ApplicationRecord
 
   aasm do
     state :requested, initial: true
-    state :accepted, :ordered, :arrived
+    state :holder_approved, :accepted, :ordered, :arrived
+
+    event :holder_approve do 
+      transitions from: :requested, to: :holder_approved
+    end
 
     event :accept do
-      transitions from: :requested, to: :accepted
+      transitions from: :holder_approved, to: :accepted
     end
   end
 end
