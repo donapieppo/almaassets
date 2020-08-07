@@ -5,7 +5,6 @@ class User < ApplicationRecord
 
   has_many :goods
   has_many :good_requests
-  has_many :bookings
 end
 
 
