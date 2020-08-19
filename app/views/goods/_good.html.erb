@@ -17,8 +17,8 @@
         <%= inv_number(good, found: (search_string and good.inv_number == search_string.to_i)) %>  
       </div>
 
-      <div class="col-5">
-        <span class="float-right">
+      <div class="col-5 text-right">
+        <span class="">
           <% if policy(current_organization).manage? %>
             <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
           <% else %>
