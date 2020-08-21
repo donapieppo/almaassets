@@ -15,11 +15,11 @@ namespace :almaassets do
     Good.where(category_id: nil).find_each do |good|
       if good.unibo_description =~ /SEDIA (FISSA|PIEGHEVOLE|GIREVOLE|OPERATIVA|SETPOINT|CON SEDUTA|ERGONOMICA)/i 
         good.update_attribute(:category_id, chair_id)
-      elsif good.unibo_description =~ /SCRIVANI|ARMADIO|CASSETTIER|ANTA|APPENDIABITI|ARMADIATURE|ARMADIETTO|CATTEDRA|LAMPADA|LAVAGNA|LIBRERIA|POLTRONCIN|POLTRONA|SEGGIOLA|TAVOLINO|TAVOLO|PANCA IN LEGNO|SEDIA|TENDA|VENTILATORE|ATTACCAPANNI|SGABELLO/i
+      elsif good.unibo_description =~ /SCRIVANI|ARMADIO|CASSETTIER|ANTA|APPENDIABITI|ARMADIATURE|ARMADIETTO|CATTEDRA|LAMPADA|LAVAGNA|LIBRERIA|POLTRONCIN|POLTRONA|SEGGIOLA|TAVOLINO|TAVOLO|PANCA IN LEGNO|SEDIA|TENDA|VENTILATORE|ATTACCAPANNI|SGABELLO|APPENDIABITO|CONDIZIONATORE/i
         good.update_attribute(:category_id, chair_id)
       elsif good.unibo_description =~ /PROIETTORE|VIDEOPROIETTOR|VIDEO PROIETTOR|Videoregistrator|Videocamer/i 
         good.update_attribute(:category_id, video_id)
-      elsif good.unibo_description =~ /SERVER/i 
+      elsif good.unibo_description =~ /SERVER|GRUPPO DI CONTINUIT/i 
         good.update_attribute(:category_id, server_id)
       elsif good.unibo_description =~ /STAMPANTE|LASERJET|MULTIFUNZIONE/i 
         good.update_attribute(:category_id, printer_id)
@@ -29,11 +29,11 @@ namespace :almaassets do
         good.update_attribute(:category_id, monitor_id)
       elsif good.unibo_description =~ /Tend(a|e) (motorizzate|Veneziana)/i 
         good.update_attribute(:category_id, chair_id)
-      elsif good.unibo_description =~ /PC\s+PORTATILE|NOTEBOOK|MACBOOK AIR|PC SLIM CASE|MACBOOK 12|Surface Pro/i 
+      elsif good.unibo_description =~ /PC\s+PORTATILE|NOTEBOOK|MACBOOK AIR|PC SLIM CASE|MACBOOK 12|Surface Pro|ELITEBOOK/i 
         good.update_attribute(:category_id, notebook_id)
       elsif good.unibo_description =~ /PROCURVE|SWITCH|WIRELESS ROUTER|WIRELESS ACCESS POINT/i 
         good.update_attribute(:category_id, network_id)
-      elsif good.unibo_description =~ /IPAD/i 
+      elsif good.unibo_description =~ /IPAD|GALAXY TAB/i 
         good.update_attribute(:category_id, tablet_id)
       elsif good.unibo_description =~ /MACBOOK/i 
         good.update_attribute(:category_id, notebook_id)
