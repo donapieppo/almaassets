@@ -7,7 +7,7 @@ module GoodsHelper
     content_tag :button, title: "Informazioni originali in ugov", 
                          class: "inv_number #{good.user_id ? 'with-owner' : 'without-owner'} #{'found' if found}",
                          data: { toggle: "popover", html: "true", content: popover_content } do
-      "inv. #{good.inv_number.to_i}"
+      "#{good.inv_number.to_i}"
     end
   end
 
