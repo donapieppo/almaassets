@@ -3,12 +3,14 @@
 <% @good_requests.each do |gr| %>  
   <%= render gr %>  
 <% end %>
+
 <% if @good_requests_as_holder.any? %>  
   <h2>Richieste sui suoi fondi</h2>
   <% @good_requests_as_holder.each do |gr| %>
     <%= render gr %>
   <% end %>
 <% end %>
+
 <div style="text-align: center">
   <div class="my-3">
     <%= link_to new_good_request_path do %>
