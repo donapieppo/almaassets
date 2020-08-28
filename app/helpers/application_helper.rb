@@ -2,3 +2,6 @@ include DmUniboCommonHelper
 
 module ApplicationHelper
 end
+
+include CategoriesHelper
+include MainAgreementsHelper
