@@ -1,0 +1,14 @@
+<% if current_user.has_some_authorization?  %>  
+  <h1>Scegli la tua struttura</h1>
+
+  <div class="row">
+    <% current_user.my_organizations.each do |o| %>  
+      <div class="col-md-6">
+        <%= link_to o.name, o.code, class: 'btn btn-lg btn-primary w-100 h-100' %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <h2 class="text-center p-5 m-5 alert alert-danger">No avete accesso a nessuna struttura.</h2>
+  <p>Si prega di contattare <%= support_mail %></p>
+<% end %>
