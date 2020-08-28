@@ -31,8 +31,11 @@
         <%= link_to big_dmicon('user', text: 'Utenti'), main_app.users_path %>
       <% end %>
       <%= form_tag main_app.find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
-        <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca"/>
+        <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca" />
       <% end %>
+    <% end %>
+    <%= form_tag main_app.find_goods_path, class: "only-in-smartphone form-inline my-2 my-lg-0 ml-3", role: "search" do %>
+      <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca numero" aria-label="Cerca" type="number" inputmode="numeric"/>
     <% end %>
   <% end %>
 <% end %>
