@@ -1,6 +1,12 @@
 @import "variables";
 @import "dm";
 
+@media (min-width: 800px) { 
+  .only-in-smartphone {
+    display: none;
+  }
+}
+
 input.choosen_dsauser {
   @extend .form-control;
   width: 30em;
