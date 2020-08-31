@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "main_agreements", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "organization_id", unsigned: true
     t.integer "category_id", unsigned: true
     t.string "title"
     t.string "name"
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["category_id"], name: "fk_main_agreements_categories"
+    t.index ["organization_id"], name: "fk_main_agreements_organizations"
   end
 
   create_table "organizations", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "locations", "buildings", name: "fk_locations_buildings", on_delete: :cascade
   add_foreign_key "locations", "organizations", name: "fk_locations_organizations"
   add_foreign_key "main_agreements", "categories", name: "fk_main_agreements_categories", on_delete: :cascade
+  add_foreign_key "main_agreements", "organizations", name: "fk_main_agreements_organizations"
   add_foreign_key "permissions", "organizations", name: "fk_organization_authorization"
   add_foreign_key "permissions", "users", name: "fk_user_authorization"
   add_foreign_key "servers", "organizations", name: "fk_servers_organizations", on_delete: :cascade
