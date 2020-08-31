@@ -1,11 +1,9 @@
 GIT
   remote: https://github.com/donapieppo/dm_unibo_common.git
-  revision: bcf485288404a3ef2036abd470a733464fb8dfcc
-  branch: ver.3
+  revision: c3455c417fbcf47b769661bc8a71e8947a467470
   specs:
     dm_unibo_common (4.0.0)
       bootsnap
-      dm_unibo_user_search
       jbuilder
       jquery-rails
       listen (~> 3)
