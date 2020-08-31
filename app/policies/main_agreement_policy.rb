@@ -3,15 +3,7 @@ class MainAgreementPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    record_organization_manager?
-  end
-
   def create?
-    record_organization_manager?
-  end
-
-  def edit?
     record_organization_manager?
   end
 
@@ -22,5 +14,4 @@ class MainAgreementPolicy < ApplicationPolicy
   def destroy?
     record_organization_manager?
   end
-
 end
