@@ -2,17 +2,17 @@ class MainAgreementsController < ApplicationController
   before_action :set_main_agreement_and_check_permission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @main_agreements = MainAgreement.order(:category_id, :price).includes(:category, :good_requests).all
+    @main_agreements = current_organization.main_agreements.order(:category_id, :price).includes(:category, :good_requests).all
     authorize :main_agreement
   end
 
   def new
-    @main_agreement = MainAgreement.new
+    @main_agreement = current_organization.main_agreements.new
     authorize @main_agreement
   end
 
   def create
-    @main_agreement = MainAgreement.new(main_agreement_params)
+    @main_agreement = current_organization.main_agreements.new(main_agreement_params)
     authorize @main_agreement
     if @main_agreement.save
       redirect_to main_agreements_path

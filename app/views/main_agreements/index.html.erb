@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<% if policy(:main_agreement).new? %>  
+<% if policy(current_organization).manage? %>  
   <p class="m-3">
   <%= link_to 'NUOVA CONVENZIONE', new_main_agreement_path, class: 'btn btn-primary' %>  
   </p>

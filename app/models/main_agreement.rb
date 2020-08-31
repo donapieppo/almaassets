@@ -1,4 +1,5 @@
 class MainAgreement < ApplicationRecord
+  belongs_to :organization
   belongs_to :category
   has_many   :documents
   has_many   :good_requests
