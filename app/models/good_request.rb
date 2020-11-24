@@ -26,4 +26,3 @@ class GoodRequest < ApplicationRecord
     end
   end
 end
-

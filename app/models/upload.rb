@@ -4,5 +4,4 @@ class Upload
   def initialize(organization)
     @organization_id = organization.id
   end
-
 end

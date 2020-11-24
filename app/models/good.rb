@@ -28,7 +28,7 @@ class Good < ApplicationRecord
     if upn =~ /(\w+\.\w+@unibo.it)/ 
       @_user_upn = $1
     else
-      @_user_upn= upn
+      @_user_upn = upn
     end
   end
 
@@ -47,7 +47,7 @@ class Good < ApplicationRecord
  
   # we want the user to confirm every year
   def better_to_confirm
-    ! (self.confirmed and (((Time.zone.now - self.confirmed).to_i/86400) < 365))
+    ! (self.confirmed && (((Time.zone.now - self.confirmed).to_i / 86400) < 365))
   end
 
   def confirm_presence(user)

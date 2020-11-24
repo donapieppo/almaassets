@@ -6,4 +6,3 @@ class Organization < ApplicationRecord
   has_many :good_requests
   has_many :main_agreements
 end
-
