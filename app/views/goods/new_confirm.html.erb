@@ -5,7 +5,7 @@
 </div>
 
 <%= form_tag confirm_good_path(@good) do %>  
-  <%= submit_tag "CONFERMO CHE IL BENE È IN MIO POSSESSO" %>
+  <%= submit_tag "CONFERMO CHE IL BENE È IN MIO POSSESSO" %> - <%= link_to_back goods_path %>  
 <% end %>
 
 

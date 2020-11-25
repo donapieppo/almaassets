@@ -5,8 +5,8 @@
 </div>
 
 <%= simple_form_for :unconfirm, url: unconfirm_good_path(@good) do |f| %>  
-  <%= f.input :motivation, label: "Messaggio", as: :text, required: false, hint: "Per completare la segnalazione si prega di compilare questo campo fornendo quante più informazioni disponibili per aiutare a determinare l'attuale posizione del bene."%> 
-  <%= f.submit "Invia segnalazione" %>
+  <%= f.input :motivation, label: 'Messaggio', as: :text, required: false, hint: "Per completare la segnalazione si prega di compilare questo campo fornendo quante più informazioni disponibili per aiutare a determinare l'attuale posizione del bene."%> 
+  <%= f.submit 'Invia segnalazione' %> - <%= link_to_back goods_path %>  
 <% end %>
 
 
