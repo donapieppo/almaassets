@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "permissions", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "user_id", null: false, unsigned: true
     t.integer "organization_id", null: false, unsigned: true
+    t.string "network", limit: 20
     t.integer "authlevel"
     t.index ["organization_id"], name: "fk_organization_authorization"
     t.index ["user_id"], name: "fk_user_authorization"
