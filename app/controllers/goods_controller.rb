@@ -44,6 +44,7 @@ class GoodsController < ApplicationController
       @title = 'Elenco beni a lei assegnati'
       @goods = @goods.where(user_id: current_user.id).where(to_unload: nil)
     end
+    authorize :good
   end
 
   def edit
