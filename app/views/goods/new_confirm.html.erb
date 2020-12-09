@@ -4,8 +4,10 @@
   <p>risulta in suo possesso.</p>
 </div>
 
+<div class="centered">
 <%= form_tag confirm_good_path(@good) do %>  
-  <%= submit_tag "CONFERMO CHE IL BENE È IN MIO POSSESSO" %> - <%= link_to_back goods_path %>  
+  <%= submit_tag "CONFERMO CHE IL BENE È IN MIO POSSESSO", class: 'btn-lg p-3' %> - <%= link_to_back goods_path %>  
 <% end %>
+</div>
 
 
