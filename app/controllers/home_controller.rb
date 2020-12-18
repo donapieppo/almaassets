@@ -17,6 +17,12 @@ class HomeController < ApplicationController
     authorize :home
     if current_user_has_some_authorization?
       @organizations = current_user.my_organizations
+    else
+      @organizations = current_user.goods.group(:organization_id).map(&:organization)
+    end
+
+    if @organizations.size == 1 
+      redirect_to current_organization_root_path(__org__: @organizations.first.code)
     end
   end
 end
