@@ -1,8 +1,8 @@
-<% if current_user.has_some_authorization?  %>  
+<% if @organizations.any? %>  
   <h1>Scegli la tua struttura</h1>
 
   <div class="row">
-    <% current_user.my_organizations.each do |o| %>  
+    <% @organizations.each do |o| %>  
       <div class="col-md-6">
         <%= link_to o.name, o.code, class: 'btn btn-lg btn-primary w-100 h-100' %>
       </div>
