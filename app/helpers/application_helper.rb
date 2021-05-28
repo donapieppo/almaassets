@@ -5,3 +5,4 @@ end
 
 include CategoriesHelper
 include MainAgreementsHelper
+include GoodsHelper
