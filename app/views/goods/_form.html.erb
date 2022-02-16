@@ -20,4 +20,6 @@
   <strong>Descrizione:</strong><i><%= @good.unibo_description %></i><br/>
 </div>
 
-<%= render "dsausers/typeahead" %>  
+<%= javascript_tag do  %>  
+  <%= render partial: "dsausers/awesomplete", formats: :js %>  
+<% end %>
