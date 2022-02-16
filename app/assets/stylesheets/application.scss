@@ -12,30 +12,7 @@ input.choosen_dsauser {
   width: 30em;
 }
 
-span.twitter-typeahead {
-  .tt-menu {
-    @extend .dropdown-menu;
-  }
-
-  .tt-suggestion {
-    @extend .dropdown-item;
-  }
-
-  .tt-suggestion.tt-cursor {
-    @extend .dropdown-item.active;
-  }
-
-  .input-group & {
-    display: flex !important;
-    align-items: center;
-    position: relative;
-    flex: 1 1 auto;
-    width: 1%;
-
-    .tt-menu, .tt-hint, .tt-input {
-      width: 100%;
-    }
-  }
+input.awesomplete {
 }
 
 .card-columns {
@@ -53,7 +30,7 @@ span.twitter-typeahead {
   font-weight: bold;
   font-size: 16px;
   &.found {
-    @extend .badge-primary;
+    @extend .bg-primary;
     font-size: 130%;
   }
 }
@@ -75,9 +52,9 @@ span.twitter-typeahead {
 
 .old_inv_number {
   @extend .badge;
-  @extend .badge-secondary;
+  @extend .bg-secondary;
   &.found {
-    @extend .badge-primary;
+    @extend .bg-primary;
     font-size: 100%;
   }
 }
