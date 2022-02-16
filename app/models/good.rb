@@ -24,7 +24,7 @@ class Good < ApplicationRecord
   end
 
   def user_upn=(upn)
-    Rails.logger.info("user_upn=#{upn}")
+    Rails.logger.info("method user_upn= with upn=#{upn}")
     if upn =~ /(\w+\.\w+@unibo.it)/ 
       @_user_upn = $1
     else
@@ -33,14 +33,14 @@ class Good < ApplicationRecord
   end
 
   def validate_user_upn
-    return true if @_user_upn.blank?
-
     Rails.logger.info("validating user_upn=#{@_user_upn}")
+
+    return true if @_user_upn.blank?
 
     u = User.find_by_upn(@_user_upn)
 
     if u
-      Rails.logger.info("found #{@_user_upn} -> #{u.inspect}")
+      Rails.logger.info("validate_user_upn: found #{@_user_upn} -> #{u.inspect}")
       self.user_id = u.id
     end
   end
