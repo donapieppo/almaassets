@@ -17,7 +17,7 @@
         <%= inv_number(good, found: (search_string and good.inv_number == search_string.to_i)) %>  
       </div>
 
-      <div class="col-5 text-right">
+      <div class="col-5 text-end">
         <span class="">
           <% if policy(current_organization).manage? %>
             <%= link_to(good.user, goods_path(user_id: good.user.id)) if good.user_id %> &nbsp;
@@ -44,7 +44,7 @@
         <strong>BENE NON PIÙ IN POSSESSO DI <%= good.user %>.</strong>
         (<%= good.unconfirmed_text %>)
       <% end %>
-      <div class="actions float-right">
+      <div class="actions float-end">
         <%= link_to_edit(edit_good_path(good), modal: true) %>  
         <%= link_to_unload(good) %>  
       </div>

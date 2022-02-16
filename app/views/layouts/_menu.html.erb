@@ -5,35 +5,35 @@
     <% if current_organization && policy(current_organization).manage? %>  
       <%= dropdown_menu :amm, big_dmicon('bookmark') + ' Categorie' do %>
         <% Category.find_each do |cat| %>  
-          <%= link_to (fwdmicon('angle-right') + " #{cat}"), main_app.goods_path(category_id: cat.id) %>
+          <li><%= link_to (fwdmicon('angle-right') + " #{cat}"), main_app.goods_path(category_id: cat.id) %></li>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to (fwdmicon('question-circle') + " sconosciuto"), main_app.goods_path(no_category: 1) %>
-        <%= link_to (fwdmicon('plus') + " nuova categoria"), main_app.new_category_path %>
+        <li><%= link_to (fwdmicon('question-circle') + " sconosciuto"), main_app.goods_path(no_category: 1) %></li>
+        <li><%= link_to (fwdmicon('plus') + " nuova categoria"), main_app.new_category_path %></li>
       <% end %>
       <%= dropdown_menu :amm, big_dmicon('map-marker') + ' Ubicazioni' do %>
         <% current_organization.locations.find_each do |location| %>  
-          <%= link_to (fwdmicon('angle-right') + " #{location}"), main_app.goods_path(location_id: location.id) %>
+          <li><%= link_to (fwdmicon('angle-right') + " #{location}"), main_app.goods_path(location_id: location.id) %></li>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to (fwdmicon('question-circle') + " mancanti"), main_app.goods_path(location_id: 0) %>
-        <%= link_to (fwdmicon('plus') + " nuova ubicazione"), main_app.new_location_path %>
+        <li><%= link_to (fwdmicon('question-circle') + " mancanti"), main_app.goods_path(location_id: 0) %></li>
+        <li><%= link_to (fwdmicon('plus') + " nuova ubicazione"), main_app.new_location_path %></li>
       <% end %>
       <%= dropdown_menu :amm, big_dmicon('trash') + ' Scarichi' do %>
-        <%= link_to big_dmicon('question-circle', text: 'Da analizzare'), main_app.goods_path(unconfirmed: true) %>
-        <%= link_to big_dmicon('trash', text: 'Scarichi'), main_app.goods_path(unload: true) %>
-        <%= link_to big_dmicon('print', text: 'Stampa Scarichi'), main_app.print_goods_path(unload: true, format: :csv) %>
+        <li><%= link_to big_dmicon('question-circle', text: 'Da analizzare'), main_app.goods_path(unconfirmed: true) %></li>
+        <li><%= link_to big_dmicon('trash', text: 'Scarichi'), main_app.goods_path(unload: true) %></li>
+        <li><%= link_to big_dmicon('print', text: 'Stampa Scarichi'), main_app.print_goods_path(unload: true, format: :csv) %></li>
       <% end %>
       <%= dropdown_menu :amm, big_dmicon('cog') + ' Altro' do %>
-        <%= link_to big_dmicon('star', text: 'Convenzioni'), main_app.main_agreements_path %>
-        <%= link_to big_dmicon('upload', text: 'Aggiorna da Ugov'), main_app.new_upload_path %>
-        <%= link_to big_dmicon('sort-amount-up', text: 'Carichi ultimi 14 giorni'), main_app.goods_path(newer: 14) %>
-        <%= link_to big_dmicon('user', text: 'Utenti'), dm_unibo_common.users_path %>
+        <li><%= link_to big_dmicon('star', text: 'Convenzioni'), main_app.main_agreements_path %></li>
+        <li><%= link_to big_dmicon('upload', text: 'Aggiorna da Ugov'), main_app.new_upload_path %></li>
+        <li><%= link_to big_dmicon('sort-amount-up', text: 'Carichi ultimi 14 giorni'), main_app.goods_path(newer: 14) %></li>
+        <li><%= link_to big_dmicon('user', text: 'Utenti'), dm_unibo_common.users_path %>
       <% end %>
-      <%= form_tag main_app.find_goods_path, class: "form-inline my-2 my-lg-0 ml-3", role: "search" do %>
+      <%= form_tag main_app.find_goods_path, class: "form-inline my-2 my-lg-0 ms-3", role: "search" do %>
         <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Cerca" />
       <% end %>
-      <%= form_tag main_app.find_goods_path, class: "only-in-smartphone form-inline my-2 my-lg-0 ml-3", role: "search" do %>
+      <%= form_tag main_app.find_goods_path, class: "only-in-smartphone form-inline my-2 my-lg-0 ms-3", role: "search" do %>
         <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca numero" aria-label="Cerca" type="number" inputmode="numeric"/>
       <% end %>
     <% end %>

@@ -19,7 +19,7 @@
     <% documents.each do |doc| %>  
       <li class="list-group-item">
         <%= link_to doc.name, doc.attach %> 
-        <span class="float-right">
+        <span class="float-end">
           <%= link_to_delete doc %>
           <%= link_to_edit edit_document_path(doc) %>
         </span>
