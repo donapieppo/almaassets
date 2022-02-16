@@ -1,0 +1,74 @@
+<div class="card my-1" id="<%= helpers.div_good_id(@good) %>">
+  <div class="card-header <%= 'unload-good' if @good.to_unload %> <%= 'unconfirmed-good' if @good.unconfirmed %>">
+    <div class="row">
+      <div class="col-4">
+        <%= content_tag :div, class: "inv_number #{@good.user_id ? 'with-owner' : 'without-owner'} #{'found' if @found}" do %>
+          <%= @good.inv_number.to_i %>
+        <% end %>
+      </div>
+
+      <div class="col-8 text-end">
+        <% if helpers.policy(helpers.current_organization).manage? %>
+          <%= link_to(@good.user, goods_path(user_id: @good.user.id)) if @good.user_id %> &nbsp;
+        <% else %>
+          <%= @good.user %> &nbsp;
+        <% end %>
+        <span class="category_icon">
+          <% if @can_edit %>  
+            <%= link_to category_icon(@good.category, size: 25), ask_category_good_path(@good), remote: true %>
+          <% else %>
+            <%= category_icon(@good.category, size: 25) %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body" style="cursor: pointer" onclick="mostra_unibo_description(this)"> 
+    <div>
+      <%= (@good.name.blank? ? @good.description : @good.name).upcase %> <small>(<%= @good.build_year %> <%= @good.location %>)</small>
+    </div>
+    <div style="font-size: 80%; display: none" class="unibo_description">
+      inv: <%= @good.inv_number %> <%= " / #{@good.old_inv_number}" if @good.old_inv_number %> <br/>
+      descrizione originale: <%= @good.unibo_description %> <br/>
+      sn: <%= @good.sn %> <br/>
+      anno: <%= @good.build_year %> <br/>
+      prezzo: <%= @good.price %> &euro;
+    </div>
+    <% if (! @good.admin_notes.blank?) and helpers.policy(@good).read_admin_notes? %>  
+      <span class="text-info"><%= @good.admin_notes %></span>
+    <% end %>
+  </div>
+
+  <div class="card-footer">
+    <%= status_icon(@good, size: 25) %>
+    <% if helpers.policy(@good).edit? %>  
+      <% if @good.unconfirmed %>  
+        <strong>BENE NON PIÙ IN POSSESSO DI <%= @good.user %>.</strong>
+        (<%= @good.unconfirmed_text %>)
+      <% end %>
+      <div class="actions float-end">
+        <%= link_to_edit(edit_good_path(@good), modal: true) %>  
+        <%= link_to_unload(@good) %>  
+      </div>
+    <% else %> 
+      <% if @good.unconfirmed %>  
+        <strong>BENE NON PIÙ IN MIO POSSESSO.</strong>
+        (<%= @good.unconfirmed_text %>)
+      <% else %>
+        <%= link_to("NON PIÙ IN MIO POSSESSO", new_unconfirm_good_path(@good), class: 'btn btn-danger m-1') %>
+        <% if @good.better_to_confirm %>
+          <%= link_to("CONFERMA PRESENZA", new_confirm_good_path(@good), class: 'btn btn-success m-1') %>
+        <% else %>
+          (Presenza del bene confermata il <%= l @good.confirmed, format: :only_day %>)
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>  
+  var mostra_unibo_description = (e) => {
+  e.getElementsByClassName("unibo_description").item(0).style.display = 'block';
+  }
+<% end %>
