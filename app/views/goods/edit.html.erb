@@ -1,1 +1,4 @@
-<%= render partial: 'form' %>  
+<%= render DmUniboCommon::ModalComponent.new() do %>
+  <%= render 'form' %>
+<% end %>
+

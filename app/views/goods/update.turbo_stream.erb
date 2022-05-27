@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@good)}" do %>
+  <%= render Good::GoodComponent.new(@good, current_user, no_icon: @no_icon, search_string: @search_string) %>  
+<% end %>
