@@ -9,11 +9,7 @@
     <meta name="author" content="Dipartimento di Matematica - Unibo">
     <title>AlmaAssets</title>
 
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= javascript_include_tag "application" %>
-    <%= stylesheet_link_tag "fa.all.min", "application" %>
+    <%= dm_unibo_common_headers %>
   </head>
 
   <body>
@@ -21,7 +17,7 @@
 
     <main role="main" class="container">
       <%= privacy_alert %>  
-      <%= bootstrap_modal_div %>
+      <%= turbo_frame_tag "modal" %>
       <%= bootstrap_flash %>
       <%= yield %>
     </main>
