@@ -11,12 +11,10 @@ module GoodsHelper
     return "" unless helpers.policy(good).unload?
     icon = good.to_unload ? dmicon('times-circle') : dmicon('trash-alt')
     title = good.to_unload ? 'cancella lo scarico' : 'da scaricare'
+    confirm = good.to_unload ? 'Sicuri di volere cancella lo scarico?' : 'Sicuri vi volere scaricare il materiale?'
 
-    link_to icon, unload_good_path(good), remote: true, title: title
-  end
-
-  def div_good_id(good)
-    "good_#{good.id}"
+    button_to icon, unload_good_path(good), title: title, form: { data: { 'turbo-confirm': confirm }, 
+                                                                  class: "d-inline px-0 mx-0" }
   end
 
   def status_icon(good, size: 20)
