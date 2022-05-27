@@ -4,7 +4,8 @@ class Good::GoodComponent < ViewComponent::Base
     @no_icon = no_icon
     @search_string = search_string
 
-    @can_edit = GoodPolicy.new(current_user, @good).edit?
+    @good_policy = GoodPolicy.new(current_user, @good)
+    @manager  = OrganizationPolicy.new(current_user, current_user.current_organization).manage?
     @found = @search_string && @good.inv_number == @search_string.to_i
   end
 end

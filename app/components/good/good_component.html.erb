@@ -1,4 +1,4 @@
-<div class="card my-1" id="<%= helpers.div_good_id(@good) %>">
+<div class="card my-1" id="<%= dom_id(@good) %>" data-controller="good">
   <div class="card-header <%= 'unload-good' if @good.to_unload %> <%= 'unconfirmed-good' if @good.unconfirmed %>">
     <div class="row">
       <div class="col-4">
@@ -8,14 +8,14 @@
       </div>
 
       <div class="col-8 text-end">
-        <% if helpers.policy(helpers.current_organization).manage? %>
+        <% if @manager %>
           <%= link_to(@good.user, goods_path(user_id: @good.user.id)) if @good.user_id %> &nbsp;
         <% else %>
           <%= @good.user %> &nbsp;
         <% end %>
         <span class="category_icon">
-          <% if @can_edit %>  
-            <%= link_to category_icon(@good.category, size: 25), ask_category_good_path(@good), remote: true %>
+          <% if @good_policy.edit? %>  
+            <%= link_to category_icon(@good.category, size: 25), ask_category_good_path(@good, modal: 1), data: { turbo_frame: 'modal' } %>
           <% else %>
             <%= category_icon(@good.category, size: 25) %>
           <% end %>
@@ -24,31 +24,34 @@
     </div>
   </div>
 
-  <div class="card-body" style="cursor: pointer" onclick="mostra_unibo_description(this)"> 
-    <div>
-      <%= (@good.name.blank? ? @good.description : @good.name).upcase %> <small>(<%= @good.build_year %> <%= @good.location %>)</small>
+  <div class="card-body" style="cursor: pointer"> 
+    <div data-action="click->good#showUniboDescription">
+      <%= (@good.name.blank? ? @good.description : @good.name).upcase %> 
+      <small>
+        (<%= @good.build_year %> <%= @good.location %>)
+      </small>
     </div>
-    <div style="font-size: 80%; display: none" class="unibo_description">
+    <div style="font-size: 80%; display: none" data-good-target="uniboDescription">
       inv: <%= @good.inv_number %> <%= " / #{@good.old_inv_number}" if @good.old_inv_number %> <br/>
       descrizione originale: <%= @good.unibo_description %> <br/>
       sn: <%= @good.sn %> <br/>
       anno: <%= @good.build_year %> <br/>
       prezzo: <%= @good.price %> &euro;
     </div>
-    <% if (! @good.admin_notes.blank?) and helpers.policy(@good).read_admin_notes? %>  
+    <% if (! @good.admin_notes.blank?) && @good_policy.read_admin_notes? %>  
       <span class="text-info"><%= @good.admin_notes %></span>
     <% end %>
   </div>
 
   <div class="card-footer">
     <%= status_icon(@good, size: 25) %>
-    <% if helpers.policy(@good).edit? %>  
+    <% if @good_policy.edit? %>  
       <% if @good.unconfirmed %>  
         <strong>BENE NON PIÙ IN POSSESSO DI <%= @good.user %>.</strong>
         (<%= @good.unconfirmed_text %>)
       <% end %>
       <div class="actions float-end">
-        <%= link_to_edit(edit_good_path(@good), modal: true) %>  
+        <%= link_to helpers.dmicon('edit'), edit_good_path(@good, modal: 1), data: { turbo_frame: 'modal' } %>
         <%= link_to_unload(@good) %>  
       </div>
     <% else %> 
@@ -66,9 +69,3 @@
     <% end %>
   </div>
 </div>
-
-<%= javascript_tag do %>  
-  var mostra_unibo_description = (e) => {
-  e.getElementsByClassName("unibo_description").item(0).style.display = 'block';
-  }
-<% end %>
