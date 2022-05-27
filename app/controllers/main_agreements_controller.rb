@@ -17,7 +17,7 @@ class MainAgreementsController < ApplicationController
     if @main_agreement.save
       redirect_to main_agreements_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class MainAgreementsController < ApplicationController
     if @main_agreement.update(main_agreement_params)
       redirect_to main_agreements_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

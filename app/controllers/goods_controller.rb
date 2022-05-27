@@ -48,15 +48,14 @@ class GoodsController < ApplicationController
   end
 
   def edit
-    render layout: false if modal_page
   end
 
   def update
     manage_confirmed_param
     if @good.update(good_params)
-      redirect_to good_path(@good), notice: "Aggiornamento registrato correttamente."
+      # redirect_to good_path(@good), notice: "Aggiornamento registrato correttamente."
     else
-      render action: :show
+      render action: :show, status: :unprocessable_entity
     end
   end
 
@@ -83,7 +82,6 @@ class GoodsController < ApplicationController
 
   def unload
     @good.update_attribute(:to_unload, ! @good.to_unload)
-    # @to_unload = @good.reload.to_unload
   end
 
   def new_confirm

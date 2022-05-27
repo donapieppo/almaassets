@@ -43,7 +43,7 @@ class GoodRequestsController < ApplicationController
     if @good_request.save
       redirect_to root_path, notice: "La richiesta è stata creato correttamente."
     else
-      render action: :new
+      render action: :new, status: :unprocessable_entity
     end
   end
 
@@ -55,7 +55,7 @@ class GoodRequestsController < ApplicationController
     if @good_request.update(good_request_params)
       redirect_to root_path, notice: 'La richiesta è stata aggiornata.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
