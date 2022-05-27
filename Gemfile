@@ -5,18 +5,7 @@ gem 'dm_unibo_user_search', git: 'https://github.com/donapieppo/dm_unibo_user_se
 gem 'dm_unibo_common',      path: '/home/rails/gems/dm_unibo_common/'
 #gem 'dm_unibo_common',      git: 'https://github.com/donapieppo/dm_unibo_common.git', branch: 'rails7'
 
-gem "sprockets-rails"
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
-gem "jsbundling-rails"
-gem "cssbundling-rails"
-
 gem 'aasm'
-gem "view_component"
 
 gem "prawn"
 gem "prawn-table"
@@ -57,3 +46,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "jsbundling-rails", "~> 1.0"
+
+gem "cssbundling-rails", "~> 1.1"
