@@ -1,6 +1,6 @@
 # https://github.com/roo-rb/roo
 require 'roo' 
-require 'roo-xls'
+# require 'roo-xls'
 
 require 'unibo_excel_mappings'
 
@@ -30,14 +30,14 @@ class UniboGood
   end
 end
 
-# pass an excel file from unibo 
+# pass an excel file f<F2>rom unibo 
 # excel = UniboFileParser.new('/tmp/pippo')
 class UniboFileParser
   def initialize(file)
     file or raise "Please give excel file name"
-    excel = Roo::Excel.new(file) 
+    excel = Roo::Spreadsheet.open(file) 
     # facciamo leggere con gli headers e poi li buttiamo
-    @file_content = excel.parse(header_search:[/Inventario/, /Descrizione Inventario/], headers: true, clean: true).drop(1)
+    @file_content = excel.parse(header_search:[/Inventario/, /Descrizione Inventario/], headers: true, clean: false).drop(1)
   end
 
   def each_original
