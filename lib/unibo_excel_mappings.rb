@@ -12,7 +12,7 @@ class UniboExcelMappings
     "Descrizione Categoria"=>:category_unibo_description,
     "Codice Possessore"=>:unibouser_code,
     "Possessore"=>:unibouser,
-    "Anno di Fabbricazione"=>:build_year,
+    "Anno fabbricazione"=>:build_year,
     "Numero seriale"=>:sn,
     "CIB"=>:cib, # !!!!!
     "Marca"=>:brand,
