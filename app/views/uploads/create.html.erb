@@ -2,7 +2,7 @@
 
 <div class="list-group">
   <% @new_goods.each do |good| %>  
-    <%= render good, no_icon: true %>  
+    <%= render Good::GoodComponent.new(good, current_user) %>  
   <% end %>
 </div>
 
