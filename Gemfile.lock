@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/donapieppo/dm_unibo_common.git
-  revision: 75f2a7c39cb3d876ddd55fdbd1b8c10e8210bbe8
+  revision: 131d689a4d3d6abc7bba16b88ca472e39989ae39
   branch: turbo
   specs:
     dm_unibo_common (5.0.0)
@@ -159,7 +159,7 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
-    jwt (2.3.0)
+    jwt (2.4.1)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -249,7 +249,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.2)
+    rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     railties (7.0.3)
       actionpack (= 7.0.3)
@@ -291,7 +291,7 @@ GEM
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
-    selenium-webdriver (4.2.0)
+    selenium-webdriver (4.2.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -322,7 +322,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    view_component (2.55.0)
+    view_component (2.57.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
     wasabi (3.7.0)
