@@ -2,9 +2,7 @@ class HomeController < ApplicationController
 
   def index
     authorize :home
-    if current_organization && policy(current_organization).manage?  
-      redirect_to good_requests_path and return
-    elsif current_organization
+    if current_organization 
       @good_requests = current_user.good_requests.all
       @good_requests_as_holder = GoodRequest.where(holder_id: current_user.id).all
       @good_requests_as_holder -= @good_requests 
