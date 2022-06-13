@@ -15,8 +15,7 @@ input.awesomplete {
 }
 
 .inv_number {
-  @extend .btn;
-  @extend .btn-sm;
+  @extend .badge;
   font-weight: bold;
   font-size: 16px;
   &.found {
@@ -25,10 +24,10 @@ input.awesomplete {
   }
 }
 .without-owner {
-  @extend .btn-danger;
+  @extend .bg-danger;
 }
 .with-owner {
-  @extend .btn-success;
+  @extend .bg-success;
 }
 .unconfirmed-good {
   @extend .bg-warning;
