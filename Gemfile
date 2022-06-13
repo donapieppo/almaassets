@@ -5,6 +5,11 @@ gem 'dm_unibo_user_search', git: 'https://github.com/donapieppo/dm_unibo_user_se
 gem 'dm_unibo_common',      git: 'https://github.com/donapieppo/dm_unibo_common.git', branch: 'turbo'
 #gem 'dm_unibo_common',      path: '/home/rails/gems/dm_unibo_common/'
 
+gem "sprockets-rails"
+gem "jsbundling-rails"
+gem "cssbundling-rails", "~> 1.1"
+gem "turbo-rails"
+
 gem 'aasm'
 
 gem "prawn"
@@ -47,6 +52,3 @@ group :test do
   gem "webdrivers"
 end
 
-gem "jsbundling-rails", "~> 1.0"
-
-gem "cssbundling-rails", "~> 1.1"

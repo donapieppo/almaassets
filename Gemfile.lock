@@ -357,13 +357,15 @@ DEPENDENCIES
   debug
   dm_unibo_common!
   dm_unibo_user_search!
-  jsbundling-rails (~> 1.0)
+  jsbundling-rails
   prawn
   prawn-table
   roo
   roo-xls
   sassc-rails
   selenium-webdriver
+  sprockets-rails
+  turbo-rails
   tzinfo-data
   web-console
   webdrivers
