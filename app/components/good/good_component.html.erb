@@ -5,9 +5,9 @@
         <%= content_tag :div, class: "inv_number #{@good.user_id ? 'with-owner' : 'without-owner'} #{'found' if @found}" do %>
           <%= @good.inv_number.to_i %>
         <% end %>
-          <% if @good.old_inv_number %>  
-            <span class="small ps-2">(ex <%= @good.old_inv_number %> <%= @good.old_org %>)</span>
-          <% end %>
+        <% if @good.old_inv_number %>  
+          <span class="small ps-2">(ex <%= @good.old_inv_number %> <%= @good.old_org %>)</span>
+        <% end %>
       </div>
 
       <div class="col-8 text-end">
@@ -40,6 +40,10 @@
       sn: <%= @good.sn %> <br/>
       anno: <%= @good.build_year %> <br/>
       prezzo: <%= @good.price %> &euro;
+      <% unless @good.unibo_description_sub.blank? %>  
+        <hr/>
+        descrizione originale sub: <%= @good.unibo_description_sub %> <br/>
+      <% end %>
     </div>
     <% if (! @good.admin_notes.blank?) && @good_policy.read_admin_notes? %>  
       <span class="text-info"><%= @good.admin_notes %></span>

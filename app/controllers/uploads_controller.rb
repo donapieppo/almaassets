@@ -11,12 +11,18 @@ class UploadsController < ApplicationController
     authorize @upload
     @differences = {} 
     @new_goods   = [] 
+    @subs        = {}
     excel_id_numbers = []
 
     begin
       parse_unibo_excel.each do |excel_unibo_good|
-        next if excel_unibo_good.get(:sub_inventory) == '1'
         inv_number = excel_unibo_good.get(:inv_number) or raise "No inv_number in #{excel_unibo_good.inspect}"
+        
+        if excel_unibo_good.get(:sub_inventory).to_i > 0
+          @subs[inv_number] ||= []
+          @subs[inv_number] << excel_unibo_good
+          next
+        end
 
         good = current_organization.goods.find_by_inv_number(inv_number) || current_organization.goods.new(inv_number: inv_number)
 
@@ -40,6 +46,14 @@ class UploadsController < ApplicationController
           @new_goods << good
         elsif good.changed_attributes.any?
           @differences[good] = good.changed_attributes 
+        end
+        
+        # siamo alla fine sei sub (:sub_inventory == 0)
+        if @subs[inv_number]
+          @subs[inv_number].each do |sub|
+            good.price = good.price.to_f + sub.get(:price).to_f
+            good.unibo_description_sub = "#{good.unibo_description_sub} #{sub.get(:description)} (#{sub.get(:price)})"
+          end
         end
 
         good.save!
@@ -68,6 +82,11 @@ class UploadsController < ApplicationController
     else
       redirect_to(new_upload_path, alert: 'Selezionare il file.') and return 
     end
+  end
+
+  def add_value(excel_unibo_good)
+    g = Good.find_by_inv_number(excel_unibo_good.get(:inv_number))
+    g.update(price: g.price.to_f + excel_unibo_good.get(:price).to_f)
   end
 end
 

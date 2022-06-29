@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.string "name"
     t.text "description"
     t.text "unibo_description"
+    t.text "unibo_description_sub"
     t.text "admin_notes"
     t.integer "build_year"
     t.float "price"
