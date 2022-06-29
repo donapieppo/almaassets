@@ -1,5 +1,5 @@
 <%= dm_card title: 'Carica il file excel di Ugov' do %>
-  <%= form_with uploads_path, multipart: true, data: { turbo: false } do %>
+  <%= form_with url: uploads_path, multipart: true, data: { turbo: false } do %>
     <p>
     <%= file_field_tag 'ugov_excel' %>
     </p>
