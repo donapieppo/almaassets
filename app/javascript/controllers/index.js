@@ -8,3 +8,5 @@ application.register("turbo-modal", TurboModalController)
 import GoodController from "./good_controller"
 application.register("good", GoodController)
 
+import DsaAwesomplete from "./dsa_awesomplete.js"
+application.register("dsa-awesomplete", DsaAwesomplete)
