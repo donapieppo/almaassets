@@ -28,7 +28,7 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def find?
-    record_organization_manager?
+    record_organization_read?
   end
 
   def unload?
