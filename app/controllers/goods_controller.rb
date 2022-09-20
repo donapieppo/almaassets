@@ -4,7 +4,7 @@ class GoodsController < ApplicationController
   def index
     @goods = current_organization.goods.includes(:category, :user, :location)
 
-    if policy(current_organization).manage? 
+    if policy(current_organization).read? 
       if params[:unassigned]
         @goods = @goods.where(user_id: nil) 
         @title = 'Elenco beni non assegnati'
@@ -60,7 +60,7 @@ class GoodsController < ApplicationController
   end
 
   def find
-    authorize current_organization, :manage?
+    authorize current_organization, :read?
     @search_string = params[:search_string] || ''
     @title = "Ricerca per #{@search_string}"
 
