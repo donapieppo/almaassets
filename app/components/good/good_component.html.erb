@@ -61,7 +61,7 @@
         <%= link_to helpers.dmicon('edit'), edit_good_path(@good, modal: 1), data: { turbo_frame: 'modal' } %>
         <%= link_to_unload(@good) %>  
       </div>
-    <% else %> 
+    <% elsif @good_policy.unconfirm? %> 
       <% if @good.unconfirmed %>  
         <strong>BENE NON PIÙ IN MIO POSSESSO.</strong>
         (<%= @good.unconfirmed_text %>)
@@ -69,10 +69,11 @@
         <%= link_to("NON PIÙ IN MIO POSSESSO", new_unconfirm_good_path(@good), class: 'btn btn-danger m-1') %>
         <% if @good.better_to_confirm %>
           <%= link_to("CONFERMA PRESENZA", new_confirm_good_path(@good), class: 'btn btn-success m-1') %>
-        <% else %>
-          (Presenza del bene confermata il <%= l @good.confirmed, format: :only_day %>)
         <% end %>
       <% end %>
+    <% end %>
+    <% if @good.confirmed %>  
+      <small>(Presenza del bene confermata il <%= l @good.confirmed, format: :only_day %>)</small>
     <% end %>
   </div>
 </div>
