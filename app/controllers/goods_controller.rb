@@ -145,6 +145,6 @@ class GoodsController < ApplicationController
   end
 
   def good_params
-    params[:good].permit(:name, :description, :user_request, :category_id, :user_upn, :location_id, :confirmed, :admin_notes)
+    params[:good].permit(:name, :description, :user_request, :category_id, :user_upn, :location_id, :confirmed, :admin_notes, :to_unload_status)
   end
 end

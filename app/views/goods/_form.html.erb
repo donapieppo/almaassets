@@ -1,17 +1,19 @@
-<%= dm_form_for @good do |good| %>  
-  <%= good.input :inv_number, disabled: true, as: :string %>  
-  <%= good.input :name %>  
-  <%= good.input :description, input_html: {rows: 4} %>  
-  <%= good.input :user_upn %>
-  <%= good.association :category %>
-  <%= good.association :location %>
+<%= dm_form_for @good do |f| %>  
+  <%= f.input :inv_number, disabled: true, as: :string %>  
+  <%= f.input :name %>  
+  <%= f.input :description, input_html: {rows: 4} %>  
+  <%= f.input :user_upn %>
+  <%= f.association :category %>
+  <%= f.association :location %>
 
-  <%= good.input :admin_notes, as: :string %>  
+  <%= f.input :admin_notes, as: :string %>  
 
   <% confirmed_hint = @good.confirmed ? "Ultima conferma di presenza: #{I18n.l(@good.confirmed)} da #{User.find(@good.confirmed_by)}. Fare check per confermare nuovamente" : "Fare check per confermare la presenza" %>  
-  <%= good.input :confirmed, as: :boolean, input_html: { checked: false }, hint: confirmed_hint %>
+  <%= f.input :confirmed, as: :boolean, input_html: { checked: false }, hint: confirmed_hint %>
 
-  <%= good.submit %>  
+  <%= f.input :to_unload_status %>  
+
+  <%= f.submit %>  
 <% end %>
 
 <div class="alert alert-warning">
