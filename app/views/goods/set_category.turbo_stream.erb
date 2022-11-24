@@ -1,4 +1,4 @@
 <%= turbo_stream.replace dom_id(@good) do %>  
-  <%= render Good::GoodComponent.new(@good, current_user) %>  
+  <%= render Good::CardComponent.new(@good, current_user) %>  
 <% end %>
 

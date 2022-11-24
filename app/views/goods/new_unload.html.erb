@@ -1,0 +1,6 @@
+<%= render DmUniboCommon::ModalComponent.new() do %>
+  <%= dm_form_for @good, url: [:unload, @good], title: 'Motivazione per disinventario e stato del bene' do |f| %>  
+    <%= f.input :to_unload_status, label: 'Note'.html_safe %>  
+    <%= f.submit 'Salva' %>  
+  <% end %>
+<% end %>

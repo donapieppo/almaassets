@@ -5,7 +5,7 @@
 
 <div class="list-group">
   <% @goods.each do |good| %>  
-    <%= render Good::GoodComponent.new(good, current_user, no_icon: @no_icon, search_string: @search_string) %>  
+    <%= render Good::CardComponent.new(good, current_user, no_icon: @no_icon, search_string: @search_string) %>  
   <% end %>
 </div>
 
