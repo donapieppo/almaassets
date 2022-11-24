@@ -23,6 +23,7 @@ it:
         user_upn: Assegnatario
         category: Categoria
         location: Ubicazione
+        to_unload_status: Stato del bene
       good_request:
         user: Richiesta di 
         name: Oggetto dell’acquisto
