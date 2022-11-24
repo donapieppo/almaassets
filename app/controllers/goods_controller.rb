@@ -1,5 +1,5 @@
 class GoodsController < ApplicationController
-  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm, :ask_category, :set_category]
+  before_action :set_good_and_check_permission, only: [:show, :edit, :update, :new_unload, :unload, :new_confirm, :confirm, :new_unconfirm, :unconfirm, :ask_category, :set_category]
 
   def index
     @goods = current_organization.goods.includes(:category, :user, :location)
@@ -80,8 +80,15 @@ class GoodsController < ApplicationController
     render action: :index
   end
 
+  def new_unload
+  end
+
   def unload
-    @good.update_attribute(:to_unload, ! @good.to_unload)
+    if @good.to_unload
+      @good.update(to_unload: false, to_unload_status: nil)
+    else
+      @good.update(to_unload: true, to_unload_status: params[:good][:to_unload_status])
+    end
   end
 
   def new_confirm

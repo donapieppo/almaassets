@@ -16,7 +16,10 @@ Rails.application.routes.draw do
     resources :goods do
       get  'find', on: :collection
       post 'find', on: :collection
-      post  'unload', on: :member
+
+      get  'new_unload', on: :member
+      post 'unload', on: :member
+      patch 'unload', on: :member
 
       get  'new_confirm',   on: :member
       post 'confirm',       on: :member
@@ -52,5 +55,6 @@ Rails.application.routes.draw do
 
     get '/', to: 'home#index', as: 'current_organization_root'
   end
+
   root to: 'home#index'
 end

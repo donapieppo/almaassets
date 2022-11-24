@@ -31,6 +31,10 @@ class GoodPolicy < ApplicationPolicy
     record_organization_read?
   end
 
+  def new_unload?
+    unload?
+  end
+
   def unload?
     record_organization_manager?
   end

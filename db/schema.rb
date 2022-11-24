@@ -108,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.datetime "unconfirmed", precision: nil
     t.text "unconfirmed_text"
     t.boolean "to_unload"
+    t.text "to_unload_status"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["category_id"], name: "fk_goods_categories"
@@ -177,9 +178,6 @@ ActiveRecord::Schema[7.0].define(version: 0) do
     t.index ["upn"], name: "index_upn_on_users", length: 191
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookings", "servers", name: "fk_bookings_servers", on_delete: :cascade
-  add_foreign_key "bookings", "users", name: "fk_bookings_users", on_delete: :cascade
   add_foreign_key "documents", "main_agreements", name: "fk_document_main_agreement"
   add_foreign_key "good_requests", "categories", name: "fk_good_requests_categories", on_delete: :cascade
   add_foreign_key "good_requests", "main_agreements", name: "fk_good_requests_agreements", on_delete: :cascade
