@@ -1,4 +1,4 @@
-class Good::GoodComponent < ViewComponent::Base
+class Good::CardComponent < ViewComponent::Base
   def initialize(good, current_user, no_icon: false, search_string: nil)
     @good = good
     @current_user = current_user

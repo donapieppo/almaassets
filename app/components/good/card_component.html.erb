@@ -39,7 +39,10 @@
       descrizione originale: <%= @good.unibo_description %> <br/>
       sn: <%= @good.sn %> <br/>
       anno: <%= @good.build_year %> <br/>
-      prezzo: <%= @good.price %> &euro;
+      prezzo: <%= @good.price %> &euro; <br/>
+      <% if @good.to_unload %>  
+        <strong>Stato:</strong> <%= @good.to_unload_status %>  
+      <% end %>
       <% unless @good.unibo_description_sub.blank? %>  
         <hr/>
         descrizione originale sub: <%= @good.unibo_description_sub %> <br/>
