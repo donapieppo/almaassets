@@ -64,7 +64,7 @@ class GoodPolicy < ApplicationPolicy
   end
 
   def print?
-    record_organization_manager?
+    true
   end
 
   def read_admin_notes?
