@@ -54,6 +54,7 @@
   </div>
 
   <div class="card-footer">
+    <%= @good.build_year %>  
     <%= status_icon(@good, size: 25) %>
     <% if @good_policy.edit? %>  
       <% if @good.unconfirmed %>  

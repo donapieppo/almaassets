@@ -14,7 +14,7 @@ class GoodsController < ApplicationController
         elsif params[:no_category]
         @goods = @goods.where(category_id: nil).order(:description)
         @title = 'Elenco beni senza categoria'
-      elsif  params[:user_id]
+      elsif params[:user_id]
         @user  = User.find(params[:user_id])
         @goods = @goods.where(user_id: @user.id)
         @title = "Elenco beni #{@user}"
@@ -31,7 +31,7 @@ class GoodsController < ApplicationController
         @goods = @goods.where(location_id: nil)
         @title = "Elenco beni senza ubicazione"
       elsif params[:unload]
-        @goods = @goods.where(to_unload: true)
+        @goods = @goods.where(to_unload: true).order(:build_year)
         @title = "Elenco beni da disinventariare"
       elsif params[:newer]
         @goods = @goods.where("created_at > ?", params[:newer].to_i.days.ago)
