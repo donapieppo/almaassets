@@ -119,11 +119,15 @@ class GoodsController < ApplicationController
 
   def print
     authorize :good
-    @goods = Good.where(to_unload: true).select(:inv_number, :unibo_description).to_a
+    @goods = Good.where(to_unload: true).select(:inv_number, :unibo_description, :to_unload_status).to_a
     respond_to do |format|
       format.html { render layout: false }
-      format.csv { send_data @goods.map{|x| [x.inv_number, x.unibo_description].to_csv}.join, 
-                   filename: "Richiesta_scarichi_#{I18n.l Date.today}_#{current_organization.name}.csv" }
+      format.csv do
+        header = ['Inv.', 'Descrizione', 'Stato'].to_csv
+        data = @goods.map{ |x| [x.inv_number, x.unibo_description, x.to_unload_status].to_csv }.join
+        filename = "Richiesta_scarichi_#{I18n.l Date.today}_#{current_organization.name}.csv"
+        send_data header + data, filename: filename
+      end
     end
   end
 
