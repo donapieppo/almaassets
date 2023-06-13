@@ -1,13 +1,7 @@
 GIT
-  remote: https://github.com/donapieppo/dm_unibo_user_search.git
-  revision: 66f8db1614878ed078966330a6d4f4fb81fbeba6
-  specs:
-    dm_unibo_user_search (0.2.0)
-      rails (~> 7.0)
-      savon (~> 2.13.0)
-
-PATH
-  remote: /home/rails/gems/dm_unibo_common
+  remote: https://github.com/donapieppo/dm_unibo_common.git
+  revision: aac620bdff41dda4652ee1fb849871b0753aa9ee
+  branch: turbo
   specs:
     dm_unibo_common (5.1.0)
       cssbundling-rails
@@ -27,6 +21,14 @@ PATH
       stimulus-rails
       turbo-rails
       view_component
+
+GIT
+  remote: https://github.com/donapieppo/dm_unibo_user_search.git
+  revision: 66f8db1614878ed078966330a6d4f4fb81fbeba6
+  specs:
+    dm_unibo_user_search (0.2.0)
+      rails (~> 7.0)
+      savon (~> 2.13.0)
 
 GEM
   remote: https://rubygems.org/
