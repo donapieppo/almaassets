@@ -1,4 +1,8 @@
-<%= render DmUniboCommon::ModalComponent.new() do %>
+<% if modal_page %>  
+  <%= render DmUniboCommon::ModalComponent.new() do %>
+    <%= render 'form' %>
+  <% end %>
+<% else %>
   <%= render 'form' %>
 <% end %>
 
