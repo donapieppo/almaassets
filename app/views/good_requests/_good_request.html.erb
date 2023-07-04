@@ -5,7 +5,7 @@
       <% if good_request.main_agreement %>  
         in convenzione <%= good_request.main_agreement %>  
     <% else %>
-      <span class="text-warning"> FUORI CONVENZIONE <%= dmicon('exclamation-triangle') %></span>
+      <span class="text-warning"> FUORI CONVENZIONE <%= dm_icon('exclamation-triangle') %></span>
     <% end %>
     </span>
   </div>
@@ -20,25 +20,25 @@
     </span>
     <% if good_request.holder_approved? %> 
       <span class="text-success">
-        <%= dmicon('check') %> (approvato)
+        <%= dm_icon('check') %> (approvato)
       </span>
     <% end %>
     <span class="float-end">
       <% if policy(good_request).print? %>  
-        <%= link_to dmicon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
-        <%= link_to dmicon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
+        <%= link_to dm_icon('print'), print_good_request_path(good_request, man: 1, format: :docx), title: 'Manifestazione Esigenza' %> 
+        <%= link_to dm_icon('print'), print_good_request_path(good_request, rel: 1, format: :docx), title: 'Relazione Rup' %> 
       <% end %>
       <% if policy(good_request).edit? %>
-        <%= link_to dmicon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
+        <%= link_to dm_icon('edit'), edit_good_request_path(good_request), title: 'Modifica richiesta' %> 
       <% end %>
       <% if policy(good_request).destroy? %>  
         <%= link_to_delete good_request_path(good_request) %> 
       <% end %>
       <% if policy(good_request).approve? %>  
         <% if good_request.holder_approved? %>  
-          <%= dmicon('check') %> 
+          <%= dm_icon('check') %> 
         <% else %>
-          <%= link_to dmicon('check') + ' approva', approve_good_request_path(good_request), class: 'btn btn-success', method: :put %> 
+          <%= link_to dm_icon('check') + ' approva', approve_good_request_path(good_request), class: 'btn btn-success', method: :put %> 
         <% end %>
       <% end %>
     </span>
