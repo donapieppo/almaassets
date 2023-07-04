@@ -4,16 +4,16 @@ class GoodsController < ApplicationController
   def index
     @goods = current_organization.goods.includes(:category, :user, :location)
 
-    if policy(current_organization).read? 
+    if policy(current_organization).read?
       if params[:unassigned]
-        @goods = @goods.where(user_id: nil) 
-        @title = 'Elenco beni non assegnati'
+        @goods = @goods.where(user_id: nil)
+        @title = "Elenco beni non assegnati"
       elsif params[:unconfirmed]
-        @goods = @goods.where.not(unconfirmed: nil) 
-        @title = 'Elenco beni dichiarati non posseduti.'
-        elsif params[:no_category]
+        @goods = @goods.where.not(unconfirmed: nil)
+        @title = "Elenco beni dichiarati non posseduti."
+      elsif params[:no_category]
         @goods = @goods.where(category_id: nil).order(:description)
-        @title = 'Elenco beni senza categoria'
+        @title = "Elenco beni senza categoria"
       elsif params[:user_id]
         @user  = User.find(params[:user_id])
         @goods = @goods.where(user_id: @user.id)
@@ -23,7 +23,7 @@ class GoodsController < ApplicationController
         @goods = @goods.where(category_id: @category.id)
         @title = "Elenco beni tipo \"#{@category}\""
         @no_icon = true
-      elsif params[:location_id] && params[:location_id] != '0'
+      elsif params[:location_id] && params[:location_id] != "0"
         @location = Location.find(params[:location_id])
         @goods = @goods.where(location_id: @location.id)
         @title = "Elenco beni presso \"#{@location}\""
@@ -38,10 +38,10 @@ class GoodsController < ApplicationController
         @title = "Elenco ultimi inserimenti"
       else
         @goods = @goods.where(user_id: nil)
-        @title = 'Elenco beni non assegnati'
+        @title = "Elenco beni non assegnati"
       end
     else
-      @title = 'Elenco beni a lei assegnati'
+      @title = "Elenco beni a lei assegnati"
       @goods = @goods.where(user_id: current_user.id).where(to_unload: nil)
     end
     authorize :good
@@ -61,13 +61,13 @@ class GoodsController < ApplicationController
 
   def find
     authorize current_organization, :read?
-    @search_string = params[:search_string] || ''
+    @search_string = params[:search_string] || ""
     @title = "Ricerca per #{@search_string}"
 
     @goods = []
 
     # first by inv num
-    if @search_string =~ /\A[0-9]+\Z/
+    if @search_string.match?(/\A[0-9]+\Z/)
       @goods << current_organization.goods.where(inv_number: @search_string.to_i).to_a
       @goods << current_organization.goods.where(old_inv_number: @search_string.to_i).to_a
     end
@@ -123,8 +123,8 @@ class GoodsController < ApplicationController
     respond_to do |format|
       format.html { render layout: false }
       format.csv do
-        header = ['Inv.', 'Descrizione', 'Stato'].to_csv
-        data = @goods.map{ |x| [x.inv_number, x.unibo_description, x.to_unload_status].to_csv }.join
+        header = ["Inv.", "Descrizione", "Stato"].to_csv
+        data = @goods.map { |x| [x.inv_number, x.unibo_description, x.to_unload_status].to_csv }.join
         filename = "Richiesta_scarichi_#{I18n.l Date.today}_#{current_organization.name}.csv"
         send_data header + data, filename: filename
       end
