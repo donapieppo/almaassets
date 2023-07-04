@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git", branch: "master"
 gem "dm_unibo_user_search", git: "https://github.com/donapieppo/dm_unibo_user_search.git"
-gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git"
 
 gem "sprockets-rails"
 gem "jsbundling-rails"
@@ -50,4 +50,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
