@@ -4,7 +4,12 @@
   <%#   <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca numero" aria-label="Cerca" type="number" inputmode="numeric"/> %>
   <%# <% end %1> %>
 
-  <% @search_component = DmUniboCommon::SearchComponent.new(search_path: search_path, placeholder: "n. ident.", title: "cerca da numero identificativo") %>  
+  <% @search_component = DmUniboCommon::SearchComponent.new(
+    search_path: search_path, 
+    placeholder: "n. ident.", 
+    title: "cerca da numero identificativo",
+    autofous: true
+  ) %>  
 <% end %>
 
 <%= render DmUniboCommon::MenuComponent.new(sso_user_upn, current_organization: current_organization, search_component: @search_component) do %>  
