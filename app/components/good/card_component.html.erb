@@ -29,7 +29,11 @@
 
   <div class="card-body" style="cursor: pointer"> 
     <div data-action="click->good#showUniboDescription">
-      <%= (@good.name.blank? ? @good.description : @good.name).upcase %> 
+      <% if @good.name.blank? %>
+        <small><%= @good.description %></small>
+      <% else %> 
+        <%= @good.name.upcase %> 
+      <% end %>
       <small>
         (<%= @good.build_year %> <%= @good.location %>)
       </small>
@@ -62,7 +66,7 @@
         (<%= @good.unconfirmed_text %>)
       <% end %>
       <div class="actions float-end">
-        <%= link_to helpers.dmicon('edit'), edit_good_path(@good, modal: 1), data: { turbo_frame: 'modal' } %>
+        <%= link_to helpers.dmicon('edit'), edit_good_path(@good), data: { turbo_frame: 'modal' } %>
         <%= link_to_unload(@good) %>  
       </div>
     <% elsif @good_policy.unconfirm? %> 
