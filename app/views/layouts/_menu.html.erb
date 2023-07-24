@@ -4,38 +4,38 @@
   <%#   <input name="search_string" size="6" class="form-control mr-sm-2" type="search" placeholder="cerca numero" aria-label="Cerca" type="number" inputmode="numeric"/> %>
   <%# <% end %1> %>
 
-  <% @search_component = DmUniboCommon::SearchComponent.new(search_path: search_path, placeholder: "n. ident.", type: "number", title: "cerca da numero identificativo") %>  
+  <% @search_component = DmUniboCommon::SearchComponent.new(search_path: search_path, placeholder: "n. ident.", title: "cerca da numero identificativo") %>  
 <% end %>
 
 <%= render DmUniboCommon::MenuComponent.new(sso_user_upn, current_organization: current_organization, search_component: @search_component) do %>  
-  <li><%= link_to big_dmicon('home', text: 'Home'), main_app.root_path %></li>
+  <li><%= link_to dm_icon("home", text: "Home"), main_app.root_path %></li>
   <% if current_organization && policy(current_organization).manage? %>  
-    <%= dropdown_menu :amm, big_dmicon('bookmark') + ' Categorie' do %>
+    <%= dropdown_menu :amm, dm_icon("bookmark", size: :xl, text: "Categorie") do %>
       <% Category.find_each do |cat| %>  
-        <li><%= link_to (fwdmicon('angle-right') + " #{cat}"), main_app.goods_path(category_id: cat.id) %></li>
+        <li><%= link_to dm_icon("angle-right", text: "#{cat}"), main_app.goods_path(category_id: cat.id) %></li>
       <% end %>
       <div class="dropdown-divider"></div>
-      <li><%= link_to (fwdmicon('question-circle') + " sconosciuto"), main_app.goods_path(no_category: 1) %></li>
-      <li><%= link_to (fwdmicon('plus') + " nuova categoria"), main_app.new_category_path %></li>
+      <li><%= link_to dm_icon("question-circle", text: "sconosciuto"), main_app.goods_path(no_category: 1) %></li>
+      <li><%= link_to dm_icon("plus", text: "nuova categoria"), main_app.new_category_path %></li>
     <% end %>
-    <%= dropdown_menu :amm, big_dmicon('map-marker') + ' Ubicazioni' do %>
+    <%= dropdown_menu :amm, dm_icon("map-marker", text: "Ubicazioni") do %>
       <% current_organization.locations.find_each do |location| %>  
-        <li><%= link_to (fwdmicon('angle-right') + " #{location}"), main_app.goods_path(location_id: location.id) %></li>
+        <li><%= link_to dm_icon("angle-right", text: "#{location}"), main_app.goods_path(location_id: location.id) %></li>
       <% end %>
       <div class="dropdown-divider"></div>
-      <li><%= link_to (fwdmicon('question-circle') + " mancanti"), main_app.goods_path(location_id: 0) %></li>
-      <li><%= link_to (fwdmicon('plus') + " nuova ubicazione"), main_app.new_location_path %></li>
+      <li><%= link_to dm_icon("question-circle", text: "mancanti"), main_app.goods_path(location_id: 0) %></li>
+      <li><%= link_to dm_icon("plus", text: "nuova ubicazione"), main_app.new_location_path %></li>
     <% end %>
-    <%= dropdown_menu :amm, big_dmicon('trash') + ' Scarichi' do %>
-      <li><%= link_to big_dmicon('question-circle', text: 'Da analizzare'), main_app.goods_path(unconfirmed: true) %></li>
-      <li><%= link_to big_dmicon('trash', text: 'Scarichi'), main_app.goods_path(unload: true) %></li>
-      <li><%= link_to big_dmicon('print', text: 'Stampa Scarichi'), main_app.print_goods_path(unload: true, format: :csv) %></li>
+    <%= dropdown_menu :amm, dm_icon("trash") + " Scarichi" do %>
+      <li><%= link_to dm_icon("question-circle", text: "Da analizzare"), main_app.goods_path(unconfirmed: true) %></li>
+      <li><%= link_to dm_icon("trash", text: "Scarichi"), main_app.goods_path(unload: true) %></li>
+      <li><%= link_to dm_icon("print", text: "Stampa Scarichi"), main_app.print_goods_path(unload: true, format: :csv) %></li>
     <% end %>
-    <%= dropdown_menu :amm, big_dmicon('cog') + ' Altro' do %>
-      <li><%= link_to big_dmicon('star', text: 'Convenzioni'), main_app.main_agreements_path %></li>
-      <li><%= link_to big_dmicon('upload', text: 'Aggiorna da Ugov'), main_app.new_upload_path %></li>
-      <li><%= link_to big_dmicon('sort-amount-up', text: 'Carichi ultimi 14 giorni'), main_app.goods_path(newer: 14) %></li>
-      <li><%= link_to big_dmicon('user', text: 'Utenti'), dm_unibo_common.users_path %>
+    <%= dropdown_menu :amm, dm_icon("cog") + " Altro" do %>
+      <li><%= link_to dm_icon("star", text: "Convenzioni"), main_app.main_agreements_path %></li>
+      <li><%= link_to dm_icon("upload", text: "Aggiorna da Ugov"), main_app.new_upload_path %></li>
+      <li><%= link_to dm_icon("sort-amount-up", text: "Carichi ultimi 14 giorni"), main_app.goods_path(newer: 14) %></li>
+      <li><%= link_to dm_icon("user", text: "Utenti"), dm_unibo_common.users_path %>
     <% end %>
   <% end %>
 <% end %>
