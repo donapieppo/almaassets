@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount DmUniboCommon::Engine => "/dm_unibo_common"
 
-  get '/choose_organization', to: "home#choose_organization"
+  get "/choose_organization", to: "home#choose_organization"
 
   scope ":__org__" do
     resources :users do
@@ -38,23 +38,22 @@ Rails.application.routes.draw do
 
     resources :uploads
 
-    resources :categories do 
+    resources :categories do
       resources :goods
       resources :good_requests
     end
 
     resources :locations
 
-    resources :bookings 
+    resources :bookings
 
     # resources :servers do
     #   resources :bookings
     # end
 
-    get '/hg/:id', to: 'bookings#hg', as: :hg, defaults: { format: 'json' }
-
-    get '/', to: 'home#index', as: 'current_organization_root'
+    get "/hg/:id", to: "bookings#hg", as: :hg, defaults: {format: "json"}
+    get "/", to: "goods#index", as: "current_organization_root"
   end
 
-  root to: 'home#index'
+  root to: "goods#index"
 end
