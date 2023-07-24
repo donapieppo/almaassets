@@ -1,10 +1,11 @@
 # https://github.com/roo-rb/roo
-require 'roo' 
+require "roo"
 # require 'roo-xls'
 
-require 'unibo_excel_mappings'
+require "unibo_excel_mappings"
 
 class UniboFileError < RuntimeError; end
+
 class UniboFileMissingDissertationError < RuntimeError; end
 
 # with unibo file names
@@ -18,11 +19,11 @@ class UniboGood
   end
 
   def get_cib_organization
-    UniboExcelMappings.old_organization((get(:cib) || "").split('/')[1])
+    UniboExcelMappings.old_organization((get(:cib) || "").split("/")[1])
   end
 
   def get_cib_inv_number
-    (get(:cib) || "").split('/')[0]
+    (get(:cib) || "").split("/")[0]
   end
 
   def get_category
@@ -30,14 +31,14 @@ class UniboGood
   end
 end
 
-# pass an excel file f<F2>rom unibo 
+# pass an excel file f<F2>rom unibo
 # excel = UniboFileParser.new('/tmp/pippo')
 class UniboFileParser
   def initialize(file)
     file or raise "Please give excel file name"
-    excel = Roo::Spreadsheet.open(file) 
+    excel = Roo::Spreadsheet.open(file)
     # facciamo leggere con gli headers e poi li buttiamo
-    @file_content = excel.parse(header_search:[/Inventario/, /Descrizione Inventario/], headers: true, clean: false).drop(1)
+    @file_content = excel.parse(header_search: [/Inventario/, /Descrizione Inventario/], headers: true, clean: false).drop(1)
   end
 
   def each_original
@@ -52,7 +53,7 @@ class UniboFileParser
     end
   end
 
-  # @file_content = excel.parse and excel.parse gives array of lines. 
+  # @file_content = excel.parse and excel.parse gives array of lines.
   def get(num)
     @file_content[num]
   end
@@ -60,8 +61,4 @@ class UniboFileParser
   def get_unibo_good(num)
     UniboGood.new(get(num))
   end
-
-  private 
-
 end
-
