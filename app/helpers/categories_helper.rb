@@ -4,33 +4,33 @@ module CategoriesHelper
     c or return "<i class='fas fa-question-circle' style='font-size: #{size}px'></i>".html_safe
 
     case c.code
-    when 'pc'
+    when "pc"
       "<i class='fas fa-desktop' style='font-size: #{size}px'></i>".html_safe
-    when 'notebook'
+    when "notebook"
       "<i class='fas fa-laptop' style='font-size: #{size}px'></i>".html_safe
-    when 'tablet'
+    when "tablet"
       "<i class='fas fa-tablet-alt' style='font-size: #{size}px'></i>".html_safe
-    when 'printer'
+    when "printer"
       "<i class='fas fa-print' style='font-size: #{size}px'></i>".html_safe
-    when 'chair'
+    when "chair"
       "<i class='fas fa-chair' style='font-size: #{size}px'></i>".html_safe
-    when 'hd'
+    when "hd"
       "<i class='far fa-hdd' style='font-size: #{size}px'></i>".html_safe
-    when 'monitor'
+    when "monitor"
       "<i class='fas fa-tv' style='font-size: #{size}px'></i>".html_safe
-    when 'projector'
+    when "projector"
       "<i class='fas fa-video' style='font-size: #{size}px'></i>".html_safe
-    when 'video'
+    when "video"
       "<i class='fas fa-camera' style='font-size: #{size}px'></i>".html_safe
-    when 'software'
+    when "software"
       "<i class='fas fa-code' style='font-size: #{size}px'></i>".html_safe
-    when 'server'
+    when "server"
       "<i class='fas fa-server' style='font-size: #{size}px'></i>".html_safe
-    when 'audio'
+    when "audio"
       "<i class='fas fa-music' style='font-size: #{size}px'></i>".html_safe
-    when 'network'
+    when "network"
       "<i class='fas fa-network-wired' style='font-size: #{size}px'></i>".html_safe
-    when 'other'
+    when "other"
       "<i class='fas fa-asterisk' style='font-size: #{size}px'></i>".html_safe
     else
       "<i class='fas fa-question-circle' style='font-size: #{size}px'></i>".html_safe
