@@ -24,11 +24,11 @@
   </div>
   <% if defined?(with_button) and with_button == true %>  
     <div class="card-footer">
-      <%= link_to dmicon('plus', text: 'Scelgo questa convenzione'), new_category_good_request_path(main_agreement.category, main_agreement_id: main_agreement.id), class: 'btn btn-success' %>
+      <%= link_to dm_icon('plus', text: 'Scelgo questa convenzione'), new_category_good_request_path(main_agreement.category, main_agreement_id: main_agreement.id), class: 'btn btn-success' %>
       <% if policy(main_agreement).edit? %>  
-        <%= link_to dmicon('file', text: 'Allega documento'), new_main_agreement_document_path(main_agreement), class: 'btn btn-primary' %>  
-        <%= link_to dmicon('edit', text: 'Modifica'), edit_main_agreement_path(main_agreement), class: 'btn btn-primary' %>  
-        <%= link_to dmicon('trash', text: 'Elimina la Convenzione'), main_agreement_path(main_agreement), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: 'btn btn-danger' %>
+        <%= link_to dm_icon('file', text: 'Allega documento'), new_main_agreement_document_path(main_agreement), class: 'btn btn-primary' %>  
+        <%= link_to dm_icon('edit', text: 'Modifica'), edit_main_agreement_path(main_agreement), class: 'btn btn-primary' %>  
+        <%= link_to dm_icon('trash', text: 'Elimina la Convenzione'), main_agreement_path(main_agreement), method: :delete, title: 'elimina', data: {confirm: 'Siete sicuri di voler cancellare?'}, class: 'btn btn-danger' %>
       <% end %>
     </div>
   <% end %>
