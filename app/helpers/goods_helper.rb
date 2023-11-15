@@ -10,13 +10,13 @@ module GoodsHelper
   def link_to_unload(good)
     return "" unless helpers.policy(good).unload?
 
-    icon = good.to_unload ? dmicon('times-circle') : dmicon('trash-alt')
-    title = good.to_unload ? 'cancella lo scarico' : 'da scaricare'
-    confirm = good.to_unload ? 'Sicuri di volere cancella lo scarico?' : 'Sicuri vi volere scaricare il materiale?'
+    icon = good.to_unload ? dm_icon("times-circle") : dm_icon("trash-alt")
+    title = good.to_unload ? "cancella lo scarico" : "da scaricare"
+    confirm = good.to_unload ? "Sicuri di volere cancella lo scarico?" : "Sicuri vi volere scaricare il materiale?"
     if good.to_unload
-      button_to icon, unload_good_path(good), title: title, form: { data: { 'turbo-confirm': confirm }, class: "d-inline px-0 mx-0" }
+      button_to icon, unload_good_path(good), title: title, form: {data: {"turbo-confirm": confirm}, class: "d-inline px-0 mx-0"}
     else
-      link_to icon, new_unload_good_path(good, modal: 1), title: title, data: { turbo_frame: :modal } 
+      link_to icon, new_unload_good_path(good, modal: 1), title: title, data: {turbo_frame: :modal} 
     end
   end
 

@@ -67,7 +67,7 @@
         (<%= @good.unconfirmed_text %>)
       <% end %>
       <div class="actions float-end">
-        <%= link_to helpers.dmicon('edit'), edit_good_path(@good), data: { turbo_frame: 'modal' } %>
+        <%= link_to helpers.dm_icon('edit'), edit_good_path(@good), data: { turbo_frame: 'modal' } %>
         <%= link_to_unload(@good) %>  
       </div>
     <% elsif @good_policy.unconfirm? %> 
