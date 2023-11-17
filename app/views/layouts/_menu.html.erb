@@ -31,12 +31,12 @@
       <li><%= link_to dm_icon("question-circle", text: "mancanti"), main_app.goods_path(location_id: 0) %></li>
       <li><%= link_to dm_icon("plus", text: "nuova ubicazione"), main_app.new_location_path %></li>
     <% end %>
-    <%= dropdown_menu :amm, dm_icon("trash") + " Scarichi" do %>
+    <%= dropdown_menu :amm, dm_icon("trash", text: "Scarichi") do %>
       <li><%= link_to dm_icon("question-circle", text: "Da analizzare"), main_app.goods_path(unconfirmed: true) %></li>
       <li><%= link_to dm_icon("trash", text: "Scarichi"), main_app.goods_path(unload: true) %></li>
       <li><%= link_to dm_icon("print", text: "Stampa Scarichi"), main_app.print_goods_path(unload: true, format: :csv) %></li>
     <% end %>
-    <%= dropdown_menu :amm, dm_icon("cog") + " Altro" do %>
+    <%= dropdown_menu :amm, dm_icon("cog", text: "Altro") do %>
       <li><%= link_to dm_icon("star", text: "Convenzioni"), main_app.main_agreements_path %></li>
       <li><%= link_to dm_icon("upload", text: "Aggiorna da Ugov"), main_app.new_upload_path %></li>
       <li><%= link_to dm_icon("sort-amount-up", text: "Carichi ultimi 14 giorni"), main_app.goods_path(newer: 14) %></li>
