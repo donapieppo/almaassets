@@ -18,8 +18,9 @@
         <% end %>
         <span class="category_icon">
           <% if @good_policy.edit? %>  
-            <%= link_to category_icon(@good.category, size: 25), ask_category_good_path(@good, modal: 1),
-              data: {turbo_frame: 'modal'}, title: "Modifica la categoria" %>
+            <%= link_to category_icon(@good.category, size: 25), ask_category_good_path(@good), 
+                        data: {turbo_frame: 'modal'}, 
+                        title: "Modifica la categoria" %>
           <% else %>
             <%= category_icon(@good.category, size: 25) %>
           <% end %>
