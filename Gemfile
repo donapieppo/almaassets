@@ -1,13 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem "dm_unibo_user_search", git: "https://github.com/donapieppo/dm_unibo_user_search.git", branch: "master"
 gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git", branch: "master"
-gem "dm_unibo_user_search", git: "https://github.com/donapieppo/dm_unibo_user_search.git"
-
-gem "sprockets-rails"
-gem "jsbundling-rails"
-gem "cssbundling-rails", "~> 1.1"
-gem "turbo-rails"
+# gem "dm_unibo_common", path: "/home/rails/gems/dm_unibo_common/"
 
 gem "aasm"
 
@@ -18,12 +14,6 @@ gem "roo-xls"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Sass to process CSS
-gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
