@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount DmUniboCommon::Engine => "/dm_unibo_common"
+  mount DmUniboCommon::Engine => "/dm_unibo_common", :as => "dm_unibo_common"
 
   get "/choose_organization", to: "home#choose_organization"
 
@@ -14,21 +14,21 @@ Rails.application.routes.draw do
     end
 
     resources :goods do
-      get  'find', on: :collection
-      post 'find', on: :collection
+      get "find", on: :collection
+      post "find", on: :collection
 
-      get  'new_unload', on: :member
-      post 'unload', on: :member
-      patch 'unload', on: :member
+      get "new_unload", on: :member
+      post "unload", on: :member
+      patch "unload", on: :member
 
-      get  'new_confirm',   on: :member
-      post 'confirm',       on: :member
-      get  'new_unconfirm', on: :member
-      post 'unconfirm',     on: :member
-      get  'ask_category',  on: :member
-      post 'set_category',  on: :member
+      get "new_confirm", on: :member
+      post "confirm", on: :member
+      get "new_unconfirm", on: :member
+      post "unconfirm", on: :member
+      get "ask_category", on: :member
+      post "set_category", on: :member
 
-      get  'print', on: :collection
+      get "print", on: :collection
     end
 
     resources :good_requests do
